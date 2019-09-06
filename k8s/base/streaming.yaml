@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: streaming
-        image: tootsuite/mastodon@sha256:1d342a9127ceb3b17b50c0f30f4c22bf624a24b9f683e195df9eb162f7e4f145
+        image: asia.gcr.io/ykzts-technology/mastodon:20190906122244
         resources:
           requests:
             cpu: 10m
