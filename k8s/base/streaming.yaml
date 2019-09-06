@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: streaming
 spec:
-  replicas: 2
   template:
     metadata:
       labels:
@@ -12,10 +11,6 @@ spec:
       containers:
       - name: streaming
         image: asia.gcr.io/ykzts-technology/mastodon:20190906122244
-        resources:
-          requests:
-            cpu: 10m
-            memory: 128Mi
         command: ["yarn", "start"]
         ports:
         - containerPort: 4000
@@ -31,53 +26,6 @@ spec:
             path: /api/v1/streaming/health
           initialDelaySeconds: 5
           periodSeconds: 5
-        env:
-        - name: REDIS_HOST
-          valueFrom:
-            secretKeyRef:
-              name: redislabs-credentials
-              key: hostname
-        - name: REDIS_PORT
-          valueFrom:
-            secretKeyRef:
-              name: redislabs-credentials
-              key: port
-        - name: REDIS_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: redislabs-credentials
-              key: password
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: cloudsql-db-credentials
-              key: username
-        - name: DB_PASS
-          valueFrom:
-            secretKeyRef:
-              name: cloudsql-db-credentials
-              key: password
-        envFrom:
-        - configMapRef:
-            name: mastodon
-      - name: cloudsql
-        image: gcr.io/cloudsql-docker/gce-proxy:1.14
-        command: ["/cloud_sql_proxy",
-                  "-instances=ykzts-technology:asia-northeast1:ykzts-technology=tcp:5432",
-                  "-credential_file=/secrets/cloudsql/credentials.json"]
-        ports:
-        - containerPort: 5432
-        securityContext:
-          runAsUser: 2
-          allowPrivilegeEscalation: false
-        volumeMounts:
-        - name: cloudsql-instance-credentials
-          mountPath: /secrets/cloudsql
-          readOnly: true
-      volumes:
-      - name: cloudsql-instance-credentials
-        secret:
-          secretName: cloudsql-instance-credentials
 ---
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
