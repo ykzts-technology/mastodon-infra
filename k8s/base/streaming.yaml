@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streaming
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        deployment: streaming
+    spec:
+      containers:
+      - name: streaming
+        image: tootsuite/mastodon@sha256:1d342a9127ceb3b17b50c0f30f4c22bf624a24b9f683e195df9eb162f7e4f145
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        command: ["yarn", "start"]
+        ports:
+        - containerPort: 4000
+        livenessProbe:
+          httpGet:
+            port: 4000
+            path: /api/v1/streaming/health
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 4000
+            path: /api/v1/streaming/health
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: hostname
+        - name: REDIS_PORT
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: port
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: password
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: password
+        envFrom:
+        - configMapRef:
+            name: mastodon
+      - name: cloudsql
+        image: gcr.io/cloudsql-docker/gce-proxy:1.14
+        command: ["/cloud_sql_proxy",
+                  "-instances=ykzts-technology:asia-northeast1:ykzts-technology=tcp:5432",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        ports:
+        - containerPort: 5432
+        securityContext:
+          runAsUser: 2
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - name: cloudsql-instance-credentials
+          mountPath: /secrets/cloudsql
+          readOnly: true
+      volumes:
+      - name: cloudsql-instance-credentials
+        secret:
+          secretName: cloudsql-instance-credentials
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: streaming
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      deployment: streaming
+---
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: streaming-backend-config
+spec:
+  timeoutSec: 7200
+  sessionAffinity:
+    affinityType: CLIENT_IP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streaming
+  annotations:
+    beta.cloud.google.com/backend-config:
+      '{"default": "streaming-backend-config"}'
+spec:
+  selector:
+    deployment: streaming
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 4000
+    targetPort: 4000

@@ -1,0 +1,9 @@
+commonLabels:
+  app: mastodon
+
+resources:
+- configMap.yaml
+- web.yaml
+- streaming.yaml
+- worker.yaml
+- ingress.yaml

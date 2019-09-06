@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mastodon
+data:
+  DB_HOST: 127.0.0.1
+  DB_PORT: "5432"
+  ES_ENABLED: "true"
+  LOCAL_DOMAIN: ykzts.technology
+  SINGLE_USER_MODE: "true"
+  SMTP_SERVER: smtp.sendgrid.net
+  SMTP_PORT: "2525"
+  SMTP_LOGIN: apikey
+  SMTP_FROM_ADDRESS: notifications@ykzts.technology
+  SMTP_DOMAIN: ykzts.technology
+  SMTP_DELIVERY_METHOD: smtp
+  SMTP_AUTH_METHOD: plain
+  SMTP_CA_FILE: /etc/ssl/certs/ca-certificates.crt
+  SMTP_OPENSSL_VERIFY_MODE: peer
+  SMTP_ENABLE_STARTTLS_AUTO: "true"
+  S3_ENABLED: "true"
+  S3_BUCKET: ykzts-technology-storage
+  S3_REGION: ap-northeast-1
+  S3_PROTOCOL: https
+  S3_HOSTNAME: storage.googleapis.com
+  S3_ENDPOINT: https://storage.googleapis.com
+  S3_SIGNATURE_VERSION: s3
+  S3_CLOUDFRONT_HOST: files.ykzts.technology

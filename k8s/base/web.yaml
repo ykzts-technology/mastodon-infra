@@ -1,0 +1,165 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        deployment: web
+    spec:
+      containers:
+      - name: web
+        image: tootsuite/mastodon@sha256:1d342a9127ceb3b17b50c0f30f4c22bf624a24b9f683e195df9eb162f7e4f145
+        resources:
+          requests:
+            cpu: 15m
+            memory: 512Mi
+        command: ["sh", "-c",
+                  "echo 'persistent_timeout 620' >> config/puma.rb && echo UmFpbHMuYXBwbGljYXRpb24uY29uZmlnLnB1YmxpY19maWxlX3NlcnZlci5oZWFkZXJzID0geyAnQ2FjaGUtQ29udHJvbCcgPT4gJ21heC1hZ2U9Mjg4MCwgcHVibGljJyB9 | base64 -d >> config/initializers/assets.rb && bundle exec rails s -p 3000"]
+        ports:
+        - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            port: 3000
+            path: /robots.txt
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 3000
+            path: /robots.txt
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: hostname
+        - name: REDIS_PORT
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: port
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: password
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: password
+        - name: ES_HOST
+          valueFrom:
+            secretKeyRef:
+              name: elasticcloud-es-credentials
+              key: hostname
+        - name: ES_PORT
+          valueFrom:
+            secretKeyRef:
+              name: elasticcloud-es-credentials
+              key: port
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-credentials
+              key: secret-key-base
+        - name: OTP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-credentials
+              key: otp-secret
+        - name: VAPID_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-credentials
+              key: vapid-private-key
+        - name: VAPID_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-credentials
+              key: vapid-public-key
+        - name: SMTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sendgrid-smtp-credentials
+              key: password
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: cloudstorage-credentials
+              key: access-key
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cloudstorage-credentials
+              key: secret-key
+        envFrom:
+        - configMapRef:
+            name: mastodon
+      - name: cloudsql
+        image: gcr.io/cloudsql-docker/gce-proxy:1.14
+        command: ["/cloud_sql_proxy",
+                  "-instances=ykzts-technology:asia-northeast1:ykzts-technology=tcp:5432",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        ports:
+        - containerPort: 5432
+        securityContext:
+          runAsUser: 2
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - name: cloudsql-instance-credentials
+          mountPath: /secrets/cloudsql
+          readOnly: true
+      volumes:
+      - name: cloudsql-instance-credentials
+        secret:
+          secretName: cloudsql-instance-credentials
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: web
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      deployment: web
+---
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: web-backend-config
+spec:
+  timeoutSec: 120
+  cdn:
+    enabled: true
+    cachePolicy:
+      includeHost: true
+      includeProtocol: true
+      includeQueryString: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  annotations:
+    beta.cloud.google.com/backend-config:
+      '{"default": "web-backend-config"}'
+spec:
+  selector:
+    deployment: web
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
