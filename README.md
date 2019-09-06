@@ -11,7 +11,8 @@ $ kubectl create secret generic mastodon-credentials \
 ## Cloud SQL
 
 ```consol
-$ kubectl create secret generic cloudsql-instance-credentials --from-file=credentials.json=$(pwd)/credentials.json
+$ kubectl create secret generic cloudsql-instance-credentials \
+  --from-file=credentials.json=$(pwd)/credentials.json
 $ kubectl create secret generic cloudsql-db-credentials \
   --from-literal=username=mastodon --from-literal=password=...
 ```
@@ -33,11 +34,13 @@ $ kubectl create secret generic elasticcloud-es-credentials \
 ## Sendgrid
 
 ```console
-$ kubectl create secret generic sendgrid-smtp-credentials --from-literal=password=...
+$ kubectl create secret generic sendgrid-smtp-credentials \
+  --from-literal=password=...
 ```
 
 ## Cloud Storage
 
 ```console
-$ kubectl create secret generic cloudstorage-credentials --from-literal=access-key=... --from-literal=secret-key=...
+$ kubectl create secret generic cloudstorage-credentials \
+  --from-literal=access-key=... --from-literal=secret-key=...
 ```
