@@ -11,13 +11,13 @@ spec:
     spec:
       containers:
       - name: web
-        image: tootsuite/mastodon@sha256:1d342a9127ceb3b17b50c0f30f4c22bf624a24b9f683e195df9eb162f7e4f145
+        image: asia.gcr.io/ykzts-technology/mastodon:20190906122244
         resources:
           requests:
             cpu: 15m
             memory: 512Mi
         command: ["sh", "-c",
-                  "echo 'persistent_timeout 620' >> config/puma.rb && echo UmFpbHMuYXBwbGljYXRpb24uY29uZmlnLnB1YmxpY19maWxlX3NlcnZlci5oZWFkZXJzID0geyAnQ2FjaGUtQ29udHJvbCcgPT4gJ21heC1hZ2U9Mjg4MCwgcHVibGljJyB9 | base64 -d >> config/initializers/assets.rb && bundle exec rails s -p 3000"]
+                  "echo UmFpbHMuYXBwbGljYXRpb24uY29uZmlnLnB1YmxpY19maWxlX3NlcnZlci5oZWFkZXJzID0geyAnQ2FjaGUtQ29udHJvbCcgPT4gJ21heC1hZ2U9Mjg4MCwgcHVibGljJyB9 | base64 -d >> config/initializers/assets.rb && bundle exec rails s -p 3000"]
         ports:
         - containerPort: 3000
         livenessProbe:
@@ -103,6 +103,8 @@ spec:
             secretKeyRef:
               name: cloudstorage-credentials
               key: secret-key
+        - name: PERSISTENT_TIMEOUT
+          value: "620"
         envFrom:
         - configMapRef:
             name: mastodon
