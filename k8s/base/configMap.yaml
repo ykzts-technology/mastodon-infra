@@ -3,8 +3,6 @@ kind: ConfigMap
 metadata:
   name: mastodon
 data:
-  DB_HOST: 127.0.0.1
-  DB_PORT: "5432"
   ES_ENABLED: "true"
   LOCAL_DOMAIN: ykzts.technology
   SINGLE_USER_MODE: "true"

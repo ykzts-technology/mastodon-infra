@@ -6,4 +6,3 @@ resources:
 - web.yaml
 - streaming.yaml
 - worker.yaml
-- ingress.yaml

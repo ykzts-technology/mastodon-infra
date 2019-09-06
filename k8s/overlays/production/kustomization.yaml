@@ -1,2 +1,8 @@
 bases:
 - ../../base
+resources:
+- ingress.yaml
+patches:
+- web.yaml
+- streaming.yaml
+- worker.yaml

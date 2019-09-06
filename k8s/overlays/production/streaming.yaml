@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: streaming
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+      - name: streaming
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: hostname
+        - name: REDIS_PORT
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: port
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: password
+        - name: DB_HOST
+          value: 127.0.0.1
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: password
+        envFrom:
+        - configMapRef:
+            name: mastodon
+      - name: cloudsql
+        image: gcr.io/cloudsql-docker/gce-proxy:1.14
+        command: ["/cloud_sql_proxy",
+                  "-instances=ykzts-technology:asia-northeast1:ykzts-technology=tcp:5432",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        ports:
+        - containerPort: 5432
+        securityContext:
+          runAsUser: 2
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - name: cloudsql-instance-credentials
+          mountPath: /secrets/cloudsql
+          readOnly: true
+      volumes:
+      - name: cloudsql-instance-credentials
+        secret:
+          secretName: cloudsql-instance-credentials
