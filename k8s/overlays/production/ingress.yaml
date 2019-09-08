@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: mastodon
   annotations:
-    ingress.gcp.kubernetes.io/pre-shared-cert: ykzts-technology-cert
+    ingress.gcp.kubernetes.io/pre-shared-cert: ykzts-technology-cert-old
 spec:
   rules:
   - host: ykzts.technology
@@ -16,3 +16,9 @@ spec:
         backend:
           serviceName: streaming
           servicePort: 4000
+  - host: files.ykzts.technology
+    http:
+      paths:
+      - backend:
+          serviceName: files
+          servicePort: 8080

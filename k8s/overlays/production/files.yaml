@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: files
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        deployment: files
+    spec:
+      containers:
+      - name: manael
+        resources:
+          requests:
+            cpu: 50m
+            memory: 256Mi
+        env:
+        - name: MANAEL_UPSTREAM_URL
+          value: https://ykzts-technology-storage.storage.googleapis.com

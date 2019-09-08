@@ -6,3 +6,4 @@ resources:
 - web.yaml
 - streaming.yaml
 - worker.yaml
+- files.yaml

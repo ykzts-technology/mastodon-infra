@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: files
+spec:
+  template:
+    spec:
+      containers:
+      - name: manael
+        image: manael/manael:1.3.3
+        command: ["manael"]
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /favicon.ico
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /favicon.ico
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: files
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      deployment: files
+---
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: files-backend-config
+spec:
+  timeoutSec: 120
+  cdn:
+    enabled: true
+    cachePolicy:
+      includeHost: true
+      includeProtocol: true
+      includeQueryString: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: files
+  annotations:
+    beta.cloud.google.com/backend-config:
+      '{"default": "files-backend-config"}'
+spec:
+  selector:
+    deployment: files
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
