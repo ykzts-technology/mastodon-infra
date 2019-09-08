@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: mastodon
   annotations:
-    ingress.gcp.kubernetes.io/pre-shared-cert: ykzts-technology-cert-old
+    ingress.gcp.kubernetes.io/pre-shared-cert: "ykzts-technology-cert,files-ykzts-technology-cert"
 spec:
   rules:
   - host: ykzts.technology
