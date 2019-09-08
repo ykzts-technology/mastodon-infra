@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: sidekiq
-        image: asia.gcr.io/ykzts-technology/mastodon:20190907035533
+        image: tootsuite/mastodon:edge
         command: ["bundle", "exec", "sidekiq"]
 ---
 apiVersion: policy/v1beta1
