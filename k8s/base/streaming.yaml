@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: streaming
-        image: asia.gcr.io/ykzts-technology/mastodon:20190907035533
+        image: tootsuite/mastodon:edge
         command: ["yarn", "start"]
         ports:
         - containerPort: 4000
