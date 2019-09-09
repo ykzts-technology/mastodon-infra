@@ -63,3 +63,11 @@ spec:
       - name: cloudsql-instance-credentials
         secret:
           secretName: cloudsql-instance-credentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streaming
+  annotations:
+    beta.cloud.google.com/backend-config:
+      '{"default": "streaming-backend-config"}'

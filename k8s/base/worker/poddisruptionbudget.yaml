@@ -1,0 +1,9 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: worker
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      deployment: worker

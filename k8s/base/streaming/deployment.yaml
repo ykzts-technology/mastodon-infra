@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streaming
+spec:
+  template:
+    metadata:
+      labels:
+        deployment: streaming
+    spec:
+      containers:
+      - name: streaming
+        image: tootsuite/mastodon:edge
+        command: ["yarn", "start"]
+        ports:
+        - containerPort: 4000
+        livenessProbe:
+          httpGet:
+            port: 4000
+            path: /api/v1/streaming/health
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 4000
+            path: /api/v1/streaming/health
+          initialDelaySeconds: 5
+          periodSeconds: 5
