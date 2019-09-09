@@ -1,16 +1,11 @@
 commonLabels:
   app: mastodon
 
+bases:
+- web
+- streaming
+- worker
+- files
+
 resources:
 - configMap.yaml
-- web/deployment.yaml
-- web/service.yaml
-- web/poddisruptionbudget.yaml
-- streaming/deployment.yaml
-- streaming/service.yaml
-- streaming/poddisruptionbudget.yaml
-- worker/deployment.yaml
-- worker/poddisruptionbudget.yaml
-- files/deployment.yaml
-- files/service.yaml
-- files/poddisruptionbudget.yaml
