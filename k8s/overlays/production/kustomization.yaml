@@ -1,9 +1,10 @@
 bases:
 - ../../base
 resources:
+- backendconfig.yaml
 - ingress.yaml
 patches:
-- web.yaml
-- streaming.yaml
-- worker.yaml
-- files.yaml
+- patches/web.yaml
+- patches/streaming.yaml
+- patches/worker.yaml
+- patches/files.yaml
