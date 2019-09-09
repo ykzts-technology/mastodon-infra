@@ -4,6 +4,9 @@ metadata:
   name: files
 spec:
   template:
+    metadata:
+      labels:
+        deployment: files
     spec:
       containers:
       - name: manael

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: cloudsql
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      deployment: cloudsql
+  template:
+    metadata:
+      labels:
+        deployment: cloudsql
+    spec:
+      containers:
+      - name: cloudsql
+        image: asia.gcr.io/cloudsql-docker/gce-proxy:1.14
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        command: ["/cloud_sql_proxy",
+                  "-instances=ykzts-technology:asia-northeast1:ykzts-technology=tcp:0.0.0.0:5432",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        ports:
+        - containerPort: 5432
+        securityContext:
+          runAsUser: 2
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - name: cloudsql-instance-credentials
+          mountPath: /secrets/cloudsql
+          readOnly: true
+      volumes:
+      - name: cloudsql-instance-credentials
+        secret:
+          secretName: cloudsql-instance-credentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudsql
+spec:
+  selector:
+    deployment: cloudsql
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
