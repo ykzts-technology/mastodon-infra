@@ -11,5 +11,4 @@ spec:
       containers:
       - name: sidekiq
         image: tootsuite/mastodon:edge
-        imagePullPolicy: Always
         command: ["bundle", "exec", "sidekiq"]
