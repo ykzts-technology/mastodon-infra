@@ -11,7 +11,6 @@ spec:
       containers:
       - name: web
         image: tootsuite/mastodon:edge
-        imagePullPolicy: Always
         command: ["sh", "-c",
                   "echo UmFpbHMuYXBwbGljYXRpb24uY29uZmlnLnB1YmxpY19maWxlX3NlcnZlci5oZWFkZXJzID0geyAnQ2FjaGUtQ29udHJvbCcgPT4gJ21heC1hZ2U9Mjg4MCwgcHVibGljJyB9 | base64 -d >> config/initializers/assets.rb && bundle exec rails s -p 3000"]
         ports:
