@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: manael
-        image: manael/manael:1.4.3
+        image: manael/manael:1.4.4
         command: ["manael"]
         ports:
         - containerPort: 8080
