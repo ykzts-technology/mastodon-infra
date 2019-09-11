@@ -10,5 +10,5 @@ spec:
     spec:
       containers:
       - name: sidekiq
-        image: tootsuite/mastodon:edge
+        image: tootsuite/mastodon@sha256:ee02d83e28b754f2475053f6415b9af881a8dda64e8d9957309b40f092d8c5b1
         command: ["bundle", "exec", "sidekiq"]
