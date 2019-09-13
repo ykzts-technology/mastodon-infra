@@ -1,0 +1,11 @@
+apiVersion: skaffold/v1beta14
+kind: Config
+deploy:
+  kustomize:
+    path: k8s/overlays/production
+profiles:
+- name: dev
+  patches:
+  - op: replace
+    path: /deploy/kustomize/path
+    value: k8s/overlays/development
