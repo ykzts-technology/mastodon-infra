@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: tootsuite/mastodon@sha256:16aa005ef8d5444e6ab82dc453dd0c2b43b98e094ea56bd4f0eb1056d3b5010b
+        image: tootsuite/mastodon@sha256:fe1c6c2a5d5c0aa017d175dbd3e09da50753b82dce9001a4111a3fcc6ff8e2cf
         command: ["sh", "-c",
                   "echo UmFpbHMuYXBwbGljYXRpb24uY29uZmlnLnB1YmxpY19maWxlX3NlcnZlci5oZWFkZXJzID0geyAnQ2FjaGUtQ29udHJvbCcgPT4gJ21heC1hZ2U9Mjg4MCwgcHVibGljJyB9 | base64 -d >> config/initializers/assets.rb && bundle exec rails s -p 3000"]
         ports:
