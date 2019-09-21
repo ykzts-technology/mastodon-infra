@@ -6,6 +6,10 @@ spec:
   replicas: 2
   template:
     spec:
+      initContainers:
+      - name: check-ready
+        image: alpine:3.10
+        command: ["sh", "-c", "until nc -z cloudsql 5432; do sleep 1; done"]
       containers:
       - name: streaming
         resources:
