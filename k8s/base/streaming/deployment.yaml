@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: streaming
-        image: tootsuite/mastodon@sha256:0100183ab1e675050d4ae0dc1804e41cd5e30731e99de15072499cdaba50d40b
+        image: tootsuite/mastodon@sha256:52e6030315c1ec5392ad3dde8eb418bbf04bfb3a866662ec5e9b21afde88b73c
         command: ["yarn", "start"]
         ports:
         - containerPort: 4000

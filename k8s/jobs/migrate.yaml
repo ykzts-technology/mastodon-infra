@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrate
+spec:
+  template:
+    spec:
+      containers:
+      - name: mastodon
+        image: tootsuite/mastodon@sha256:52e6030315c1ec5392ad3dde8eb418bbf04bfb3a866662ec5e9b21afde88b73c
+        env:
+        - name: DB_HOST
+          value: cloudsql
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: password
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-credentials
+              key: secret-key-base
+        - name: OTP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-credentials
+              key: otp-secret
+        command: ["./bin/rails", "db:migrate"]
+      restartPolicy: Never
