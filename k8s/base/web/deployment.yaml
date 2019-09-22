@@ -12,7 +12,7 @@ spec:
       - name: web
         image: tootsuite/mastodon@sha256:d0eccdd307cab04ec33095dc5b37fda1536ffb4e387123be9cac7f48df6589b7
         command: ["sh", "-c",
-                  "echo UmFpbHMuYXBwbGljYXRpb24uY29uZmlnLnB1YmxpY19maWxlX3NlcnZlci5oZWFkZXJzID0geyAnQ2FjaGUtQ29udHJvbCcgPT4gJ21heC1hZ2U9Mjg4MCwgcHVibGljJyB9 | base64 -d >> config/initializers/assets.rb && bundle exec rails s -p 3000"]
+                  "echo UmFpbHMuYXBwbGljYXRpb24uY29uZmlnLnB1YmxpY19maWxlX3NlcnZlci5oZWFkZXJzID0gewogICdDYWNoZS1Db250cm9sJyA9PiAnbWF4LWFnZT0yODgwLCBwdWJsaWMnCn0KClBhcGVyY2xpcDo6QXR0YWNobWVudC5kZWZhdWx0X29wdGlvbnNbOnMzX2hlYWRlcnNdLm1lcmdlISgKICAnWC1BbXotTXVsdGlwYXJ0LVRocmVzaG9sZCcgPT4gNDAubWVnYWJ5dGVzLAopCg== | base64 -d > config/initializers/z_monkeypatch.rb && bundle exec rails s -p 3000"]
         ports:
         - containerPort: 3000
         livenessProbe:

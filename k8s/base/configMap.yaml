@@ -22,5 +22,5 @@ data:
   S3_PROTOCOL: https
   S3_HOSTNAME: storage.googleapis.com
   S3_ENDPOINT: https://storage.googleapis.com
-  S3_SIGNATURE_VERSION: s3
+  S3_SIGNATURE_VERSION: v4
   S3_CLOUDFRONT_HOST: files.ykzts.technology
