@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon@sha256:d0eccdd307cab04ec33095dc5b37fda1536ffb4e387123be9cac7f48df6589b7
+        image: tootsuite/mastodon:v3.0.0rc1
         env:
         - name: DB_HOST
           value: cloudsql

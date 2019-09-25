@@ -10,5 +10,5 @@ spec:
     spec:
       containers:
       - name: sidekiq
-        image: tootsuite/mastodon@sha256:d0eccdd307cab04ec33095dc5b37fda1536ffb4e387123be9cac7f48df6589b7
-        command: ["sh", "-c", "echo UmFpbHMuYXBwbGljYXRpb24uY29uZmlnLnB1YmxpY19maWxlX3NlcnZlci5oZWFkZXJzID0gewogICdDYWNoZS1Db250cm9sJyA9PiAnbWF4LWFnZT0yODgwLCBwdWJsaWMnCn0KClBhcGVyY2xpcDo6QXR0YWNobWVudC5kZWZhdWx0X29wdGlvbnNbOnMzX2hlYWRlcnNdLm1lcmdlISgKICAnWC1BbXotTXVsdGlwYXJ0LVRocmVzaG9sZCcgPT4gNDAubWVnYWJ5dGVzLAopCg== | base64 -d > config/initializers/z_monkeypatch.rb && bundle exec sidekiq"]
+        image: tootsuite/mastodon:v3.0.0rc1
+        command: ["bundle", "exec", "sidekiq"]

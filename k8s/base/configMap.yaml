@@ -23,4 +23,5 @@ data:
   S3_HOSTNAME: storage.googleapis.com
   S3_ENDPOINT: https://storage.googleapis.com
   S3_SIGNATURE_VERSION: v4
+  S3_MULTIPART_THRESHOLD: "52428800"
   S3_CLOUDFRONT_HOST: files.ykzts.technology
