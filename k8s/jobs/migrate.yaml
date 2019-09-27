@@ -10,9 +10,15 @@ spec:
         image: tootsuite/mastodon:v3.0.0rc1
         env:
         - name: DB_HOST
-          value: cloudsql
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: hostname
         - name: DB_PORT
-          value: "5432"
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: port
         - name: DB_USER
           valueFrom:
             secretKeyRef:

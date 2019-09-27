@@ -2,7 +2,6 @@ bases:
 - ../../base
 resources:
 - backendconfig.yaml
-- cloudsql.yaml
 - ingress.yaml
 patches:
 - patches/web.yaml

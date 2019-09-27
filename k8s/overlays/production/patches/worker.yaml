@@ -6,10 +6,6 @@ spec:
   replicas: 4
   template:
     spec:
-      initContainers:
-      - name: check-ready
-        image: alpine:3.10
-        command: ["sh", "-c", "until nc -z cloudsql 5432; do sleep 1; done"]
       containers:
       - name: sidekiq
         resources:
@@ -33,9 +29,15 @@ spec:
               name: redislabs-credentials
               key: password
         - name: DB_HOST
-          value: cloudsql
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: hostname
         - name: DB_PORT
-          value: "5432"
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: port
         - name: DB_USER
           valueFrom:
             secretKeyRef:
