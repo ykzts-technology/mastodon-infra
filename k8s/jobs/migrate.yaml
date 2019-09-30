@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:v3.0.0rc1
+        image: tootsuite/mastodon:v3.0.0rc2
         env:
         - name: DB_HOST
           valueFrom:
