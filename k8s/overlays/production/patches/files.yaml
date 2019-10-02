@@ -23,3 +23,4 @@ metadata:
   annotations:
     beta.cloud.google.com/backend-config:
       '{"default": "files-backend-config"}'
+    cloud.google.com/neg: '{"ingress": true}'
