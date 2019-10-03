@@ -1,6 +1,7 @@
 bases:
 - ../../base
 resources:
+- vpa.yaml
 - backendconfig.yaml
 - ingress.yaml
 patches:

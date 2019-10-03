@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migrate
+  name: search-deploy
 spec:
   template:
     spec:
@@ -29,6 +29,16 @@ spec:
             secretKeyRef:
               name: cloudsql-db-credentials
               key: password
+        - name: ES_HOST
+          valueFrom:
+            secretKeyRef:
+              name: elasticcloud-es-credentials
+              key: hostname
+        - name: ES_PORT
+          valueFrom:
+            secretKeyRef:
+              name: elasticcloud-es-credentials
+              key: port
         - name: SECRET_KEY_BASE
           valueFrom:
             secretKeyRef:
@@ -39,5 +49,5 @@ spec:
             secretKeyRef:
               name: mastodon-credentials
               key: otp-secret
-        command: ["./bin/rails", "db:migrate"]
+        command: ["./bin/tootctl", "search", "deploy"]
       restartPolicy: Never

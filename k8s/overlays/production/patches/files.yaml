@@ -10,11 +10,8 @@ spec:
       - name: manael
         resources:
           requests:
-            cpu: 100m
-            memory: 256Mi
-          limits:
-            cpu: 150m
-            memory: 512Mi
+            cpu: 10m
+            memory: 128Mi
         env:
         - name: MANAEL_UPSTREAM_URL
           value: https://ykzts-technology-storage.storage.googleapis.com

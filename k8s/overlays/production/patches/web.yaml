@@ -10,11 +10,8 @@ spec:
       - name: web
         resources:
           requests:
-            cpu: 100m
+            cpu: 20m
             memory: 256Mi
-          limits:
-            cpu: 150m
-            memory: 512Mi
         env:
         - name: REDIS_HOST
           valueFrom:
