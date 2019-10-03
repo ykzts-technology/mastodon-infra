@@ -3,15 +3,18 @@ kind: Deployment
 metadata:
   name: worker
 spec:
-  replicas: 4
+  replicas: 5
   template:
     spec:
       containers:
       - name: sidekiq
         resources:
           requests:
-            cpu: 20m
+            cpu: 100m
             memory: 256Mi
+          limits:
+            cpu: 150m
+            memory: 512Mi
         env:
         - name: REDIS_HOST
           valueFrom:
