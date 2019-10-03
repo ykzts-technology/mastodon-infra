@@ -3,15 +3,18 @@ kind: Deployment
 metadata:
   name: files
 spec:
-  replicas: 2
+  replicas: 3
   template:
     spec:
       containers:
       - name: manael
         resources:
           requests:
-            cpu: 50m
+            cpu: 100m
             memory: 256Mi
+          limits:
+            cpu: 150m
+            memory: 512Mi
         env:
         - name: MANAEL_UPSTREAM_URL
           value: https://ykzts-technology-storage.storage.googleapis.com
