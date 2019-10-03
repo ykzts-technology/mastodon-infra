@@ -3,18 +3,15 @@ kind: Deployment
 metadata:
   name: streaming
 spec:
-  replicas: 2
+  replicas: 3
   template:
     spec:
       containers:
       - name: streaming
         resources:
           requests:
-            cpu: 50m
+            cpu: 5m
             memory: 128Mi
-          limits:
-            cpu: 70m
-            memory: 256Mi
         env:
         - name: REDIS_HOST
           valueFrom:

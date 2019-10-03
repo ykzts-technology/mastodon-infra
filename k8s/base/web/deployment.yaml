@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: tootsuite/mastodon:v3.0.0rc2
+        image: tootsuite/mastodon:v3.0.0rc3
         command: ["sh", "-c",
                   "echo UmFpbHMuYXBwbGljYXRpb24uY29uZmlnLnB1YmxpY19maWxlX3NlcnZlci5oZWFkZXJzID0geyAnQ2FjaGUtQ29udHJvbCcgPT4gJ21heC1hZ2U9Mjg4MCwgcHVibGljJyB9 | base64 -d >> config/initializers/assets.rb && bundle exec rails s -p 3000"]
         ports:
@@ -19,11 +19,11 @@ spec:
           httpGet:
             port: 3000
             path: /health
-          initialDelaySeconds: 5
+          initialDelaySeconds: 30
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 3000
             path: /health
-          initialDelaySeconds: 60
+          initialDelaySeconds: 30
           periodSeconds: 5
