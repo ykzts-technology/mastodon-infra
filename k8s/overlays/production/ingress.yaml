@@ -16,6 +16,18 @@ spec:
         backend:
           serviceName: streaming
           servicePort: 4000
+      - path: /assets/*
+        backend:
+          serviceName: assets
+          servicePort: 3000
+      - path: /packs/*
+        backend:
+          serviceName: assets
+          servicePort: 3000
+      - path: /emoji/*
+        backend:
+          serviceName: assets
+          servicePort: 3000
   - host: files.ykzts.technology
     http:
       paths:

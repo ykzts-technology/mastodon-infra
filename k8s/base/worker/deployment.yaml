@@ -9,6 +9,6 @@ spec:
         deployment: worker
     spec:
       containers:
-      - name: sidekiq
+      - name: mastodon
         image: tootsuite/mastodon:v3.0.0
         command: ["bundle", "exec", "sidekiq"]

@@ -32,3 +32,16 @@ spec:
       includeHost: true
       includeProtocol: true
       includeQueryString: false
+---
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: assets-backend-config
+spec:
+  timeoutSec: 240
+  cdn:
+    enabled: true
+    cachePolicy:
+      includeHost: true
+      includeProtocol: true
+      includeQueryString: false
