@@ -6,6 +6,7 @@ bases:
 - streaming
 - worker
 - files
+- assets
 
 resources:
 - configMap.yaml

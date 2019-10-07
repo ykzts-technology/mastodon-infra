@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-      - name: web
+      - name: mastodon
         resources:
           requests:
             cpu: 20m

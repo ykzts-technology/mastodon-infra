@@ -9,3 +9,4 @@ patches:
 - patches/streaming.yaml
 - patches/worker.yaml
 - patches/files.yaml
+- patches/assets.yaml

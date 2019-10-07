@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment 
 metadata:
-  name: worker
+  name: assets
 spec:
-  replicas: 5
+  replicas: 3
   template:
     spec:
       containers:
       - name: mastodon
         resources:
           requests:
-            cpu: 20m
+            cpu: 5m
             memory: 128Mi
         env:
         - name: REDIS_HOST
@@ -93,6 +93,17 @@ spec:
             secretKeyRef:
               name: cloudstorage-credentials
               key: secret-key
+        - name: PERSISTENT_TIMEOUT
+          value: "620"
         envFrom:
         - configMapRef:
             name: mastodon
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: assets
+  annotations:
+    beta.cloud.google.com/backend-config:
+      '{"default": "assets-backend-config"}'
+    cloud.google.com/neg: '{"ingress": true}'
