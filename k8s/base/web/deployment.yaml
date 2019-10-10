@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:v3.0.0
+        image: tootsuite/mastodon:v3.0.1
         command: ["bundle", "exec", "rails", "s", "-p", "3000"]
         ports:
         - containerPort: 3000
