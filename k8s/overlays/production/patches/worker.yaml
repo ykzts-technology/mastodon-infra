@@ -13,6 +13,8 @@ spec:
             cpu: 20m
             memory: 128Mi
         env:
+        - name: STATSD_ADDR
+          value: statsd-exporter:9125
         - name: REDIS_HOST
           valueFrom:
             secretKeyRef:
