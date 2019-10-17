@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: statsd-exporter
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+      - name: statsd-exporter
+        resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: statsd-exporter
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'

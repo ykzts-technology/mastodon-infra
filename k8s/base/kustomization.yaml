@@ -7,6 +7,7 @@ bases:
 - worker
 - files
 - assets
+- statsd-exporter
 
 resources:
 - configMap.yaml

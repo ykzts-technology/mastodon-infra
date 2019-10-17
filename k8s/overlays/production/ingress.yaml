@@ -28,6 +28,10 @@ spec:
         backend:
           serviceName: assets
           servicePort: 3000
+      - path: /metrics
+        backend:
+          serviceName: statsd-exporter
+          servicePort: 9102
   - host: files.ykzts.technology
     http:
       paths:
