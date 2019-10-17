@@ -10,3 +10,4 @@ patches:
 - patches/worker.yaml
 - patches/files.yaml
 - patches/assets.yaml
+- patches/statsd-exporter.yaml

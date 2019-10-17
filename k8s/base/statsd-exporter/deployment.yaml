@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: statsd-exporter
+spec:
+  template:
+    metadata:
+      labels:
+        deployment: statsd-exporter
+    spec:
+      containers:
+      - name: statsd-exporter
+        image: prom/statsd-exporter:v0.12.2
+        ports:
+        - containerPort: 9102
+        - containerPort: 9125
+        livenessProbe:
+          httpGet:
+            port: 9102
+            path: /metrics
+          initialDelaySeconds: 30
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 9102
+            path: /metrics
+          initialDelaySeconds: 30
+          periodSeconds: 5
