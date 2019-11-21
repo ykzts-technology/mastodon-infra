@@ -19,7 +19,7 @@ spec:
         command: ["bundle", "exec", "sidekiq"]
         resources:
           limits:
-            cpu: 50m
+            cpu: 75m
             memory: 256Mi
         env:
         - name: LOCAL_DOMAIN
