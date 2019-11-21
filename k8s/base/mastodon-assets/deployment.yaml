@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mastodon-assets
+  labels:
+    app: mastodon-assets
+spec:
+  selector:
+    matchLabels:
+      app: mastodon-assets
+  template:
+    metadata:
+      labels:
+        app: mastodon-assets
+    spec:
+      containers:
+      - name: mastodon-assets
+        image: asia.gcr.io/ykzts-technology/mastodon-assets
+        resources:
+          limits:
+            cpu: 25m
+            memory: 128Mi
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            port: 80
+            path: /healthz
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 80
+            path: /healthz
+          initialDelaySeconds: 10
+          periodSeconds: 5

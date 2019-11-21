@@ -1,0 +1,128 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mastodon-web
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+      - name: mastodon
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: hostname
+        - name: REDIS_PORT
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: port
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: password
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: hostname
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: port
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: password
+        - name: ES_ENABLED
+          value: "true"
+        - name: ES_HOST
+          valueFrom:
+            secretKeyRef:
+              name: elasticcloud-es-credentials
+              key: hostname
+        - name: ES_PORT
+          valueFrom:
+            secretKeyRef:
+              name: elasticcloud-es-credentials
+              key: port
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-credentials
+              key: secret-key-base
+        - name: OTP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-credentials
+              key: otp-secret
+        - name: VAPID_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-credentials
+              key: vapid-private-key
+        - name: VAPID_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-credentials
+              key: vapid-public-key
+        - name: SMTP_SERVER
+          value: smtp.sendgrid.net
+        - name: SMTP_PORT
+          value: "2525"
+        - name: SMTP_LOGIN
+          value: apikey
+        - name: SMTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sendgrid-smtp-credentials
+              key: password
+        - name: SMTP_FROM_ADDRESS
+          value: ykzts.technology
+        - name: S3_ENABLED
+          value: "true"
+        - name: S3_BUCKET
+          value: ykzts-technology-storage
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: cloudstorage-credentials
+              key: access-key
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cloudstorage-credentials
+              key: secret-key
+        - name: S3_REGION
+          value: ap-northeast-1
+        - name: S3_PROTOCOL
+          value: https
+        - name: S3_HOSTNAME
+          value: storage.googleapis.com
+        - name: S3_ENDPOINT
+          value: https://storage.googleapis.com
+        - name: S3_SIGNATURE_VERSION
+          value: v4
+        - name: S3_MULTIPART_THRESHOLD
+          value: "52428800"
+        - name: S3_CLOUDFRONT_HOST
+          value: files.ykzts.technology
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mastodon-web
+  annotations:
+    beta.cloud.google.com/backend-config:
+      '{"default": "mastodon-web-backend-config"}'
+    cloud.google.com/neg: '{"ingress": true}'

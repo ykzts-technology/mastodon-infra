@@ -1,7 +1,7 @@
 apiVersion: cloud.google.com/v1beta1
 kind: BackendConfig
 metadata:
-  name: web-backend-config
+  name: mastodon-web-backend-config
 spec:
   timeoutSec: 120
   cdn:
@@ -14,7 +14,7 @@ spec:
 apiVersion: cloud.google.com/v1beta1
 kind: BackendConfig
 metadata:
-  name: streaming-backend-config
+  name: mastodon-streaming-backend-config
 spec:
   timeoutSec: 7200
   sessionAffinity:
@@ -23,20 +23,7 @@ spec:
 apiVersion: cloud.google.com/v1beta1
 kind: BackendConfig
 metadata:
-  name: files-backend-config
-spec:
-  timeoutSec: 120
-  cdn:
-    enabled: true
-    cachePolicy:
-      includeHost: true
-      includeProtocol: true
-      includeQueryString: false
----
-apiVersion: cloud.google.com/v1beta1
-kind: BackendConfig
-metadata:
-  name: assets-backend-config
+  name: mastodon-assets-backend-config
 spec:
   timeoutSec: 240
   cdn:

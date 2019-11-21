@@ -1,13 +1,13 @@
 bases:
 - ../../base
+- manael
+
 resources:
-- vpa.yaml
 - backendconfig.yaml
 - ingress.yaml
+
 patches:
-- patches/web.yaml
-- patches/streaming.yaml
-- patches/worker.yaml
-- patches/files.yaml
-- patches/assets.yaml
-- patches/statsd-exporter.yaml
+- patches/mastodon-web.yaml
+- patches/mastodon-streaming.yaml
+- patches/mastodon-worker.yaml
+- patches/mastodon-assets.yaml

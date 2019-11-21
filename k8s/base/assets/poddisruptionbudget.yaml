@@ -1,9 +1,0 @@
-apiVersion: policy/v1beta1
-kind: PodDisruptionBudget
-metadata:
-  name: assets
-spec:
-  minAvailable: 2
-  selector:
-    matchLabels:
-      deployment: assets

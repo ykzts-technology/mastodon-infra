@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mastodon-streaming
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+      - name: mastodon
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: hostname
+        - name: REDIS_PORT
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: port
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: password
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: hostname
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: port
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mastodon-streaming
+  annotations:
+    beta.cloud.google.com/backend-config:
+      '{"default": "mastodon-streaming-backend-config"}'
+    cloud.google.com/neg: '{"ingress": true}'

@@ -1,11 +1,20 @@
-apiVersion: skaffold/v1beta14
+apiVersion: skaffold/v1
 kind: Config
+build:
+  artifacts:
+  - image: asia.gcr.io/ykzts-technology/mastodon-assets
+    context: mastodon-assets
+  local:
+    push: false
 deploy:
   kustomize:
-    path: k8s/overlays/production
+    path: k8s/overlays/development
 profiles:
-- name: dev
+- name: production
   patches:
   - op: replace
+    path: /build/local/push
+    value: true
+  - op: replace
     path: /deploy/kustomize/path
-    value: k8s/overlays/development
+    value: k8s/overlays/production

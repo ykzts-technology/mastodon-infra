@@ -1,13 +1,5 @@
-commonLabels:
-  app: mastodon
-
 bases:
-- web
-- streaming
-- worker
-- files
-- assets
-- statsd-exporter
-
-resources:
-- configMap.yaml
+- mastodon-web
+- mastodon-streaming
+- mastodon-worker
+- mastodon-assets
