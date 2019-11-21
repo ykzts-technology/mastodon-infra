@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mastodon-assets
+  annotations:
+    beta.cloud.google.com/backend-config:
+      '{"default": "mastodon-assets-backend-config"}'
+    cloud.google.com/neg: '{"ingress": true}'

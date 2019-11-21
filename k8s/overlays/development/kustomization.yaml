@@ -1,2 +1,14 @@
 bases:
 - ../../base
+- postgres
+- redis
+- elasticsearch
+
+resources:
+- jobs/init.yaml
+- ingress.yaml
+
+patches:
+- patches/mastodon-web.yaml
+- patches/mastodon-streaming.yaml
+- patches/mastodon-worker.yaml

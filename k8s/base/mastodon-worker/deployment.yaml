@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mastodon-worker
+  labels:
+    app: mastodon-worker
+spec:
+  selector:
+    matchLabels:
+      app: mastodon-worker
+  template:
+    metadata:
+      labels:
+        app: mastodon-worker
+    spec:
+      containers:
+      - name: mastodon
+        image: tootsuite/mastodon:v3.0.1
+        command: ["bundle", "exec", "sidekiq"]
+        resources:
+          limits:
+            cpu: 50m
+            memory: 256Mi
+        env:
+        - name: LOCAL_DOMAIN
+          value: ykzts.technology
+        - name: SINGLE_USER_MODE
+          value: "true"

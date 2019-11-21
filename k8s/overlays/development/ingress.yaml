@@ -2,9 +2,6 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: mastodon
-  annotations:
-    ingress.gcp.kubernetes.io/pre-shared-cert: ykzts-technology-cert,files-ykzts-technology-cert
-    kubernetes.io/ingress.global-static-ip-name: ykzts-technology-ip
 spec:
   rules:
   - host: ykzts.technology
@@ -29,9 +26,3 @@ spec:
         backend:
           serviceName: mastodon-assets
           servicePort: 80
-  - host: files.ykzts.technology
-    http:
-      paths:
-      - backend:
-          serviceName: manael
-          servicePort: 8080

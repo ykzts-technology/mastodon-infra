@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mastodon-streaming
+  labels:
+    app: mastodon-streaming
+spec:
+  selector:
+    matchLabels:
+      app: mastodon-streaming
+  template:
+    metadata:
+      labels:
+        app: mastodon-streaming
+    spec:
+      containers:
+      - name: mastodon
+        image: tootsuite/mastodon:v3.0.1
+        command: ["yarn", "start"]
+        resources:
+          limits:
+            cpu: 25m
+            memory: 256Mi
+        ports:
+        - containerPort: 4000
+        livenessProbe:
+          httpGet:
+            port: 4000
+            path: /api/v1/streaming/health
+          initialDelaySeconds: 30
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            port: 4000
+            path: /api/v1/streaming/health
+          initialDelaySeconds: 30
+          periodSeconds: 15
