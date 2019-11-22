@@ -20,7 +20,7 @@ spec:
         resources:
           limits:
             cpu: 75m
-            memory: 256Mi
+            memory: 512Mi
         env:
         - name: LOCAL_DOMAIN
           value: ykzts.technology
