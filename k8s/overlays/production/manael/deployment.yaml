@@ -5,7 +5,7 @@ metadata:
   labels:
     app: manael
 spec:
-  replicas: 2
+  replicas: 5
   selector:
     matchLabels:
       app: manael
@@ -20,7 +20,7 @@ spec:
         resources:
           limits:
             cpu: 50m
-            memory: 512Mi
+            memory: 256Mi
         env:
         - name: MANAEL_UPSTREAM_URL
           value: https://ykzts-technology-storage.storage.googleapis.com
