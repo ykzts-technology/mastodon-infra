@@ -1,0 +1,49 @@
+name: Deploy to GKE
+
+on:
+  push:
+    branches:
+    - master
+
+env:
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_REGION: asia-northeast1
+  GKE_CLUSTER: ykzts-technology
+
+  KUSTOMIZE_VERSION: 2.1.0
+  SKAFFOLD_VERSION: 1.0.1
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Setup
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '272.0.0'
+        service_account_email: ${{ secrets.GKE_EMAIL }}
+        service_account_key: ${{ secrets.GKE_KEY }}
+
+    - name: Set up Skaffold
+      run: |
+        curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v${SKAFFOLD_VERSION}/skaffold-linux-amd64
+        sudo install skaffold /usr/local/bin
+
+    - name: Build, and Publish
+      run: |
+        gcloud auth configure-docker
+        skaffold build --file-output tags.json
+
+    - name: Set up Kustomize
+      run: |
+        curl -Lo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64
+        sudo install kustomize /usr/local/bin
+
+    - name: Deploy
+      run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER --project $GKE_PROJECT --region $GKE_REGION
+        skaffold deploy --build-artifacts tags.json --profile production --status-check

@@ -4,17 +4,13 @@ build:
   artifacts:
   - image: asia.gcr.io/ykzts-technology/mastodon-assets
     context: mastodon-assets
-  local:
-    push: false
 deploy:
+  statusCheckDeadlineSeconds: 600
   kustomize:
     path: k8s/overlays/development
 profiles:
 - name: production
   patches:
-  - op: replace
-    path: /build/local/push
-    value: true
   - op: replace
     path: /deploy/kustomize/path
     value: k8s/overlays/production
