@@ -3,19 +3,17 @@ kind: Deployment
 metadata:
   name: mastodon-web
 spec:
-  replicas: 2
+  replicas: 3
   template:
     spec:
       containers:
       - name: mastodon
         resources:
           limits:
-            memory: 1536Mi
+            memory: 1024Mi
         env:
-        - name: MAX_THREADS
-          value: "8"
         - name: WEB_CONCURRENCY
-          value: "4"
+          value: "8"
         - name: REDIS_HOST
           valueFrom:
             secretKeyRef:
