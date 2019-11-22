@@ -12,6 +12,10 @@ spec:
           limits:
             memory: 1536Mi
         env:
+        - name: MAX_THREADS
+          value: "8"
+        - name: WEB_CONCURRENCY
+          value: "4"
         - name: REDIS_HOST
           valueFrom:
             secretKeyRef:
