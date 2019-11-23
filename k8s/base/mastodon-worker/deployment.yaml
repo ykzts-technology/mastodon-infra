@@ -18,8 +18,11 @@ spec:
         image: tootsuite/mastodon:v3.0.1
         command: ["bundle", "exec", "sidekiq"]
         resources:
+          requests:
+            cpu: 50m
+            memory: 256Mi
           limits:
-            cpu: 75m
+            cpu: 100m
             memory: 512Mi
         env:
         - name: LOCAL_DOMAIN
