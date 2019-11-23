@@ -13,7 +13,7 @@ spec:
             memory: 1024Mi
         env:
         - name: WEB_CONCURRENCY
-          value: "8"
+          value: "4"
         - name: REDIS_HOST
           valueFrom:
             secretKeyRef:
