@@ -8,9 +8,6 @@ spec:
     spec:
       containers:
       - name: mastodon
-        resources:
-          limits:
-            memory: 1024Mi
         env:
         - name: WEB_CONCURRENCY
           value: "4"

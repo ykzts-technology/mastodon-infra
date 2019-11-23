@@ -18,6 +18,9 @@ spec:
         image: tootsuite/mastodon:v3.0.1
         command: ["yarn", "start"]
         resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
           limits:
             cpu: 25m
             memory: 256Mi

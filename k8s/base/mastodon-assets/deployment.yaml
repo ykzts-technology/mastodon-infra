@@ -17,9 +17,12 @@ spec:
       - name: mastodon-assets
         image: asia.gcr.io/ykzts-technology/mastodon-assets
         resources:
+          requests:
+            cpu: 10m
+            memory: 128Mi
           limits:
             cpu: 25m
-            memory: 128Mi
+            memory: 256Mi
         ports:
         - containerPort: 80
         livenessProbe:
