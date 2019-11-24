@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:v3.0.1
+        image: asia.gcr.io/ykzts-technology/mastodon
         command: ["bundle", "exec", "sidekiq"]
         resources:
           requests:
