@@ -119,6 +119,16 @@ spec:
           value: "52428800"
         - name: S3_CLOUDFRONT_HOST
           value: files.ykzts.technology
+        - name: ELASTIC_APM_SERVER_URL
+          valueFrom:
+            secretKeyRef:
+              name: elastic-apm-credentials
+              key: server-url
+        - name: ELASTIC_APM_SECRET_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: elastic-apm-credentials
+              key: secret-token
 ---
 apiVersion: v1
 kind: Service
