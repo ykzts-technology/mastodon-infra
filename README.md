@@ -44,3 +44,10 @@ $ kubectl create secret generic sendgrid-smtp-credentials \
 $ kubectl create secret generic cloudstorage-credentials \
   --from-literal=access-key=... --from-literal=secret-key=...
 ```
+
+## New Relic
+
+```console
+$ kubectl create secret generic newrelic-credentials \
+  --from-literal=license-key=...
+```

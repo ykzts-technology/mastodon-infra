@@ -119,6 +119,11 @@ spec:
           value: "52428800"
         - name: S3_CLOUDFRONT_HOST
           value: files.ykzts.technology
+        - name: NEWRELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: newrelic-credentials
+              key: license-key
 ---
 apiVersion: v1
 kind: Service
