@@ -9,11 +9,11 @@ RUN set -ex \
 	&& apt update \
 	&& apt install -y git \
 	&& bundle config --delete frozen \
-	&& bundle add elastic-apm \
+	&& bundle add newrelic_rpm \
 	&& bundle config frozen \
 	&& rm -rf /var/cache \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& echo "server_url: <%= ENV['ELASTIC_APM_SERVER_URL'] %>" >> config/elastic_apm.yml \
-	&& echo "secret_token: <%= ENV['ELASTIC_APM_SECRET_TOKEN'] %>" >> config/elastic_apm.yml
+	&& rm -rf /var/lib/apt/lists/*
+
+COPY newrelic.yml config/newrelic.yml
 
 USER mastodon

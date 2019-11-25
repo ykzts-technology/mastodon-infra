@@ -1,0 +1,15 @@
+common: &default_settings
+  license_key: <%= ENV['NEWRELIC_LICENSE_KEY'] %>
+  app_name: ykzts.technology
+  log_level: info
+
+development:
+  <<: *default_settings
+  app_name: ykzts.technology (Development)
+
+test:
+  <<: *default_settings
+  monitor_mode: false
+
+production:
+  <<: *default_settings
