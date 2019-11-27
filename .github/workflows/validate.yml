@@ -1,0 +1,40 @@
+name: Validate
+
+on:
+  pull_request:
+    branches:
+    - master
+  push:
+    branches:
+    - master
+
+env:
+  KUBEVAL_VERSION: 0.14.0
+  KUSTOMIZE_VERSION: 2.1.0
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Set up Kustomize
+      run: |
+        cd $(mktemp -d)
+        curl -Lo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64
+        sudo install kustomize /usr/local/bin
+        cd -
+
+    - name: Set up Kubeval
+      run: |
+        cd $(mktemp -d)
+        curl -Lo kubeval.tar.gz https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz
+        tar xf kubeval.tar.gz
+        sudo install kubeval /usr/local/bin
+        cd -
+
+    - name: Validate
+      run: |
+        kustomize k8s/overlays/production | kubeval --ignore-missing-schemas
