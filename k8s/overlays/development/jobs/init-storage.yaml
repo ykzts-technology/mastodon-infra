@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mastodon-init-storage-config
+data:
+  config.json: |
+    {
+      "version": "9",
+      "hosts": {
+        "minio": {
+          "url": "http://minio:9000",
+          "accessKey": "minio",
+          "secretKey": "minio123",
+          "api": "s3v4",
+          "lookup": "auto"
+        }
+      }
+    }
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mastodon-init-storage
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: alpine
+        image: alpine:3.10.3
+        command: ["sh", "-c", "until nc -z minio 9000; do sleep 3; done"]
+      containers:
+      - name: mc
+        image: minio/mc:RELEASE.2019-10-09T22-54-57Z
+        command:
+        - sh
+        - -c
+        - mc mb minio/storage; mc policy set public minio/storage/
+        volumeMounts:
+        - mountPath: /root/.mc/config.json
+          subPath: config.json
+          readOnly: true
+          name: mastodon-init-storage-config
+      restartPolicy: OnFailure
+      volumes:
+      - name: mastodon-init-storage-config
+        configMap:
+          name: mastodon-init-storage-config

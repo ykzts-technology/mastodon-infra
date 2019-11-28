@@ -2,42 +2,33 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: manael
-  labels:
-    app: manael
 spec:
   replicas: 5
-  selector:
-    matchLabels:
-      app: manael
   template:
-    metadata:
-      labels:
-        app: manael
     spec:
       containers:
       - name: manael
-        image: manael/manael:1.5.0
-        resources:
-          requests:
-            cpu: 25m
-            memory: 128Mi
-          limits:
-            cpu: 50m
-            memory: 256Mi
         env:
         - name: MANAEL_UPSTREAM_URL
           value: https://ykzts-technology-storage.storage.googleapis.com
-        ports:
-        - containerPort: 8080
         livenessProbe:
           httpGet:
             port: 8080
             path: /favicon.ico
           initialDelaySeconds: 30
-          periodSeconds: 15
+          periodSeconds: 20
         readinessProbe:
           httpGet:
             port: 8080
             path: /favicon.ico
           initialDelaySeconds: 30
-          periodSeconds: 15
+          periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: manael
+  annotations:
+    beta.cloud.google.com/backend-config:
+      '{"default": "manael-backend-config"}'
+    cloud.google.com/neg: '{"ingress": true}'

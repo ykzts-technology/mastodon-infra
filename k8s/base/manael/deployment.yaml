@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manael
+  labels:
+    app: manael
+spec:
+  selector:
+    matchLabels:
+      app: manael
+  template:
+    metadata:
+      labels:
+        app: manael
+    spec:
+      containers:
+      - name: manael
+        image: manael/manael:1.5.0
+        resources:
+          requests:
+            cpu: 25m
+            memory: 128Mi
+          limits:
+            cpu: 50m
+            memory: 256Mi
+        ports:
+        - containerPort: 8080

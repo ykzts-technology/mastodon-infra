@@ -19,10 +19,10 @@ spec:
         command: ["yarn", "start"]
         resources:
           requests:
-            cpu: 10m
+            cpu: 20m
             memory: 128Mi
           limits:
-            cpu: 25m
+            cpu: 50m
             memory: 256Mi
         ports:
         - containerPort: 4000
@@ -30,11 +30,11 @@ spec:
           httpGet:
             port: 4000
             path: /api/v1/streaming/health
-          initialDelaySeconds: 30
-          periodSeconds: 15
+          initialDelaySeconds: 60
+          periodSeconds: 30
         readinessProbe:
           httpGet:
             port: 4000
             path: /api/v1/streaming/health
-          initialDelaySeconds: 30
-          periodSeconds: 15
+          initialDelaySeconds: 60
+          periodSeconds: 30
