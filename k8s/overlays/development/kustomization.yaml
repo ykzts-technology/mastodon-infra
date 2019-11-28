@@ -4,11 +4,20 @@ bases:
 - ../../base
 - postgres
 - redis
+- minio
 - elasticsearch
 resources:
-- jobs/init.yaml
-- ingress.yaml
+- jobs/init-db.yaml
+- jobs/init-storage.yaml
 patches:
 - patches/mastodon-web.yaml
 - patches/mastodon-streaming.yaml
 - patches/mastodon-worker.yaml
+- patches/manael.yaml
+patchesJson6902:
+- target:
+    group: networking.k8s.io
+    version: v1beta1
+    kind: Ingress
+    name: mastodon
+  path: patches/ingress.yaml

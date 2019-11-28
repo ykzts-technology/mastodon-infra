@@ -5,3 +5,6 @@ bases:
 - mastodon-streaming
 - mastodon-worker
 - mastodon-assets
+- manael
+resources:
+- ingress.yaml

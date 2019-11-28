@@ -1,0 +1,7 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: mastodon
+  annotations:
+    ingress.gcp.kubernetes.io/pre-shared-cert: ykzts-technology-cert,files-ykzts-technology-cert
+    kubernetes.io/ingress.global-static-ip-name: ykzts-technology-ip

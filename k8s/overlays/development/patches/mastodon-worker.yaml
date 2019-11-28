@@ -28,6 +28,8 @@ spec:
           value: elasticsearch
         - name: ES_PORT
           value: "9200"
+        - name: LOCAL_DOMAIN
+          value: mastodon.localhost
         - name: SECRET_KEY_BASE
           value: a427a53eb74fb788a9782c4290c867790ee9485c330dfc49fa3ca04f38f718205f03a77d77f50106b7cdc45f1d3b734b5476cb7da66f7f766d107f708f9e44ce
         - name: OTP_SECRET
@@ -36,3 +38,23 @@ spec:
           value: XLtm4rkyTmhTW5aJ-8OWmB32BB5uvLCppx7JPyuSnlg=
         - name: VAPID_PUBLIC_KEY
           value: BOoeifxTKxy3tSpQF9ocYXq1f64nOwx04AUaxeNRWx29fy0iqtH44NeYGmLMSYQoBanWAw4Sl5Ky5gBzBeIsT5I=
+        - name: SMTP_DELIVERY_METHOD
+          value: file
+        - name: S3_ENABLED
+          value: "true"
+        - name: S3_BUCKET
+          value: storage
+        - name: AWS_ACCESS_KEY_ID
+          value: minio
+        - name: AWS_SECRET_ACCESS_KEY
+          value: minio123
+        - name: S3_REGION
+          value: us-east-1
+        - name: S3_PROTOCOL
+          value: https
+        - name: S3_HOSTNAME
+          value: minioo:9000
+        - name: S3_ENDPOINT
+          value: http://minio:9000
+        - name: S3_CLOUDFRONT_HOST
+          value: files.mastodon.localhost

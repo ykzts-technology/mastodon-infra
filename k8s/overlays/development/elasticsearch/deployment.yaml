@@ -8,6 +8,8 @@ spec:
   selector:
     matchLabels:
       app: elasticsearch
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -29,11 +31,11 @@ spec:
           httpGet:
             port: 9200
             path: /_cluster/health
-          initialDelaySeconds: 60
-          periodSeconds: 15
+          initialDelaySeconds: 120
+          periodSeconds: 30
         readinessProbe:
           httpGet:
             port: 9200
             path: /_cluster/health
-          initialDelaySeconds: 60
-          periodSeconds: 15
+          initialDelaySeconds: 120
+          periodSeconds: 30

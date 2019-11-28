@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manael
+spec:
+  template:
+    spec:
+      containers:
+      - name: manael
+        env:
+        - name: MANAEL_UPSTREAM_URL
+          value: http://minio:9000/storage

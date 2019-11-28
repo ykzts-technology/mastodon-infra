@@ -26,3 +26,9 @@ spec:
         backend:
           serviceName: mastodon-assets
           servicePort: 80
+  - host: files.ykzts.technology
+    http:
+      paths:
+      - backend:
+          serviceName: manael
+          servicePort: 8080
