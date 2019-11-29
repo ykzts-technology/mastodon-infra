@@ -37,4 +37,5 @@ jobs:
 
     - name: Validate
       run: |
+        kustomize build k8s/overlays/development | kubeval
         kustomize build k8s/overlays/production | kubeval --ignore-missing-schemas
