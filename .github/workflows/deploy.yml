@@ -4,6 +4,8 @@ on:
   push:
     branches:
     - master
+    paths:
+    - '!k8s/overlays/development/**'
 
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
