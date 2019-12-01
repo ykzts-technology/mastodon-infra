@@ -9,8 +9,10 @@ spec:
       containers:
       - name: mastodon
         env:
+        - name: MAX_THREADS
+          value: "15"
         - name: WEB_CONCURRENCY
-          value: "4"
+          value: "1"
         - name: REDIS_HOST
           valueFrom:
             secretKeyRef:
