@@ -16,7 +16,7 @@ spec:
       containers:
       - name: mastodon
         image: asia.gcr.io/ykzts-technology/mastodon
-        command: ["bundle", "exec", "sidekiq"]
+        command: ["bundle", "exec", "sidekiq", "-c", "15"]
         resources:
           requests:
             cpu: 50m
@@ -25,6 +25,8 @@ spec:
             cpu: 100m
             memory: 512Mi
         env:
+        - name: DB_POOL
+          value: "15"
         - name: LOCAL_DOMAIN
           value: ykzts.technology
         - name: SINGLE_USER_MODE
