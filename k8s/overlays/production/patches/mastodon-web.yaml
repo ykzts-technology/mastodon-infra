@@ -10,7 +10,7 @@ spec:
       - name: mastodon
         env:
         - name: MAX_THREADS
-          value: "5"
+          value: "10"
         - name: WEB_CONCURRENCY
           value: "3"
         - name: REDIS_HOST
