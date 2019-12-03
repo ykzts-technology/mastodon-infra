@@ -10,9 +10,9 @@ spec:
       - name: mastodon
         env:
         - name: MAX_THREADS
-          value: "15"
+          value: "5"
         - name: WEB_CONCURRENCY
-          value: "1"
+          value: "3"
         - name: REDIS_HOST
           valueFrom:
             secretKeyRef:
