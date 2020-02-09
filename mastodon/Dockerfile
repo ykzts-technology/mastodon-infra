@@ -1,4 +1,4 @@
-FROM tootsuite/mastodon:v3.0.1
+FROM tootsuite/mastodon:v3.1.0
 
 USER root
 
