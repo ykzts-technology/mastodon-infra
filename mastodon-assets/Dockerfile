@@ -1,4 +1,4 @@
-FROM tootsuite/mastodon:v3.0.1 as mastodon
+FROM tootsuite/mastodon:v3.1.0 as mastodon
 
 FROM nginx:1.17.8-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
