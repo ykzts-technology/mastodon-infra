@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:v3.1.1
+        image: tootsuite/mastodon:v3.1.2
         command: ["yarn", "start"]
         resources:
           requests:
