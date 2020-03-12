@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: manael
 spec:
-  replicas: 5
   template:
     spec:
       containers:
