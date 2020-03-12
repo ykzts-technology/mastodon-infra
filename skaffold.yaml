@@ -1,4 +1,4 @@
-apiVersion: skaffold/v1
+apiVersion: skaffold/v2alpha4
 kind: Config
 build:
   artifacts:
@@ -9,10 +9,11 @@ build:
 deploy:
   statusCheckDeadlineSeconds: 600
   kustomize:
-    path: k8s/overlays/development
+    paths:
+    - k8s/overlays/development
 profiles:
 - name: production
-  patches:
-  - op: replace
-    path: /deploy/kustomize/path
-    value: k8s/overlays/production
+  deploy:
+    kustomize:
+      paths:
+      - k8s/overlays/production

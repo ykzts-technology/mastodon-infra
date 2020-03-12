@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: mastodon-worker
 spec:
-  replicas: 3
   template:
     spec:
       containers:
