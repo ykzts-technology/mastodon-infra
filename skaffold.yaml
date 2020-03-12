@@ -4,8 +4,6 @@ build:
   artifacts:
   - image: asia.gcr.io/ykzts-technology/mastodon
     context: mastodon
-  - image: asia.gcr.io/ykzts-technology/mastodon-assets
-    context: mastodon-assets
 deploy:
   statusCheckDeadlineSeconds: 600
   kustomize:

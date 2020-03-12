@@ -5,9 +5,9 @@ bases:
 resources:
 - backendconfig.yaml
 patches:
+- patches/nginx.yaml
 - patches/mastodon-web.yaml
 - patches/mastodon-streaming.yaml
 - patches/mastodon-worker.yaml
-- patches/mastodon-assets.yaml
 - patches/manael.yaml
 - patches/ingress.yaml

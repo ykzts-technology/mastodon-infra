@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mastodon-assets
+  name: nginx
   labels:
-    app: mastodon-assets
+    app: nginx
 spec:
   selector:
     matchLabels:
-      app: mastodon-assets
+      app: nginx
   template:
     metadata:
       labels:
-        app: mastodon-assets
+        app: nginx
     spec:
       containers:
-      - name: mastodon-assets
-        image: asia.gcr.io/ykzts-technology/mastodon-assets
+      - name: nginx
+        image: nginx:1.17.9-alpine
         resources:
           requests:
             cpu: 10m
@@ -25,6 +25,10 @@ spec:
             memory: 256Mi
         ports:
         - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/nginx
+          readOnly: true
+          name: nginx-config
         livenessProbe:
           httpGet:
             port: 80
@@ -37,3 +41,7 @@ spec:
             path: /healthz
           initialDelaySeconds: 10
           periodSeconds: 5
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
