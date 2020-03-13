@@ -125,12 +125,3 @@ spec:
             secretKeyRef:
               name: newrelic-credentials
               key: license-key
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mastodon-web
-  annotations:
-    beta.cloud.google.com/backend-config:
-      '{"default": "mastodon-web-backend-config"}'
-    cloud.google.com/neg: '{"ingress": true}'

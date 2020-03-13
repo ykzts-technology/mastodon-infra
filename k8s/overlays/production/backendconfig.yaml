@@ -1,7 +1,7 @@
 apiVersion: cloud.google.com/v1beta1
 kind: BackendConfig
 metadata:
-  name: mastodon-web-backend-config
+  name: nginx-backend-config
 spec:
   timeoutSec: 120
   cdn:
@@ -19,19 +19,6 @@ spec:
   timeoutSec: 7200
   sessionAffinity:
     affinityType: CLIENT_IP
----
-apiVersion: cloud.google.com/v1beta1
-kind: BackendConfig
-metadata:
-  name: mastodon-assets-backend-config
-spec:
-  timeoutSec: 240
-  cdn:
-    enabled: true
-    cachePolicy:
-      includeHost: true
-      includeProtocol: true
-      includeQueryString: false
 ---
 apiVersion: cloud.google.com/v1beta1
 kind: BackendConfig

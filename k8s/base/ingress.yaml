@@ -8,24 +8,12 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: mastodon-web
-          servicePort: 3000
+          serviceName: nginx
+          servicePort: 80
       - path: /api/v1/streaming/*
         backend:
           serviceName: mastodon-streaming
           servicePort: 4000
-      - path: /assets/*
-        backend:
-          serviceName: mastodon-assets
-          servicePort: 80
-      - path: /packs/*
-        backend:
-          serviceName: mastodon-assets
-          servicePort: 80
-      - path: /emoji/*
-        backend:
-          serviceName: mastodon-assets
-          servicePort: 80
   - host: files.ykzts.technology
     http:
       paths:
