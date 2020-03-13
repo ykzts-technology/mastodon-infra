@@ -8,6 +8,11 @@ spec:
   selector:
     matchLabels:
       app: mastodon-worker
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -17,13 +22,6 @@ spec:
       - name: mastodon
         image: asia.gcr.io/ykzts-technology/mastodon
         command: ["bundle", "exec", "sidekiq", "-c", "15"]
-        resources:
-          requests:
-            cpu: 50m
-            memory: 256Mi
-          limits:
-            cpu: 100m
-            memory: 512Mi
         env:
         - name: DB_POOL
           value: "15"

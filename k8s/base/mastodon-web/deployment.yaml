@@ -8,6 +8,11 @@ spec:
   selector:
     matchLabels:
       app: mastodon-web
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -17,13 +22,6 @@ spec:
       - name: mastodon
         image: asia.gcr.io/ykzts-technology/mastodon
         command: ["bundle", "exec", "rails", "s", "-p", "3000"]
-        resources:
-          requests:
-            cpu: 50m
-            memory: 512Mi
-          limits:
-            cpu: 100m
-            memory: 1024Mi
         env:
         - name: LOCAL_DOMAIN
           value: ykzts.technology
