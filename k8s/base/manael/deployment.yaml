@@ -8,6 +8,11 @@ spec:
   selector:
     matchLabels:
       app: manael
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -16,12 +21,5 @@ spec:
       containers:
       - name: manael
         image: manael/manael:1.5.0
-        resources:
-          requests:
-            cpu: 25m
-            memory: 128Mi
-          limits:
-            cpu: 50m
-            memory: 256Mi
         ports:
         - containerPort: 8080

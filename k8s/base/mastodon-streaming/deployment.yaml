@@ -8,6 +8,11 @@ spec:
   selector:
     matchLabels:
       app: mastodon-streaming
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -17,13 +22,6 @@ spec:
       - name: mastodon
         image: tootsuite/mastodon:v3.1.2
         command: ["yarn", "start"]
-        resources:
-          requests:
-            cpu: 20m
-            memory: 128Mi
-          limits:
-            cpu: 50m
-            memory: 256Mi
         ports:
         - containerPort: 4000
         livenessProbe:
