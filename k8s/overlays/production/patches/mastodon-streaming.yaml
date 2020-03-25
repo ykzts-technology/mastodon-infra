@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: mastodon-streaming
 spec:
+  replicas: 2
   template:
     spec:
       containers:
