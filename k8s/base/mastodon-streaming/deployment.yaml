@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:latest
+        image: tootsuite/mastodon:v3.1.3
         command: ["yarn", "start"]
         ports:
         - containerPort: 4000
