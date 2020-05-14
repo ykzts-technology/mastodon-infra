@@ -7,8 +7,23 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:v3.1.3
+        image: tootsuite/mastodon:v3.1.4
         env:
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: hostname
+        - name: REDIS_PORT
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: port
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redislabs-credentials
+              key: password
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
