@@ -5,7 +5,6 @@ bases:
 - postgres
 - redis
 - minio
-- elasticsearch
 resources:
 - jobs/init-db.yaml
 - jobs/init-storage.yaml

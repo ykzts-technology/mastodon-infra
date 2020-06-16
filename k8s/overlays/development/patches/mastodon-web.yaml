@@ -24,10 +24,6 @@ spec:
           value: postgres
         - name: DB_PASS
           value: ""
-        - name: ES_HOST
-          value: elasticsearch
-        - name: ES_PORT
-          value: "9200"
         - name: LOCAL_DOMAIN
           value: mastodon.localhost
         - name: SECRET_KEY_BASE

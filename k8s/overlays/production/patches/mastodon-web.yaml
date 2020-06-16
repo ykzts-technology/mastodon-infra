@@ -48,18 +48,6 @@ spec:
             secretKeyRef:
               name: cloudsql-db-credentials
               key: password
-        - name: ES_ENABLED
-          value: "true"
-        - name: ES_HOST
-          valueFrom:
-            secretKeyRef:
-              name: elasticcloud-es-credentials
-              key: hostname
-        - name: ES_PORT
-          valueFrom:
-            secretKeyRef:
-              name: elasticcloud-es-credentials
-              key: port
         - name: SECRET_KEY_BASE
           valueFrom:
             secretKeyRef:
