@@ -24,13 +24,6 @@ $ kubectl create secret generic redislabs-credentials \
   --from-literal=hostname=... --from-literal=port=... --from-literal=password=...
 ```
 
-## Elastic Cloud
-
-```console
-$ kubectl create secret generic elasticcloud-es-credentials \
-  --from-literal=hostname=... --from-literal=port=...
-```
-
 ## Sendgrid
 
 ```console
