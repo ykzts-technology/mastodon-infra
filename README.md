@@ -11,8 +11,6 @@ $ kubectl create secret generic mastodon-credentials \
 ## Cloud SQL
 
 ```consol
-$ kubectl create secret generic cloudsql-instance-credentials \
-  --from-file=credentials.json=$(pwd)/credentials.json
 $ kubectl create secret generic cloudsql-db-credentials \
   --from-literal=username=mastodon --from-literal=password=...
 ```
