@@ -9,7 +9,7 @@ on:
 
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
-  GKE_REGION: asia-northeast1
+  GKE_REGION: asia-northeast1-c
   GKE_CLUSTER: primary
   KUSTOMIZE_VERSION: 2.1.0
   SKAFFOLD_VERSION: 1.5.0
