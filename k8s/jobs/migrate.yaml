@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:v3.1.4
+        image: tootsuite/mastodon:v3.1.5
         env:
         - name: REDIS_HOST
           valueFrom:
