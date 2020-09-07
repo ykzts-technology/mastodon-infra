@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
       - name: manael
-        image: manael/manael:1.7.0
+        image: ghcr.io/manael/manael:1.7.0
         ports:
         - containerPort: 8080
