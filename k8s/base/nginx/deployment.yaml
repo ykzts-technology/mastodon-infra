@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.19.7-alpine
+        image: nginx:1.19.8-alpine
         ports:
         - containerPort: 80
         volumeMounts:
