@@ -5,3 +5,4 @@ metadata:
   annotations:
     ingress.gcp.kubernetes.io/pre-shared-cert: ykzts-technology-cert,files-ykzts-technology-cert
     kubernetes.io/ingress.global-static-ip-name: ykzts-technology-ip
+    networking.gke.io/v1beta1.FrontendConfig: mastodon-frontend-config
