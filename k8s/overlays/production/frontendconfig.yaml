@@ -1,25 +1,7 @@
 apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
 metadata:
-  name: nginx-frontend-config
-spec:
-  redirectToHttps:
-    enabled: true
-    responseCodeName: PERMANENT_REDIRECT
----
-apiVersion: networking.gke.io/v1beta1
-kind: FrontendConfig
-metadata:
-  name: mastodon-streaming-frontend-config
-spec:
-  redirectToHttps:
-    enabled: true
-    responseCodeName: PERMANENT_REDIRECT
----
-apiVersion: networking.gke.io/v1beta1
-kind: FrontendConfig
-metadata:
-  name: manael-frontend-config
+  name: mastodon-frontend-config
 spec:
   redirectToHttps:
     enabled: true
