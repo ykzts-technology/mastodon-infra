@@ -33,17 +33,21 @@ spec:
         - containerPort: 3000
         livenessProbe:
           httpGet:
-            host: ykzts.technology
             port: 3000
             path: /health
+            httpHeaders:
+            - name: Host
+              value: ykzts.technology
           initialDelaySeconds: 180
           timeoutSeconds: 15
           periodSeconds: 30
         readinessProbe:
           httpGet:
-            host: ykzts.technology
             port: 3000
             path: /health
+            httpHeaders:
+            - name: Host
+              value: ykzts.technology
           initialDelaySeconds: 180
           timeoutSeconds: 15
           periodSeconds: 30
