@@ -3,7 +3,7 @@ name: Deploy to GKE
 on:
   push:
     branches:
-    - master
+    - main
     paths-ignore:
     - 'k8s/overlays/development/**'
 

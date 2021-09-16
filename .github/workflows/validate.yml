@@ -3,10 +3,10 @@ name: Validate
 on:
   pull_request:
     branches:
-    - master
+    - main
   push:
     branches:
-    - master
+    - main
 
 env:
   KUBEVAL_VERSION: 0.14.0
