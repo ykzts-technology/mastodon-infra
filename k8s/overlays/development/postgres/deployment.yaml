@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: postgres:9.6.23-alpine
+        image: postgres:9.6.24-alpine
         resources:
           limits:
             cpu: 50m
