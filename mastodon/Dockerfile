@@ -1,4 +1,4 @@
-FROM tootsuite/mastodon:v3.4.6
+FROM tootsuite/mastodon:edge
 
 # TODO: なんかうまく動いていなかったので一旦コメントアウト
 # USER root
