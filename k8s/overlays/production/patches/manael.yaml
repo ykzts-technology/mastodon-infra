@@ -8,6 +8,13 @@ spec:
     spec:
       containers:
       - name: manael
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 125m
+          limits:
+            memory: 1Gi
+            cpu: 500m
         env:
         - name: MANAEL_UPSTREAM_URL
           value: https://ykzts-technology-storage.storage.googleapis.com

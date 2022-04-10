@@ -8,6 +8,13 @@ spec:
     spec:
       containers:
       - name: mastodon
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 125m
+          limits:
+            memory: 512Mi
+            cpu: 250m
         env:
         - name: REDIS_HOST
           valueFrom:

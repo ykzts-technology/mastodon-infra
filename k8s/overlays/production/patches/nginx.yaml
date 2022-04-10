@@ -4,6 +4,17 @@ metadata:
   name: nginx
 spec:
   replicas: 2
+  template:
+    spec:
+      containers:
+      - name: nginx
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 125m
+          limits:
+            memory: 512Gi
+            cpu: 500m
 ---
 apiVersion: v1
 kind: Service
