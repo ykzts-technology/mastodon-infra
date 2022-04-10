@@ -34,7 +34,7 @@ module "vpc" {
   source  = "terraform-google-modules/network/google"
   version = "~> 5.0"
 
-  network_name = ""
+  network_name = local.network_name
   project_id   = var.project_id
   secondary_ranges = {
     (local.subnet_name) = [
