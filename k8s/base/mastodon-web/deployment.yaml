@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: asia.gcr.io/ykzts-technology/mastodon
+        image: tootsuite/mastodon:v3.5.1
         command: ["bundle", "exec", "rails", "s", "-p", "3000"]
         env:
         - name: LOCAL_DOMAIN

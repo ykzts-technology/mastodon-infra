@@ -1,9 +1,5 @@
 apiVersion: skaffold/v2alpha4
 kind: Config
-build:
-  artifacts:
-  - image: asia.gcr.io/ykzts-technology/mastodon
-    context: mastodon
 deploy:
   statusCheckDeadlineSeconds: 600
   kustomize:
