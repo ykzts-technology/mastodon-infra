@@ -30,7 +30,7 @@ jobs:
     - name: Set up GKE
       uses: google-github-actions/get-gke-credentials@v0
       with:
-        cluster_name: primary
+        cluster_name: mastodon-cluster
         location: asia-northeast1-c
 
     - name: Set up Skaffold
