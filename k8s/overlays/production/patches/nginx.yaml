@@ -10,10 +10,10 @@ spec:
       - name: nginx
         resources:
           requests:
-            memory: 128Mi
-            cpu: 125m
+            memory: 512Mi
+            cpu: 250m
           limits:
-            memory: 512Gi
+            memory: 1Gi
             cpu: 500m
 ---
 apiVersion: v1

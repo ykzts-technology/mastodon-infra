@@ -10,11 +10,11 @@ spec:
       - name: mastodon
         resources:
           requests:
-            memory: 128Mi
-            cpu: 125m
-          limits:
             memory: 512Mi
             cpu: 250m
+          limits:
+            memory: 1Gi
+            cpu: 500m
         env:
         - name: REDIS_HOST
           valueFrom:
