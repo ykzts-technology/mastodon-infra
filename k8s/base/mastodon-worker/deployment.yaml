@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: asia.gcr.io/ykzts-technology/mastodon
+        image: tootsuite/mastodon:v3.5.1
         command: ["bundle", "exec", "sidekiq", "-c", "15"]
         env:
         - name: DB_POOL
