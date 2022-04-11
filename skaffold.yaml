@@ -1,7 +1,6 @@
 apiVersion: skaffold/v2alpha4
 kind: Config
 deploy:
-  statusCheckDeadlineSeconds: 600
   kustomize:
     paths:
     - k8s/overlays/development
