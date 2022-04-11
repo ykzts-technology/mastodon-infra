@@ -14,6 +14,9 @@ spec:
           limits:
             memory: 512Mi
             cpu: 250m
+      nodeSelector:
+        cloud.google.com/gke-spot: "true"
+      terminationGracePeriodSeconds: 25
 ---
 apiVersion: v1
 kind: Service

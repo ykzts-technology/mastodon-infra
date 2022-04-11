@@ -115,3 +115,6 @@ spec:
           value: "52428800"
         - name: S3_CLOUDFRONT_HOST
           value: files.ykzts.technology
+      nodeSelector:
+        cloud.google.com/gke-spot: "true"
+      terminationGracePeriodSeconds: 25

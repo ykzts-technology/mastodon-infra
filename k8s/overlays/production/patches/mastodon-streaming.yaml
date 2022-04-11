@@ -50,6 +50,9 @@ spec:
             secretKeyRef:
               name: cloudsql-db-credentials
               key: password
+      nodeSelector:
+        cloud.google.com/gke-spot: "true"
+      terminationGracePeriodSeconds: 25
 ---
 apiVersion: v1
 kind: Service
