@@ -3,17 +3,16 @@ kind: Deployment
 metadata:
   name: mastodon-web
 spec:
-  replicas: 2
   template:
     spec:
       containers:
       - name: mastodon
         resources:
           requests:
-            memory: 512Mi
+            memory: 1Gi
             cpu: 250m
           limits:
-            memory: 1Gi
+            memory: 2Gi
             cpu: 500m
         env:
         - name: MAX_THREADS

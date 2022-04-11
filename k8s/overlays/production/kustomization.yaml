@@ -4,6 +4,7 @@ bases:
 - ../../base
 resources:
 - backendconfig.yaml
+- hpa.yaml
 patches:
 - patches/nginx.yaml
 - patches/mastodon-web.yaml
