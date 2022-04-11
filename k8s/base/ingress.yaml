@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mastodon
@@ -7,16 +7,25 @@ spec:
   - host: ykzts.technology
     http:
       paths:
-      - backend:
-          serviceName: nginx
-          servicePort: 80
-      - path: /api/v1/streaming/*
+      - path: /
+        pathType: Prefix
         backend:
-          serviceName: mastodon-streaming
-          servicePort: 4000
+          service:
+            name: nginx
+            port:
+              number: 80
+      - path: /api/v1/streaming/
+        pathType: Prefix
+        backend:
+          service:
+            name: mastodon-streaming
+            port:
+              number: 4000
   - host: files.ykzts.technology
     http:
       paths:
       - backend:
-          serviceName: manael
-          servicePort: 8080
+          service:
+            name: manael
+            port:
+              number: 8080
