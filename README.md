@@ -12,6 +12,7 @@ $ kubectl create secret generic mastodon-credentials \
 
 ```consol
 $ kubectl create secret generic cloudsql-db-credentials \
+  --from-literal=hostname=... --from-literal=port=... \
   --from-literal=username=mastodon --from-literal=password=...
 ```
 
@@ -34,11 +35,4 @@ $ kubectl create secret generic sendgrid-smtp-credentials \
 ```console
 $ kubectl create secret generic cloudstorage-credentials \
   --from-literal=access-key=... --from-literal=secret-key=...
-```
-
-## New Relic
-
-```console
-$ kubectl create secret generic newrelic-credentials \
-  --from-literal=license-key=...
 ```
