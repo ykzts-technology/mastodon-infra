@@ -50,4 +50,4 @@ jobs:
 
     - name: Deploy
       run: |
-        skaffold deploy --build-artifacts tags.json --status-check
+        skaffold deploy --build-artifacts tags.json
