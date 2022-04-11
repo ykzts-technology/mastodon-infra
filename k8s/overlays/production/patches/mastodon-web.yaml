@@ -9,11 +9,11 @@ spec:
       - name: mastodon
         resources:
           requests:
-            memory: 1Gi
+            memory: 2Gi
             cpu: 250m
           limits:
             memory: 2Gi
-            cpu: 500m
+            cpu: 250m
         env:
         - name: MAX_THREADS
           value: "10"
