@@ -13,25 +13,28 @@ env:
   SKAFFOLD_PROFILE: production
 
 jobs:
-  setup-build-publish-deploy:
-    name: Setup, Build, Publish, and Deploy
+  build-publish-deploy:
+    name: Build, Publish, and Deploy
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v0
+    - name: Authenticate to GCP
+      uses: google-github-actions/auth@v0
       with:
-        export_default_credentials: true
-        project_id: ${{ secrets.GKE_PROJECT }}
-        service_account_key: ${{ secrets.GKE_KEY }}
+        workload_identity_provider: ${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+        service_account: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
 
     - name: Set up GKE
       uses: google-github-actions/get-gke-credentials@v0
       with:
-        cluster_name: mastodon-cluster
-        location: asia-northeast1
+        cluster_name: ${{ secrets.GKE_CLUSTER_NAME }}
+        location: ${{ secrets.GOOGLE_REGION }}
 
     - name: Set up Skaffold
       run: |
@@ -39,9 +42,7 @@ jobs:
         sudo install skaffold /usr/local/bin
 
     - name: Build, and Publish
-      run: |
-        gcloud auth configure-docker
-        skaffold build --file-output tags.json
+      run: skaffold build --file-output tags.json
 
     - name: Set up Kustomize
       run: |
@@ -49,5 +50,4 @@ jobs:
         sudo install kustomize /usr/local/bin
 
     - name: Deploy
-      run: |
-        skaffold deploy --build-artifacts tags.json
+      run: skaffold deploy --build-artifacts tags.json
