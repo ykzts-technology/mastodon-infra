@@ -12,8 +12,8 @@ spec:
             memory: 512Mi
             cpu: 250m
           limits:
-            memory: 1Gi
-            cpu: 500m
+            memory: 512Mi
+            cpu: 250m
         env:
         - name: REDIS_HOST
           valueFrom:
