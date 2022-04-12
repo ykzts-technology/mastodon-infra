@@ -7,11 +7,6 @@ on:
     paths-ignore:
     - 'k8s/overlays/development/**'
 
-env:
-  KUSTOMIZE_VERSION: 2.1.0
-  SKAFFOLD_VERSION: 1.38.0
-  SKAFFOLD_PROFILE: production
-
 jobs:
   build-publish-deploy:
     name: Build, Publish, and Deploy
@@ -39,11 +34,11 @@ jobs:
     - name: Build, and Publish
       uses: docker://gcr.io/k8s-skaffold/skaffold:v1.38.0
       with:
-        args: build --file-output tags.json
+        args: build --file-output tags.json --profile production
         entrypoint: skaffold
 
     - name: Deploy
       uses: docker://gcr.io/k8s-skaffold/skaffold:v1.38.0
       with:
-        args: deploy --build-artifacts tags.json
+        args: deploy --build-artifacts tags.json --profile production
         entrypoint: skaffold
