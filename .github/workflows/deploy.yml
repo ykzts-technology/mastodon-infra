@@ -36,18 +36,14 @@ jobs:
         cluster_name: ${{ secrets.GKE_CLUSTER_NAME }}
         location: ${{ secrets.GOOGLE_REGION }}
 
-    - name: Set up Skaffold
-      run: |
-        curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v${SKAFFOLD_VERSION}/skaffold-linux-amd64
-        sudo install skaffold /usr/local/bin
-
     - name: Build, and Publish
-      run: skaffold build --file-output tags.json
-
-    - name: Set up Kustomize
-      run: |
-        curl -Lo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64
-        sudo install kustomize /usr/local/bin
+      uses: docker://gcr.io/k8s-skaffold/skaffold:v1.38.0
+      with:
+        args: build --file-output tags.json
+        entrypoint: skaffold
 
     - name: Deploy
-      run: skaffold deploy --build-artifacts tags.json
+      uses: docker://gcr.io/k8s-skaffold/skaffold:v1.38.0
+      with:
+        args: deploy --build-artifacts tags.json
+        entrypoint: skaffold
