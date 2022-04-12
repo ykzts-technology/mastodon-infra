@@ -122,6 +122,11 @@ module "sql-db" {
   disk_type           = "PD_SSD"
   enable_default_db   = true
   enable_default_user = true
+  insights_config = {
+    query_string_length     = 1024
+    record_application_tags = false
+    record_client_address   = false
+  }
   ip_configuration = {
     allocated_ip_range  = null
     authorized_networks = []
