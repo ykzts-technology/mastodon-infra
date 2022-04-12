@@ -32,7 +32,7 @@ data "google_client_config" "default" {}
 
 module "vpc" {
   source  = "terraform-google-modules/network/google"
-  version = "~> 5.0"
+  version = "5.0.0"
 
   network_name = local.network_name
   project_id   = var.project_id
@@ -62,9 +62,88 @@ module "vpc" {
   ]
 }
 
+module "sql-db" {
+  source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
+  version = "10.0.1"
+
+  availability_type = "ZONAL"
+  backup_configuration = {
+    enabled                        = true
+    location                       = null
+    point_in_time_recovery_enabled = false
+    retained_backups               = 7
+    retention_unit                 = "COUNT"
+    start_time                     = "18:00"
+    transaction_log_retention_days = 7
+  }
+  create_timeout = "30m"
+  database_flags = [
+    {
+      name  = "autovacuum"
+      value = "on"
+    },
+    {
+      name  = "checkpoint_completion_target"
+      value = "0.7"
+    },
+    {
+      name  = "default_statistics_target"
+      value = "100"
+    },
+    {
+      name  = "maintenance_work_mem"
+      value = "108800"
+    },
+    {
+      name  = "max_connections"
+      value = "128"
+    },
+    {
+      name  = "max_wal_size"
+      value = "128"
+    },
+    {
+      name  = "random_page_cost"
+      value = "1.1"
+    },
+    {
+      name  = "work_mem"
+      value = "6800"
+    },
+  ]
+  database_version    = "POSTGRES_9_6"
+  db_charset          = "UTF8"
+  db_collation        = "en_US.UTF8"
+  db_name             = "postgres"
+  delete_timeout      = "30m"
+  deletion_protection = true
+  disk_autoresize     = true
+  disk_size           = 37
+  disk_type           = "PD_SSD"
+  enable_default_db   = true
+  enable_default_user = true
+  ip_configuration = {
+    allocated_ip_range  = null
+    authorized_networks = []
+    ipv4_enabled        = false
+    private_network     = module.vpc.network_id
+    require_ssl         = false
+  }
+  maintenance_window_day          = 1
+  maintenance_window_hour         = 19
+  maintenance_window_update_track = "stable"
+  name                            = var.db_instance_name
+  project_id                      = var.project_id
+  region                          = var.region
+  tier                            = "db-g1-small"
+  update_timeout                  = "30m"
+  user_name                       = "postgres"
+  zone                            = "${var.region}-c"
+}
+
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-public-cluster"
-  version = "~> 20.0"
+  version = "20.0.0"
 
   enable_vertical_pod_autoscaling = true
   ip_range_pods                   = local.pods_range_name

@@ -1,8 +1,12 @@
 variable "project_id" {
-  description = "The project ID to host the cluster in"
+  type = string
 }
 
 variable "region" {
-  description = "The region the cluster in"
-  default     = "asia-northeast1"
+  default = "asia-northeast1"
+  type    = string
+}
+
+variable "db_instance_name" {
+  type = string
 }
