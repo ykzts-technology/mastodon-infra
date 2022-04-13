@@ -1,20 +1,17 @@
-variable "db_instance_name" {
+variable "db_hostname" {
   type = string
 }
 
-variable "domain" {
+variable "db_password" {
   type = string
 }
 
-variable "dns_zone_name" {
-  type = string
+variable "db_port" {
+  default = "5432"
+  type    = string
 }
 
-variable "ip_address_name" {
-  type = string
-}
-
-variable "project_id" {
+variable "db_username" {
   type = string
 }
 
@@ -28,11 +25,6 @@ variable "redis_password" {
 
 variable "redis_port" {
   type = string
-}
-
-variable "region" {
-  default = "asia-northeast1"
-  type    = string
 }
 
 variable "smtp_password" {

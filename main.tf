@@ -18,6 +18,8 @@ locals {
   svc_range_name         = "ip-range-svc-mastodon"
 }
 
+data "google_client_config" "default" {}
+
 provider "google" {
   project = var.project_id
   region  = var.region
@@ -28,7 +30,11 @@ provider "google-beta" {
   region  = var.region
 }
 
-data "google_client_config" "default" {}
+provider "kubernetes" {
+  cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+  host                   = "https://${module.gke.endpoint}"
+  token                  = data.google_client_config.default.access_token
+}
 
 module "vpc" {
   source  = "terraform-google-modules/network/google"
@@ -112,13 +118,32 @@ module "dns-public-zone" {
       type    = "TXT"
     }
   ]
-  type       = "public"
+  type = "public"
+}
+
+resource "random_password" "db_user" {
+  length           = 21
+  lower            = true
+  min_lower        = 1
+  min_numeric      = 1
+  min_special      = 1
+  min_upper        = 1
+  number           = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+  special          = true
+  upper            = true
 }
 
 module "sql-db" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
   version = "10.0.1"
 
+  additional_users = [
+    {
+      name     = "mastodon",
+      password = random_password.db_user.result
+    },
+  ]
   availability_type = "ZONAL"
   backup_configuration = {
     enabled                        = true
@@ -212,4 +237,20 @@ module "gke" {
   region                          = var.region
   release_channel                 = "REGULAR"
   subnetwork                      = local.subnet_names[index(module.vpc.subnets_names, local.subnet_name)]
+}
+
+module "mastodon-secrets" {
+  source = "./modules/mastodon-secrets"
+
+  db_hostname        = module.sql-db.private_ip_address
+  db_password        = module.sql-db.additional_users[0].password
+  db_username        = module.sql-db.additional_users[0].name
+  redis_hostname     = var.redis_hostname
+  redis_password     = var.redis_password
+  redis_port         = var.redis_port
+  smtp_password      = var.smtp_password
+  storage_access_key = var.storage_access_key
+  storage_secret_key = var.storage_secret_key
+  vapid_private_key  = var.vapid_private_key
+  vapid_public_key   = var.vapid_public_key
 }
