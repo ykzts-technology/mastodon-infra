@@ -20,54 +20,6 @@ locals {
 
 data "google_client_config" "default" {}
 
-provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
-provider "google-beta" {
-  project = var.project_id
-  region  = var.region
-}
-
-provider "kubernetes" {
-  cluster_ca_certificate = base64decode(module.gke.ca_certificate)
-  host                   = "https://${module.gke.endpoint}"
-  token                  = data.google_client_config.default.access_token
-}
-
-module "vpc" {
-  source  = "terraform-google-modules/network/google"
-  version = "5.0.0"
-
-  network_name = local.network_name
-  project_id   = var.project_id
-  secondary_ranges = {
-    (local.subnet_name) = [
-      {
-        range_name    = local.pods_range_name
-        ip_cidr_range = "192.168.0.0/18"
-      },
-      {
-        range_name    = local.svc_range_name
-        ip_cidr_range = "192.168.64.0/18"
-      },
-    ]
-  }
-  subnets = [
-    {
-      subnet_name   = local.subnet_name
-      subnet_ip     = "10.0.0.0/17"
-      subnet_region = var.region
-    },
-    {
-      subnet_name   = local.master_auth_subnetwork
-      subnet_ip     = "10.60.0.0/17"
-      subnet_region = var.region
-    },
-  ]
-}
-
 module "address-fe" {
   source  = "terraform-google-modules/address/google"
   version = "3.1.1"
@@ -121,27 +73,14 @@ module "dns-public-zone" {
   type = "public"
 }
 
-resource "random_password" "db_user" {
-  length           = 21
-  lower            = true
-  min_lower        = 1
-  min_numeric      = 1
-  min_special      = 1
-  min_upper        = 1
-  number           = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-  special          = true
-  upper            = true
-}
-
 module "sql-db" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
   version = "10.0.1"
 
   additional_users = [
     {
-      name     = "mastodon",
-      password = random_password.db_user.result
+      name     = "mastodon"
+      password = null
     },
   ]
   availability_type = "ZONAL"
