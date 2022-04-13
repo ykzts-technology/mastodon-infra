@@ -163,6 +163,12 @@ module "sql-db" {
   zone                            = "${var.region}-c"
 }
 
+resource "google_storage_hmac_key" "key" {
+  project               = var.project_id
+  service_account_email = google_service_account.gcs_service_account.email
+  state                 = "ACTIVE"
+}
+
 module "gcs_buckets" {
   source  = "terraform-google-modules/cloud-storage/google"
   version = "3.2.0"
@@ -190,6 +196,8 @@ module "gcs_buckets" {
   versioning = {
     (var.storage_bucket_name) = false
   }
+
+  depends_on = [google_storage_hmac_key.key]
 }
 
 module "gke" {
@@ -217,8 +225,8 @@ module "mastodon-secrets" {
   redis_password     = var.redis_password
   redis_port         = var.redis_port
   smtp_password      = var.smtp_password
-  storage_access_key = var.storage_access_key
-  storage_secret_key = var.storage_secret_key
+  storage_access_key = google_storage_hmac_key.key.access_id
+  storage_secret_key = google_storage_hmac_key.key.secret
   vapid_private_key  = var.vapid_private_key
   vapid_public_key   = var.vapid_public_key
 }
