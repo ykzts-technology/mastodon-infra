@@ -47,6 +47,10 @@ variable "storage_secret_key" {
   type = string
 }
 
+variable "storage_bucket_name" {
+  type = string
+}
+
 variable "vapid_private_key" {
   type = string
 }

@@ -163,6 +163,35 @@ module "sql-db" {
   zone                            = "${var.region}-c"
 }
 
+module "gcs_buckets" {
+  source  = "terraform-google-modules/cloud-storage/google"
+  version = "3.2.0"
+
+  admins = [google_service_account.gcs_service_account.email]
+  bucket_policy_only = {
+    (var.storage_bucket_name) = false
+  }
+  cors = [
+    {
+      max_age_seconds = 3600
+      method          = ["GET", "HEAD"]
+      response_header = ["Content-Length"]
+      origin          = ["https://${var.domain}"]
+    },
+  ]
+  hmac_key_admins          = [google_service_account.gcs_service_account.email]
+  location                 = "ASIA"
+  names                    = [var.storage_bucket_name]
+  storage_class            = "MULTI_REGIONAL"
+  prefix                   = ""
+  project_id               = var.project_id
+  set_admin_roles          = true
+  set_hmac_key_admin_roles = true
+  versioning = {
+    (var.storage_bucket_name) = false
+  }
+}
+
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-public-cluster"
   version = "20.0.0"
