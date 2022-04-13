@@ -173,7 +173,7 @@ module "gcs_buckets" {
   source  = "terraform-google-modules/cloud-storage/google"
   version = "3.2.0"
 
-  bucket_hmac_key_admins = {
+  bucket_admins = {
     (var.storage_bucket_name) = "serviceAccount:${google_service_account.gcs_service_account.email}",
   }
   bucket_policy_only = {
@@ -187,12 +187,12 @@ module "gcs_buckets" {
       origin          = ["https://${var.domain}"]
     },
   ]
-  location                 = "ASIA"
-  names                    = [var.storage_bucket_name]
-  storage_class            = "MULTI_REGIONAL"
-  prefix                   = ""
-  project_id               = var.project_id
-  set_hmac_key_admin_roles = true
+  location        = "ASIA"
+  names           = [var.storage_bucket_name]
+  storage_class   = "MULTI_REGIONAL"
+  prefix          = ""
+  project_id      = var.project_id
+  set_admin_roles = true
   versioning = {
     (var.storage_bucket_name) = false
   }
