@@ -5,6 +5,7 @@ bases:
 resources:
 - backendconfig.yaml
 - certificate.yaml
+- frontendconfig.yaml
 - hpa.yaml
 patches:
 - patches/nginx.yaml
