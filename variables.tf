@@ -1,16 +1,8 @@
-variable "db_instance_name" {
-  type = string
-}
-
 variable "domain" {
   type = string
 }
 
-variable "dns_zone_name" {
-  type = string
-}
-
-variable "ip_address_name" {
+variable "name" {
   type = string
 }
 
@@ -36,10 +28,6 @@ variable "region" {
 }
 
 variable "smtp_password" {
-  type = string
-}
-
-variable "storage_bucket_name" {
   type = string
 }
 
