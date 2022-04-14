@@ -4,5 +4,5 @@ metadata:
   name: mastodon
   annotations:
     kubernetes.io/ingress.global-static-ip-name: ykzts-technology-ip
-    networking.gke.io/managed-certificates: mastodon-infra
+    networking.gke.io/managed-certificates: mastodon-certificate
     networking.gke.io/v1beta1.FrontendConfig: mastodon-frontend-config
