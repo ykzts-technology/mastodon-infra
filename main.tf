@@ -9,6 +9,7 @@ terraform {
 }
 
 locals {
+  storage_bucket_name    = "${var.name}-storage"
   cluster_type           = "mastodon"
   master_auth_subnetwork = "mastodon-master-subnet"
   network_name           = "mastodon-network"
@@ -27,7 +28,7 @@ module "address-fe" {
   address_type = "EXTERNAL"
   global       = true
   ip_version   = "IPV4"
-  names        = [var.ip_address_name]
+  names        = ["${var.name}-ip"]
   project_id   = var.project_id
   region       = var.region
 }
@@ -42,7 +43,7 @@ module "dns-public-zone" {
     state         = "on"
   }
   domain     = "${var.domain}."
-  name       = var.dns_zone_name
+  name       = var.name
   project_id = var.project_id
   recordsets = [
     {
@@ -154,7 +155,7 @@ module "sql-db" {
   maintenance_window_day          = 1
   maintenance_window_hour         = 19
   maintenance_window_update_track = "stable"
-  name                            = var.db_instance_name
+  name                            = var.name
   project_id                      = var.project_id
   region                          = var.region
   tier                            = "db-g1-small"
@@ -174,10 +175,10 @@ module "gcs_buckets" {
   version = "3.2.0"
 
   bucket_admins = {
-    (var.storage_bucket_name) = "serviceAccount:${google_service_account.gcs_service_account.email}",
+    (local.storage_bucket_name) = "serviceAccount:${google_service_account.gcs_service_account.email}",
   }
   bucket_policy_only = {
-    (var.storage_bucket_name) = false
+    (local.storage_bucket_name) = false
   }
   cors = [
     {
@@ -188,13 +189,13 @@ module "gcs_buckets" {
     },
   ]
   location        = "ASIA"
-  names           = [var.storage_bucket_name]
+  names           = [local.storage_bucket_name]
   storage_class   = "MULTI_REGIONAL"
   prefix          = ""
   project_id      = var.project_id
   set_admin_roles = true
   versioning = {
-    (var.storage_bucket_name) = false
+    (local.storage_bucket_name) = false
   }
 
   depends_on = [google_storage_hmac_key.key]
