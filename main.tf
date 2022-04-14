@@ -201,6 +201,12 @@ module "gcs_buckets" {
   depends_on = [google_storage_hmac_key.key]
 }
 
+resource "google_compute_ssl_policy" "default" {
+  name            = "default-ssl-policy"
+  profile         = "MODERN"
+  min_tls_version = "TLS_1_2"
+}
+
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-public-cluster"
   version = "20.0.0"
