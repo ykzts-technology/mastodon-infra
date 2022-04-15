@@ -8,7 +8,6 @@ resources:
 - frontendconfig.yaml
 - hpa.yaml
 patches:
-- patches/nginx.yaml
 - patches/mastodon-web.yaml
 - patches/mastodon-streaming.yaml
 - patches/mastodon-worker.yaml

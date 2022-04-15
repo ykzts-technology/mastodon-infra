@@ -11,9 +11,9 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nginx
+            name: mastodon-web
             port:
-              number: 80
+              number: 3000
       - path: /api/v1/streaming/
         pathType: Prefix
         backend:
@@ -21,6 +21,27 @@ spec:
             name: mastodon-streaming
             port:
               number: 4000
+      - path: /assets/
+        pathType: Prefix
+        backend:
+          service:
+            name: mastodon-assets
+            port:
+              number: 3000
+      - path: /emoji/
+        pathType: Prefix
+        backend:
+          service:
+            name: mastodon-assets
+            port:
+              number: 3000
+      - path: /packs/
+        pathType: Prefix
+        backend:
+          service:
+            name: mastodon-assets
+            port:
+              number: 3000
   - host: files.ykzts.technology
     http:
       paths:
