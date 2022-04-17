@@ -10,18 +10,6 @@ variable "project_id" {
   type = string
 }
 
-variable "redis_hostname" {
-  type = string
-}
-
-variable "redis_password" {
-  type = string
-}
-
-variable "redis_port" {
-  type = string
-}
-
 variable "region" {
   default = "asia-northeast1"
   type    = string
