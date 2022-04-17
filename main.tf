@@ -244,9 +244,9 @@ module "mastodon-secrets" {
   db_hostname        = module.sql-db.private_ip_address
   db_password        = module.sql-db.additional_users[0].password
   db_username        = module.sql-db.additional_users[0].name
-  redis_hostname     = var.redis_hostname
-  redis_password     = var.redis_password
-  redis_port         = var.redis_port
+  redis_hostname     = module.memorystore.host
+  redis_password     = module.memorystore.auth_string
+  redis_port         = module.memorystore.port
   smtp_password      = var.smtp_password
   storage_access_key = google_storage_hmac_key.key.access_id
   storage_secret_key = google_storage_hmac_key.key.secret
