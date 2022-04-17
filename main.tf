@@ -164,6 +164,22 @@ module "sql-db" {
   zone                            = "${var.region}-c"
 }
 
+module "memorystore" {
+  source  = "terraform-google-modules/memorystore/google"
+  version = "4.3.0"
+
+  auth_enabled            = true
+  authorized_network      = module.vpc.network_id
+  connect_mode            = "PRIVATE_SERVICE_ACCESS"
+  memory_size_gb          = 1
+  name                    = var.name
+  project                 = var.project_id
+  redis_version           = "REDIS_6_X"
+  region                  = var.region
+  tier                    = "BASIC"
+  transit_encryption_mode = "SERVER_AUTHENTICATION"
+}
+
 resource "google_storage_hmac_key" "key" {
   project               = var.project_id
   service_account_email = google_service_account.gcs_service_account.email
