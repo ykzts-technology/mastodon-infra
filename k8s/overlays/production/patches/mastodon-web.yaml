@@ -115,6 +115,8 @@ spec:
           value: "52428800"
         - name: S3_CLOUDFRONT_HOST
           value: files.ykzts.technology
+        - name: TRUSTED_PROXY_IP
+          value: 130.211.0.0/22,35.191.0.0/16
       nodeSelector:
         cloud.google.com/gke-spot: "true"
       terminationGracePeriodSeconds: 25
