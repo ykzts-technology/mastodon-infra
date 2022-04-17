@@ -177,7 +177,7 @@ module "memorystore" {
   redis_version           = "REDIS_6_X"
   region                  = var.region
   tier                    = "BASIC"
-  transit_encryption_mode = "SERVER_AUTHENTICATION"
+  transit_encryption_mode = "DISABLED"
 }
 
 resource "google_storage_hmac_key" "key" {
