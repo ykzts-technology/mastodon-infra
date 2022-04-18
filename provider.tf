@@ -8,6 +8,8 @@ provider "google-beta" {
   region  = var.region
 }
 
+data "google_client_config" "default" {}
+
 provider "kubernetes" {
   cluster_ca_certificate = base64decode(module.gke.ca_certificate)
   host                   = "https://${module.gke.endpoint}"
