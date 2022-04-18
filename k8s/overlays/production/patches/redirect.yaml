@@ -29,3 +29,10 @@ spec:
       nodeSelector:
         cloud.google.com/gke-spot: "true"
       terminationGracePeriodSeconds: 25
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redirect
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
