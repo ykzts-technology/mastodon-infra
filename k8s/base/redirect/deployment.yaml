@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
       - name: redirect
-        image: asia-northeast1-docker.pkg.dev/ykzts-technology/redirect
+        image: asia-northeast1-docker.pkg.dev/ykzts-technology/redirect/redirect
         ports:
         - containerPort: 8080
