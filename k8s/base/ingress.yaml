@@ -3,6 +3,11 @@ kind: Ingress
 metadata:
   name: mastodon
 spec:
+  defaultBackend:
+    service:
+      name: redirect
+      port:
+        number: 8080
   rules:
   - host: ykzts.technology
     http:
