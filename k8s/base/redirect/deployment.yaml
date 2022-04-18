@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redirect
+  labels:
+    app: redirect
+spec:
+  selector:
+    matchLabels:
+      app: redirect
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: redirect
+    spec:
+      containers:
+      - name: redirect
+        image: asia-northeast1-docker.pkg.dev/ykzts-technology/redirect
+        ports:
+        - containerPort: 8080

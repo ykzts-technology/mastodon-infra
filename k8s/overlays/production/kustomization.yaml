@@ -12,4 +12,5 @@ patches:
 - patches/mastodon-streaming.yaml
 - patches/mastodon-worker.yaml
 - patches/manael.yaml
+- patches/redirect.yaml
 - patches/ingress.yaml
