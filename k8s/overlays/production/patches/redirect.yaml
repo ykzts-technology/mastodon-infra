@@ -17,13 +17,13 @@ spec:
         livenessProbe:
           httpGet:
             port: 8080
-            path: /health
+            path: /healthz
           initialDelaySeconds: 30
           periodSeconds: 20
         readinessProbe:
           httpGet:
             port: 8080
-            path: /health
+            path: /healthz
           initialDelaySeconds: 30
           periodSeconds: 20
       nodeSelector:
