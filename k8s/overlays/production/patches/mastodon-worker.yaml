@@ -82,7 +82,7 @@ spec:
               name: sendgrid-smtp-credentials
               key: password
         - name: SMTP_FROM_ADDRESS
-          value: ykzts.technology
+          value: Mastodon <notifications@ykzts.technology>
         - name: S3_ENABLED
           value: "true"
         - name: S3_BUCKET
