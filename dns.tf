@@ -41,6 +41,12 @@ module "dns-public-zone" {
       ttl     = 7200
       type    = "A"
     },
+    {
+      name    = ""
+      records = ["issue \"pki.goog"\"]
+      ttl     = 7200
+      type    = "CAA"
+    },
     # GitHub
     {
       name    = "_github-challenge-ykzts-technology-organization"
@@ -66,6 +72,12 @@ module "dns-public-zone" {
       records = ["s2.domainkey.u26458027.wl028.sendgrid.net."]
       ttl     = 3600
       type    = "CNAME"
+    },
+    {
+      name    = "_dmarc"
+      records = ["v=DMARC1; p=reject"]
+      ttl     = 3600
+      type    = "TXT"
     },
   ]
   type = "public"
