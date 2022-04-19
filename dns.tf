@@ -51,19 +51,19 @@ module "dns-public-zone" {
     # SendGrid
     {
       name    = "em7827"
-      records = ["u26458027.wl028.sendgrid.net"]
+      records = ["u26458027.wl028.sendgrid.net."]
       ttl     = 3600
       type    = "CNAME"
     },
     {
       name    = "s1._domainkey"
-      records = ["s1.domainkey.u26458027.wl028.sendgrid.net"]
+      records = ["s1.domainkey.u26458027.wl028.sendgrid.net."]
       ttl     = 3600
       type    = "CNAME"
     },
     {
       name    = "s2._domainkey"
-      records = ["s2.domainkey.u26458027.wl028.sendgrid.net"]
+      records = ["s2.domainkey.u26458027.wl028.sendgrid.net."]
       ttl     = 3600
       type    = "CNAME"
     },
