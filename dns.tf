@@ -43,7 +43,7 @@ module "dns-public-zone" {
     },
     {
       name    = ""
-      records = ["issue \"pki.goog\""]
+      records = ["0 issue \"pki.goog\""]
       ttl     = 7200
       type    = "CAA"
     },
