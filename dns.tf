@@ -41,12 +41,32 @@ module "dns-public-zone" {
       ttl     = 7200
       type    = "A"
     },
+    # GitHub
     {
       name    = "_github-challenge-ykzts-technology-organization"
       records = ["a0fb7df9f0"]
       ttl     = 3600
       type    = "TXT"
-    }
+    },
+    # SendGrid
+    {
+      name    = "em7827"
+      records = ["u26458027.wl028.sendgrid.net"]
+      ttl     = 3600
+      type    = "CNAME"
+    },
+    {
+      name    = "s1._domainkey"
+      records = ["s1.domainkey.u26458027.wl028.sendgrid.net"]
+      ttl     = 3600
+      type    = "CNAME"
+    },
+    {
+      name    = "s2._domainkey"
+      records = ["s2.domainkey.u26458027.wl028.sendgrid.net"]
+      ttl     = 3600
+      type    = "CNAME"
+    },
   ]
   type = "public"
 }
