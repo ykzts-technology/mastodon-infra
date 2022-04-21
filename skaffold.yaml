@@ -1,10 +1,5 @@
 apiVersion: skaffold/v2beta28
 kind: Config
-build:
-  artifacts:
-  - image: asia-northeast1-docker.pkg.dev/ykzts-technology/redirect/redirect
-    ko:
-      dir: ./redirect
 deploy:
   kustomize:
     paths:

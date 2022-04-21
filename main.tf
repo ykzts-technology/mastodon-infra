@@ -18,14 +18,6 @@ locals {
   svc_range_name         = "ip-range-svc-mastodon"
 }
 
-module "docker-repositories" {
-  source = "./modules/artifact-registry-repositories"
-
-  names    = ["redirect"]
-  project = var.project_id
-  region  = var.region
-}
-
 resource "google_compute_ssl_policy" "default" {
   name            = "default-ssl-policy"
   profile         = "MODERN"
