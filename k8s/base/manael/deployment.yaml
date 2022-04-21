@@ -21,8 +21,5 @@ spec:
       containers:
       - name: manael
         image: ghcr.io/manaelproxy/manael:1.9.1
-        env:
-        - name: MANAEL_ENABLE_AVIF
-          value: "true"
         ports:
         - containerPort: 8080
