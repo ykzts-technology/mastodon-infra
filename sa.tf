@@ -6,7 +6,6 @@ module "service_accounts" {
   names         = ["terraform"]
   project_id    = var.project_id
   project_roles = [
-    "${var.project_id}=>roles/artifactregistry.admin",
     "${var.project_id}=>roles/cloudsql.admin",
     "${var.project_id}=>roles/compute.networkAdmin",
     "${var.project_id}=>roles/compute.securityAdmin",
