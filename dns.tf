@@ -5,7 +5,7 @@ module "address-fe" {
   address_type = "EXTERNAL"
   global       = true
   ip_version   = "IPV4"
-  names        = ["${var.name}-ip"]
+  names        = ["${local.default_name}-ip"]
   project_id   = var.project_id
   region       = var.region
 }
@@ -20,7 +20,7 @@ module "dns-public-zone" {
     state         = "on"
   }
   domain     = "${var.domain}."
-  name       = var.name
+  name       = local.default_name
   project_id = var.project_id
   recordsets = [
     {

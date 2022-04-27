@@ -9,6 +9,7 @@ terraform {
 }
 
 locals {
+  default_name           = var.project_id
   cluster_type           = "mastodon"
   master_auth_subnetwork = "mastodon-master-subnet"
   network_name           = "mastodon-network"

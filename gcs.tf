@@ -1,5 +1,5 @@
 locals {
-  storage_bucket_name = "${var.name}-storage"
+  storage_bucket_name = "${local.default_name}-storage"
 }
 
 resource "google_storage_hmac_key" "key" {
