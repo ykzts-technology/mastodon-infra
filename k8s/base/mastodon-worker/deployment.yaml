@@ -29,3 +29,5 @@ spec:
           value: ykzts.technology
         - name: SINGLE_USER_MODE
           value: "true"
+        - name: DEFAULT_LOCALE
+          value: ja
