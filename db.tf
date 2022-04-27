@@ -11,7 +11,7 @@ module "sql-db" {
   availability_type = "ZONAL"
   backup_configuration = {
     enabled                        = true
-    location                       = null
+    location                       = "asia"
     point_in_time_recovery_enabled = false
     retained_backups               = 7
     retention_unit                 = "COUNT"
@@ -79,10 +79,10 @@ module "sql-db" {
   maintenance_window_day          = 1
   maintenance_window_hour         = 19
   maintenance_window_update_track = "stable"
-  name                            = var.name
+  name                            = local.default_name
   project_id                      = var.project_id
   region                          = var.region
-  tier                            = "db-g1-small"
+  tier                            = "db-custom-1-3840"
   update_timeout                  = "30m"
   user_name                       = "postgres"
   zone                            = "${var.region}-c"
@@ -96,7 +96,7 @@ module "memorystore" {
   authorized_network      = module.vpc.network_id
   connect_mode            = "PRIVATE_SERVICE_ACCESS"
   memory_size_gb          = 1
-  name                    = var.name
+  name                    = local.default_name
   project                 = var.project_id
   redis_version           = "REDIS_6_X"
   region                  = var.region
