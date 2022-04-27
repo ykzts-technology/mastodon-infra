@@ -29,6 +29,8 @@ spec:
           value: "true"
         - name: PERSISTENT_TIMEOUT
           value: "620"
+        - name: DEFAULT_LOCALE
+          value: ja
         ports:
         - containerPort: 3000
         livenessProbe:

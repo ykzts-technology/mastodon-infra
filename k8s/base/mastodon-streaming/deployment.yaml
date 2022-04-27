@@ -22,6 +22,9 @@ spec:
       - name: mastodon
         image: tootsuite/mastodon:edge@sha256:a9b81af6033b21932fcc5c120874862d278617bc9163f438fbfc52f6f707e5f7
         command: ["yarn", "start"]
+        env:
+        - name: DEFAULT_LOCALE
+          value: ja
         ports:
         - containerPort: 4000
         livenessProbe:
