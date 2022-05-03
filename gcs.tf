@@ -28,7 +28,7 @@ module "gcs_buckets" {
   ]
   location        = "ASIA"
   names           = [local.storage_bucket_name]
-  storage_class   = "MULTI_REGIONAL"
+  storage_class   = "STANDARD"
   prefix          = ""
   project_id      = var.project_id
   set_admin_roles = true
