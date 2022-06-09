@@ -9,7 +9,7 @@
 			// Append -bullseye or -buster to pin to an OS version.
 			// Use -bullseye variants on local arm64/Apple Silicon.
 			"VARIANT": "1-bullseye",
-			"TERRAFORM_VERSION": "1.2.0",
+			"TERRAFORM_VERSION": "1.2.2",
 			"TFLINT_VERSION": "none",
 			"TERRAGRUNT_VERSION": "none",
 			"INSTALL_DOCKER": "true",
