@@ -38,7 +38,7 @@ spec:
   - type: Resource
     resource:
       name: memory
-      targetAverageUtilization: 80
+      targetAverageUtilization: 95
 ---
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
@@ -59,7 +59,7 @@ spec:
   - type: Resource
     resource:
       name: memory
-      targetAverageUtilization: 80
+      targetAverageUtilization: 95
 ---
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
