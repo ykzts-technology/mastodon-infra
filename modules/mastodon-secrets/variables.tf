@@ -1,3 +1,7 @@
+variable "deepl_api_key" {
+  type = string
+}
+
 variable "db_hostname" {
   type = string
 }
