@@ -43,6 +43,7 @@ module "gke" {
 module "mastodon-secrets" {
   source = "./modules/mastodon-secrets"
 
+  deepl_api_key      = var.deepl_api_key
   db_hostname        = module.sql-db.private_ip_address
   db_password        = module.sql-db.additional_users[0].password
   db_username        = module.sql-db.additional_users[0].name

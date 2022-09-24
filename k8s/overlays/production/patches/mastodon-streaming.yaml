@@ -52,6 +52,11 @@ spec:
               key: password
         - name: TRUSTED_PROXY_IP
           value: 34.98.116.19/32 130.211.0.0/22 35.191.0.0/16
+        - name: DEEPL_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: deepl-credentials
+              key: api-key
       nodeSelector:
         cloud.google.com/gke-spot: "true"
       terminationGracePeriodSeconds: 25

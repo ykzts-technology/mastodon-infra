@@ -64,3 +64,13 @@ resource "kubernetes_secret" "cloudstorage_credentials" {
     name = "cloudstorage-credentials"
   }
 }
+
+resource "kubernetes_secret" "deepl_credentials" {
+  data = {
+    api-key     = var.deepl_api_key
+  }
+
+  metadata {
+    name = "deepl-credentials"
+  }
+}
