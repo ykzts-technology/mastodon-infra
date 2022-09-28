@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:edge@sha256:a33c5a62ccfd9c71db9090dd9411fc00fca686bb76aea3dc3c0171ba2affcce5
+        image: tootsuite/mastodon:edge@sha256:111f59456a8f35dbe6199b1d0ad36f26dfaa88c2263ff0d5d2a292fa1ba62bd0
         env:
         - name: REDIS_HOST
           valueFrom:
