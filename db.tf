@@ -90,7 +90,7 @@ module "sql-db" {
 
 module "memorystore" {
   source  = "terraform-google-modules/memorystore/google"
-  version = "5.1.0"
+  version = "6.0.0"
 
   auth_enabled            = true
   authorized_network      = module.vpc.network_id
