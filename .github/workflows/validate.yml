@@ -17,13 +17,13 @@ jobs:
       uses: actions/checkout@master
 
     - name: Kustomize (development)
-      uses: docker://gcr.io/k8s-skaffold/skaffold:v1.39.2
+      uses: docker://gcr.io/k8s-skaffold/skaffold:v1.39.3
       with:
         args: build k8s/overlays/development
         entrypoint: kustomize
 
     - name: Kustomize (production)
-      uses: docker://gcr.io/k8s-skaffold/skaffold:v1.39.2
+      uses: docker://gcr.io/k8s-skaffold/skaffold:v1.39.3
       with:
         args: build k8s/overlays/production
         entrypoint: kustomize
