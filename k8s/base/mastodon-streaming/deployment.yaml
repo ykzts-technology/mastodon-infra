@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:edge@sha256:b628d5c425c47a10bd70993114e8fd9d46ead665735987986ddbc3390d9508ad
+        image: tootsuite/mastodon:edge@sha256:56ba4241a1fd94bea6ac3c23f38c958549d527928f85445d4998c0e57588da43
         command: ["yarn", "start"]
         env:
         - name: DEFAULT_LOCALE
