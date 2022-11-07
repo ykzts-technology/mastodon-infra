@@ -10,13 +10,13 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   metrics:
-  - type: PodResource
+  - type: Resource
     resource:
       name: cpu
       target:
         averageUtilization: 80
         type: Utilization
-  - type: PodResource
+  - type: Resource
     resource:
       name: memory
       target:
@@ -35,13 +35,13 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   metrics:
-  - type: PodResource
+  - type: Resource
     resource:
       name: cpu
       target:
         averageUtilization: 80
         type: Utilization
-  - type: PodResource
+  - type: Resource
     resource:
       name: memory
       target:
@@ -60,13 +60,13 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   metrics:
-  - type: PodResource
+  - type: Resource
     resource:
       name: cpu
       target:
         averageUtilization: 80
         type: Utilization
-  - type: PodResource
+  - type: Resource
     resource:
       name: memory
       target:
@@ -85,13 +85,13 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   metrics:
-  - type: PodResource
+  - type: Resource
     resource:
       name: cpu
       target:
         averageUtilization: 80
         type: Utilization
-  - type: PodResource
+  - type: Resource
     resource:
       name: memory
       target:
