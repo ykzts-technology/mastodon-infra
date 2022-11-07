@@ -10,14 +10,18 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   metrics:
-  - type: Resource
+  - type: PodResource
     resource:
       name: cpu
-      targetAverageUtilization: 80
-  - type: Resource
+      target:
+        averageUtilization: 80
+        type: Utilization
+  - type: PodResource
     resource:
       name: memory
-      targetAverageUtilization: 80
+      target:
+        averageUtilization: 80
+        type: Utilization
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -31,14 +35,18 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   metrics:
-  - type: Resource
+  - type: PodResource
     resource:
       name: cpu
-      targetAverageUtilization: 80
-  - type: Resource
+      target:
+        averageUtilization: 80
+        type: Utilization
+  - type: PodResource
     resource:
       name: memory
-      targetAverageUtilization: 95
+      target:
+        averageUtilization: 95
+        type: Utilization
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -52,14 +60,18 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   metrics:
-  - type: Resource
+  - type: PodResource
     resource:
       name: cpu
-      targetAverageUtilization: 80
-  - type: Resource
+      target:
+        averageUtilization: 80
+        type: Utilization
+  - type: PodResource
     resource:
       name: memory
-      targetAverageUtilization: 95
+      target:
+        averageUtilization: 95
+        type: Utilization
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -73,11 +85,15 @@ spec:
   minReplicas: 1
   maxReplicas: 5
   metrics:
-  - type: Resource
+  - type: PodResource
     resource:
       name: cpu
-      targetAverageUtilization: 80
-  - type: Resource
+      target:
+        averageUtilization: 80
+        type: Utilization
+  - type: PodResource
     resource:
       name: memory
-      targetAverageUtilization: 80
+      target:
+        averageUtilization: 80
+        type: Utilization
