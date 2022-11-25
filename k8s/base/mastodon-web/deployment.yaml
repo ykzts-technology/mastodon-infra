@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:edge@sha256:9b6afa005f52003ddfcde0256cfc3d1563de09aae066014bc2316fd0fbe2dfa2
+        image: tootsuite/mastodon:edge@sha256:f1e9334c5c91521c6437eb581892365a0f0e4a042e33c3459f043ada2854f119
         command: ["bundle", "exec", "rails", "s", "-p", "3000"]
         env:
         - name: LOCAL_DOMAIN
