@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: tootsuite/mastodon:edge@sha256:16be0d4d831a463bccc41d3c95aacf7d571d6a1acf02d3a1409bb5261eadefab
+        image: tootsuite/mastodon:edge@sha256:aec274478add23be88c5a738d82fe4d0ab1cff2d3357fda4d4edbd21ffa9f4d3
         command: ["bundle", "exec", "sidekiq", "-c", "15"]
         env:
         - name: DB_POOL
