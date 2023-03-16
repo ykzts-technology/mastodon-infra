@@ -1,11 +1,12 @@
 module "sql-db" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
-  version = "13.0.1"
+  version = "14.0.1"
 
   additional_users = [
     {
-      name     = "mastodon"
-      password = null
+      name            = "mastodon"
+      password        = null
+      random_password = true
     },
   ]
   availability_type = "ZONAL"
