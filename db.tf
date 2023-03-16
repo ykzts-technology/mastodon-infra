@@ -1,6 +1,6 @@
 module "sql-db" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
-  version = "14.0.1"
+  version = "14.1.0"
 
   additional_users = [
     {
