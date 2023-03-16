@@ -1,70 +1,21 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.224.3/containers/azure-terraform
 {
-	"name": "Mastodon Infra",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			// Update the VARIANT arg to pick a version of Go: 1, 1.18, 1.17
-			// Append -bullseye or -buster to pin to an OS version.
-			// Use -bullseye variants on local arm64/Apple Silicon.
-			"VARIANT": "1-bullseye",
-			"TERRAFORM_VERSION": "1.2.2",
-			"TFLINT_VERSION": "none",
-			"TERRAGRUNT_VERSION": "none",
-			"INSTALL_DOCKER": "true",
-			"NODE_VERSION": "none",
-			"KIND_VERSION": "0.12.0",
-			"SKAFFOLD_VERSION": "1.38.0",
-			"KUSTOMIZE_VERSION": "4.5.4"
-		},
-	},
-	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
-	"overrideCommand": false,
-	"runArgs": [
-		"--init",
-		"--env-file",
-		".devcontainer/devcontainer.env",
-		"--cap-add=SYS_PTRACE",
-		"--security-opt",
-		"seccomp=unconfined"
-	],
-	"remoteEnv": {
-		// Sets environment variables required for terrafom remote backend
-		"TF_BACKEND_RESOURCE_GROUP": "${containerEnv:TF_BACKEND_RESOURCE_GROUP}",
-		"TF_BACKEND_LOCATION": "${containerEnv:TF_BACKEND_LOCATION}",
-		"TF_BACKEND_STORAGE_ACCOUNT": "${containerEnv:TF_BACKEND_STORAGE_ACCOUNT}",
-		"TF_BACKEND_CONTAINER": "${containerEnv:TF_BACKEND_CONTAINER}",
-		"TF_BACKEND_KEY": "${containerEnv:TF_BACKEND_KEY}",
-
-		// Use 'TF_VAR' prefix to set input variables for terraform templates
-		// "TF_VAR_rg_name":	"${containerEnv:TF_VAR_RG_NAME}"
-	},
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"go.toolsManagement.checkForUpdates": "local",
-		"go.useLanguageServer": true,
-		"go.gopath": "/go",
-		"terraform.languageServer": {
-			"enabled": true,
-			"args": [],
-		}
-	},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"EditorConfig.EditorConfig",
-		"golang.Go",
-		"hashicorp.terraform",
-		"ms-azuretools.vscode-docker",
-	],
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "terraform --version",
-
-	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "EditorConfig.EditorConfig"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "terragrunt": "none",
+      "tflint": "none",
+      "version": "1.4.1"
+    }
+  },
+  "name": "Mastodon Infra"
 }
