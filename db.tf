@@ -4,8 +4,9 @@ module "sql-db" {
 
   additional_users = [
     {
-      name     = "mastodon"
-      password = null
+      name            = "mastodon"
+      password        = null
+      random_password = true
     },
   ]
   availability_type = "ZONAL"
