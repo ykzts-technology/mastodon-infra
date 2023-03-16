@@ -29,7 +29,7 @@ module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-public-cluster"
   version = "25.0.0"
 
-  enable_vertical_pod_autoscaling = true
+  enable_vertical_pod_autoscaling = null
   ip_range_pods                   = local.pods_range_name
   ip_range_services               = local.svc_range_name
   name                            = "${local.cluster_type}-cluster"
