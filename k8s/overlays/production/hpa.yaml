@@ -1,4 +1,4 @@
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: mastodon-web
@@ -23,7 +23,7 @@ spec:
         averageUtilization: 80
         type: Utilization
 ---
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: mastodon-streaming
@@ -48,7 +48,7 @@ spec:
         averageUtilization: 95
         type: Utilization
 ---
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: mastodon-worker
@@ -73,7 +73,7 @@ spec:
         averageUtilization: 95
         type: Utilization
 ---
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: manael
