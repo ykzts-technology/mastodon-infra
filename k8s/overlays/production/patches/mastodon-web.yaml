@@ -125,21 +125,3 @@ spec:
       nodeSelector:
         cloud.google.com/gke-spot: "true"
       terminationGracePeriodSeconds: 25
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mastodon-web
-  annotations:
-    beta.cloud.google.com/backend-config:
-      '{"default": "mastodon-web-backend-config"}'
-    cloud.google.com/neg: '{"ingress": true}'
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mastodon-assets
-  annotations:
-    beta.cloud.google.com/backend-config:
-      '{"default": "mastodon-assets-backend-config"}'
-    cloud.google.com/neg: '{"ingress": true}'

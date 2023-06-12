@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/devcontainers/base:1-bullseye
 
-ARG SKAFFOLD_VERSION=2.2.0
-ARG KUSTOMIZE_VERSION=5.0.1
+ARG SKAFFOLD_VERSION=2.5.1
+ARG KUSTOMIZE_VERSION=5.0.3
 RUN \
   if [ "${SKAFFOLD_VERSION}" != "none" ]; then \
     curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/v${SKAFFOLD_VERSION}/skaffold-linux-amd64 \
@@ -9,7 +9,8 @@ RUN \
     && rm skaffold; \
   fi \
   && if [ "${KUSTOMIZE_VERSION}" != "none" ]; then \
-    curl -Lo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64 \
+    curl -Lo kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz \
+    && tar xf kustomize.tar.gz \
     && install kustomize /usr/local/bin \
     && rm kustomize; \
   fi

@@ -32,12 +32,3 @@ spec:
       nodeSelector:
         cloud.google.com/gke-spot: "true"
       terminationGracePeriodSeconds: 25
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: manael
-  annotations:
-    beta.cloud.google.com/backend-config:
-      '{"default": "manael-backend-config"}'
-    cloud.google.com/neg: '{"ingress": true}'

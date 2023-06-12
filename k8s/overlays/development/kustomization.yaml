@@ -1,22 +1,20 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-bases:
+resources:
 - ../../base
 - postgres
 - redis
 - minio
-resources:
 - jobs/init-db.yaml
 - jobs/init-storage.yaml
 patches:
-- patches/mastodon-web.yaml
-- patches/mastodon-streaming.yaml
-- patches/mastodon-worker.yaml
-- patches/manael.yaml
-patchesJson6902:
-- target:
+- path: patches/mastodon-web.yaml
+- path: patches/mastodon-streaming.yaml
+- path: patches/mastodon-worker.yaml
+- path: patches/manael.yaml
+- path: patches/ingress.yaml
+  target:
     group: networking.k8s.io
     version: v1
     kind: Ingress
     name: mastodon
-  path: patches/ingress.yaml
