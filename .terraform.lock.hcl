@@ -20,20 +20,20 @@ provider "registry.terraform.io/hashicorp/google" {
 }
 
 provider "registry.terraform.io/hashicorp/google-beta" {
-  version     = "4.69.0"
-  constraints = "4.69.0"
+  version     = "4.69.1"
+  constraints = "4.69.1"
   hashes = [
-    "h1:/fuTPkv6X/GGXmk/15yAajDo6c2SGWwtp2J3QzeBBi4=",
-    "h1:4XGlcdBTsAxQNrZ3C1JGeeL7GwDhbXjAEgQG/ChZwoA=",
-    "h1:BvdC6M/AOdoxLnCq4edM/p1+aKKjx5KWaADuBaZMxWU=",
-    "h1:MnNly0lawWa47b6ebdI1Ntis/BVNaFdLuWRd9ZFuHwY=",
-    "h1:SmaTkoxjLnQejwBGT9VspYTfv6ZvOhoOOUtWV3jaOLs=",
-    "h1:baKtMnKhfl2U71SatSmAuw9dEpluEfb+orEmAKR6jvY=",
-    "h1:ciX5rxJSOAZkUEQnkPIpe1s1L5kLq9Hj+nHtODJEPcg=",
-    "h1:mF4qpljcGlEDorZaXRx97M7AOpghKeSu0RxvQ4js2nA=",
-    "h1:shRCa93XpIDGqDN5zdqb+EQiDAJ+G0NyQd7cjUcOISI=",
-    "h1:tODW1r8woT9pnMtLFENJAYUx4yu8l5p+GyiZtkQaw7A=",
-    "h1:w37ArEzbcjtLWs80u51E7ZF6muxRkaFEVlR5oYlHebg=",
+    "h1:3fQOLQncnDZsVThBYhaTRdMh/59nQY7exYfrNYkHE24=",
+    "h1:D6MBiQFuVccRbjEZekokoxaERc4bHOXfR23ePxi0yAg=",
+    "h1:FxQRwWhd8fLmehE4fJSulNFhCSGxzNltfDTNUAPMy48=",
+    "h1:P0FZVE06mpY+7LSraLChJ1VMv0njSFw3I1Kymhr2bJ4=",
+    "h1:Q0GS71iG5HoOcTY+IlfP0Jfjg53/Xmuhx1MWQvNwTbY=",
+    "h1:RtF0KofM/0LcmZQNlkUqJFM5yY0SmrtNWR7kjwCpMoE=",
+    "h1:VGYPOWj06bYUc278zN2S2xPtZV814NFCTJOLMvd2mKQ=",
+    "h1:bZZBWb+teleXyOZB6yi4gJEuQjYhX5ZF7jJue3qVpFg=",
+    "h1:e9o2g6UJ+ymf7izfEdZeF81KOR/PWGHnOwgnV+JEPSY=",
+    "h1:itYpL6typEinqgQLaBN67SCuDuK0Zm0/o/w6vDEuczY=",
+    "h1:q5cPHxQyC4Is5hxrvABg5gchQ6H9i0y2cox3fppQUA0=",
   ]
 }
 
