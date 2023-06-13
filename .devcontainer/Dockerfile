@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:0-bullseye
+FROM mcr.microsoft.com/devcontainers/base:1-bullseye
 
 ARG SKAFFOLD_VERSION=2.2.0
 ARG KUSTOMIZE_VERSION=5.0.1
