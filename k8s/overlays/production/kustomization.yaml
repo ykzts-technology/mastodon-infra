@@ -1,16 +1,58 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-bases:
-- ../../base
 resources:
+- ../../base
 - backendconfig.yaml
 - certificate.yaml
 - frontendconfig.yaml
 - hpa.yaml
 patches:
-- patches/mastodon-web.yaml
-- patches/mastodon-streaming.yaml
-- patches/mastodon-worker.yaml
-- patches/manael.yaml
-- patches/redirect.yaml
-- patches/ingress.yaml
+- path: patches/mastodon-web.yaml
+- patch: |-
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: mastodon-web
+      annotations:
+        beta.cloud.google.com/backend-config:
+          '{"default": "mastodon-web-backend-config"}'
+        cloud.google.com/neg: '{"ingress": true}'
+- patch: |-
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: mastodon-assets
+      annotations:
+        beta.cloud.google.com/backend-config:
+          '{"default": "mastodon-assets-backend-config"}'
+        cloud.google.com/neg: '{"ingress": true}'
+- path: patches/mastodon-streaming.yaml
+- patch: |-
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: mastodon-streaming
+      annotations:
+        beta.cloud.google.com/backend-config:
+          '{"default": "mastodon-streaming-backend-config"}'
+        cloud.google.com/neg: '{"ingress": true}'
+- path: patches/mastodon-worker.yaml
+- path: patches/manael.yaml
+- patch: |-
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: manael
+      annotations:
+        beta.cloud.google.com/backend-config:
+          '{"default": "manael-backend-config"}'
+        cloud.google.com/neg: '{"ingress": true}'
+- path: patches/redirect.yaml
+- patch: |-
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: redirect
+      annotations:
+        cloud.google.com/neg: '{"ingress": true}'
+- path: patches/ingress.yaml
