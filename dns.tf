@@ -1,6 +1,6 @@
 module "address-fe" {
   source  = "terraform-google-modules/address/google"
-  version = "3.1.2"
+  version = "3.1.3"
 
   address_type = "EXTERNAL"
   global       = true
