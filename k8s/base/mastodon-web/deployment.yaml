@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: ghcr.io/mastodon/mastodon:edge@sha256:d1d5ec46c96d86c3f5fc025dac03156b93f4b2708b5e36d9bff1139e752ca419
+        image: ghcr.io/mastodon/mastodon:edge@sha256:f7fd8c56cf1ceee9fa6b027c1ce028b44abbfe9be39df25aa9d2844f9094c741
         command: ["bundle", "exec", "rails", "s", "-p", "3000"]
         env:
         - name: LOCAL_DOMAIN
