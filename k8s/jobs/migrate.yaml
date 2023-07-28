@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: ghcr.io/mastodon/mastodon:nightly@sha256:c9c0ce607cb71f42e827dca41702924a3bd406f1a966901d6c025f32087c8447
+        image: ghcr.io/mastodon/mastodon:nightly@sha256:7aa0920fd7113898c2fd625f611a42315fdc8a44ef37d43d3c85a713789b1265
         env:
         - name: REDIS_HOST
           valueFrom:
