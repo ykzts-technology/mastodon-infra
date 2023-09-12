@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: ghcr.io/mastodon/mastodon:nightly@sha256:5c9a1036ec315eb88ca9ea3312f6d79fc984708eae7534a591dae42b072dd56c
+        image: ghcr.io/mastodon/mastodon:nightly@sha256:99a6d05ebfdda4c070cfe354012e0841c960a567e7ea04751b2c5ffef4612813
         command: ["bundle", "exec", "sidekiq", "-c", "15"]
         env:
         - name: DB_POOL
