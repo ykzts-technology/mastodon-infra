@@ -31,6 +31,8 @@ spec:
           value: "620"
         - name: DEFAULT_LOCALE
           value: ja
+        - name: RUBY_YJIT_ENABLE
+          value: "1"
         ports:
         - containerPort: 3000
         livenessProbe:
