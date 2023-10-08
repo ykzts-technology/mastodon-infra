@@ -31,3 +31,5 @@ spec:
           value: "true"
         - name: DEFAULT_LOCALE
           value: ja
+        - name: RUBY_YJIT_ENABLE
+          value: "1"
