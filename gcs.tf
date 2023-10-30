@@ -10,7 +10,7 @@ resource "google_storage_hmac_key" "key" {
 
 module "gcs_buckets" {
   source  = "terraform-google-modules/cloud-storage/google"
-  version = "4.0.1"
+  version = "5.0.0"
 
   bucket_admins = {
     (local.storage_bucket_name) = "serviceAccount:${google_service_account.gcs_service_account.email}",
