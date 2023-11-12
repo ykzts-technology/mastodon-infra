@@ -27,7 +27,7 @@ resource "google_compute_ssl_policy" "default" {
 
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-public-cluster"
-  version = "28.0.0"
+  version = "29.0.0"
 
   create_service_account          = false
   enable_vertical_pod_autoscaling = true

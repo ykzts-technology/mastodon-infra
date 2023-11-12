@@ -14,7 +14,7 @@
     "ghcr.io/devcontainers/features/terraform:1": {
       "terragrunt": "none",
       "tflint": "none",
-      "version": "1.4.1"
+      "version": "1.6.3"
     }
   },
   "name": "Mastodon Infra"
