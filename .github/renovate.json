@@ -1,5 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>inabagumi/renovate-config"],
+  "packageRules": [
+    {
+      "groupName": "mastodon docker containers",
+      "groupSlug": "mastodon",
+      "matchDatasources": ["docker"],
+      "matchPackagePrefixes": ["ghcr.io/mastodon/"]
+    }
+  ],
   "reviewers": ["ykzts"]
 }
