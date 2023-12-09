@@ -25,7 +25,7 @@ jobs:
         service_account: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
 
     - name: Set up GKE
-      uses: google-github-actions/get-gke-credentials@v1
+      uses: google-github-actions/get-gke-credentials@v2
       with:
         cluster_name: ${{ secrets.GKE_CLUSTER_NAME }}
         location: ${{ secrets.GOOGLE_REGION }}
