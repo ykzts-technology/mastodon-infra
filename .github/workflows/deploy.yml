@@ -3,16 +3,18 @@ name: Deploy to GKE
 on:
   push:
     branches: [main]
-    paths-ignore:
-    - 'k8s/overlays/development/**'
+    paths:
+    - .github/workflows/deploy.yml
+    - k8s
+    - !k8s/overlays/development/**
 
 jobs:
   build-publish-deploy:
     name: Build, Publish, and Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: read
+      id-token: write
 
     steps:
     - name: Checkout
