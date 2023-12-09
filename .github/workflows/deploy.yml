@@ -6,7 +6,7 @@ on:
     paths:
     - .github/workflows/deploy.yml
     - k8s
-    - !k8s/overlays/development/**
+    - '!k8s/overlays/development/**'
 
 jobs:
   build-publish-deploy:
