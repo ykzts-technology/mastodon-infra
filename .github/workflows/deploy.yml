@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
     - .github/workflows/deploy.yml
-    - k8s
+    - k8s/**
     - '!k8s/overlays/development/**'
 
 jobs:
