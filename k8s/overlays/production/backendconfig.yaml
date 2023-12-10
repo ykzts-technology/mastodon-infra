@@ -1,4 +1,4 @@
-apiVersion: cloud.google.com/v1beta1
+apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
   name: mastodon-web-backend-config
@@ -6,12 +6,14 @@ spec:
   timeoutSec: 120
   cdn:
     enabled: true
+    cacheMode: USE_ORIGIN_HEADERS
     cachePolicy:
       includeHost: true
       includeProtocol: true
       includeQueryString: true
+    serveWhileStale: 360
 ---
-apiVersion: cloud.google.com/v1beta1
+apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
   name: mastodon-assets-backend-config
@@ -19,12 +21,16 @@ spec:
   timeoutSec: 120
   cdn:
     enabled: true
+    cacheMode: FORCE_CACHE_ALL
     cachePolicy:
       includeHost: false
       includeProtocol: false
       includeQueryString: false
+    clientTtl: 86400
+    defaultTtl: 86400
+    maxTtl: 31622400
 ---
-apiVersion: cloud.google.com/v1beta1
+apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
   name: mastodon-streaming-backend-config
@@ -33,7 +39,7 @@ spec:
   sessionAffinity:
     affinityType: CLIENT_IP
 ---
-apiVersion: cloud.google.com/v1beta1
+apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
   name: manael-backend-config
@@ -41,7 +47,9 @@ spec:
   timeoutSec: 120
   cdn:
     enabled: true
+    cacheMode: CACHE_ALL_STATIC
     cachePolicy:
       includeHost: true
       includeProtocol: true
       includeQueryString: false
+    serveWhileStale: 0
