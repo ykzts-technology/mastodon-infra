@@ -54,5 +54,8 @@ spec:
       includeHost: true
       includeProtocol: true
       includeQueryString: false
+    clientTtl: 86400
+    defaultTtl: 86400
+    maxTtl: 31622400
     requestCoalescing: true
     serveWhileStale: 0
