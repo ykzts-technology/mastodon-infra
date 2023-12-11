@@ -37,7 +37,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: mastodon-assets
+            name: mastodon-emoji
             port:
               number: 3000
       - path: /packs/

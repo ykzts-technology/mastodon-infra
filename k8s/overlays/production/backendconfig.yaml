@@ -3,7 +3,7 @@ kind: BackendConfig
 metadata:
   name: mastodon-web-backend-config
 spec:
-  timeoutSec: 120
+  timeoutSec: 60
   cdn:
     enabled: true
     cacheMode: USE_ORIGIN_HEADERS
@@ -19,7 +19,25 @@ kind: BackendConfig
 metadata:
   name: mastodon-assets-backend-config
 spec:
-  timeoutSec: 120
+  timeoutSec: 30
+  cdn:
+    enabled: true
+    cacheMode: FORCE_CACHE_ALL
+    cachePolicy:
+      includeHost: false
+      includeProtocol: false
+      includeQueryString: false
+    clientTtl: 31622400
+    defaultTtl: 31622400
+    maxTtl: 31622400
+    requestCoalescing: true
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: mastodon-emoji-backend-config
+spec:
+  timeoutSec: 30
   cdn:
     enabled: true
     cacheMode: FORCE_CACHE_ALL
@@ -46,7 +64,7 @@ kind: BackendConfig
 metadata:
   name: manael-backend-config
 spec:
-  timeoutSec: 120
+  timeoutSec: 60
   cdn:
     enabled: true
     cacheMode: CACHE_ALL_STATIC
