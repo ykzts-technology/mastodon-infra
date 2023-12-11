@@ -26,6 +26,15 @@ patches:
         beta.cloud.google.com/backend-config:
           '{"default": "mastodon-assets-backend-config"}'
         cloud.google.com/neg: '{"ingress": true}'
+- patch: |-
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: mastodon-emoji
+      annotations:
+        beta.cloud.google.com/backend-config:
+          '{"default": "mastodon-emoji-backend-config"}'
+        cloud.google.com/neg: '{"ingress": true}'
 - path: patches/mastodon-streaming.yaml
 - patch: |-
     apiVersion: v1
