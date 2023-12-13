@@ -9,7 +9,7 @@
       "matchPackagePrefixes": ["ghcr.io/mastodon/"]
     },
     {
-      "groupName": "google",
+      "groupName": "google terraform providers",
       "matchDatasources": ["terraform-provider"],
       "matchPackageNames": ["google", "google-beta"]
     }
