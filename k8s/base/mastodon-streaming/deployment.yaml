@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: ghcr.io/mastodon/mastodon-streaming:nightly@sha256:41214ebcf5e25111251ee0c319937b4cc5845a86df5d2a0d1df1cf3612db57ef
+        image: ghcr.io/mastodon/mastodon-streaming:nightly@sha256:6a01a7afa75dc27affe1c73b6bfb8dc1d7349da1a7ca3401bb7f7a38bfd9614d
         command: ["yarn", "start"]
         env:
         - name: DEFAULT_LOCALE
