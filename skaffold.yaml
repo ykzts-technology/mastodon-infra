@@ -1,12 +1,16 @@
-apiVersion: skaffold/v2beta28
+apiVersion: skaffold/v4beta8
 kind: Config
-deploy:
+manifests:
   kustomize:
     paths:
-    - k8s/overlays/development
+      - k8s/overlays/development
+deploy:
+  kubectl: {}
 profiles:
-- name: production
-  deploy:
-    kustomize:
-      paths:
-      - k8s/overlays/production
+  - name: production
+    manifests:
+      kustomize:
+        paths:
+          - k8s/overlays/production
+    deploy:
+      kubectl: {}
