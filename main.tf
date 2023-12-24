@@ -31,6 +31,7 @@ module "gke" {
 
   create_service_account          = false
   enable_vertical_pod_autoscaling = true
+  gateway_api_channel             = "CHANNEL_STANDARD"
   ip_range_pods                   = local.pods_range_name
   ip_range_services               = local.svc_range_name
   name                            = "${local.cluster_type}-cluster"
