@@ -75,7 +75,7 @@ module "dns-public-zone" {
     },
     {
       name    = "_dmarc"
-      records = ["v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email"]
+      records = ["v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email"]
       ttl     = 3600
       type    = "TXT"
     },
