@@ -99,7 +99,7 @@ module "memorystore" {
   memory_size_gb          = 1
   name                    = local.default_name
   project                 = var.project_id
-  redis_version           = "REDIS_6_X"
+  redis_version           = "REDIS_7_X"
   region                  = var.region
   tier                    = "BASIC"
   transit_encryption_mode = "DISABLED"
