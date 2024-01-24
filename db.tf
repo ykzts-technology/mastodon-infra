@@ -54,7 +54,7 @@ module "sql-db" {
       value = "6800"
     },
   ]
-  database_version    = "POSTGRES_14"
+  database_version    = "POSTGRES_15"
   db_charset          = "UTF8"
   db_collation        = "en_US.UTF8"
   db_name             = "postgres"
