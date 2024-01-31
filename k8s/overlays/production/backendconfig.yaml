@@ -77,3 +77,8 @@ spec:
     maxTtl: 31622400
     requestCoalescing: true
     serveWhileStale: 0
+  customResponseHeaders:
+    headers:
+      - "Content-Security-Policy: default-src 'none'; form-action 'none'"
+      - "Permissions-Policy: camera=(), geolocation=(), microphone=()"
+      - "X-Content-Type-Options: no-sniff"
