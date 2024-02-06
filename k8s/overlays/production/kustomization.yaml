@@ -6,6 +6,7 @@ resources:
 - certificate.yaml
 - frontendconfig.yaml
 - hpa.yaml
+- monitoring.yaml
 patches:
 - path: patches/mastodon-web.yaml
 - patch: |-
