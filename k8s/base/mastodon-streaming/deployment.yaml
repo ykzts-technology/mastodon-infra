@@ -4,12 +4,10 @@ metadata:
   name: mastodon-streaming
   labels:
     app: mastodon-streaming
-    app.kubernetes.io/name: mastodon-streaming
 spec:
   selector:
     matchLabels:
       app: mastodon-streaming
-      app.kubernetes.io/name: mastodon-streaming
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -19,7 +17,6 @@ spec:
     metadata:
       labels:
         app: mastodon-streaming
-        app.kubernetes.io/name: mastodon-streaming
     spec:
       containers:
       - name: mastodon

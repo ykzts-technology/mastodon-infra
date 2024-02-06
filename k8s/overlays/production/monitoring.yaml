@@ -3,11 +3,11 @@ kind: PodMonitoring
 metadata:
   name: mastodon-streaming
   labels:
-    app.kubernetes.io/name: mastodon-streaming
+    app: mastodon-streaming
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: mastodon-streaming
+      app: mastodon-streaming
   endpoints:
   - port: metrics
     interval: 30s
