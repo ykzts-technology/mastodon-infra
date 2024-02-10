@@ -25,6 +25,16 @@ resource "google_compute_ssl_policy" "default" {
   min_tls_version = "TLS_1_2"
 }
 
+module "datasource-syncer-workload-identity" {
+  source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
+  version = "30.0.0"
+
+  name       = "datasource-syncer"
+  namespace  = "default"
+  project_id = var.project_id
+  roles      = ["roles/monitoring.viewer", "roles/iam.serviceAccountTokenCreator"]
+}
+
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-public-cluster"
   version = "30.0.0"
