@@ -68,3 +68,14 @@ module "mastodon-secrets" {
   vapid_private_key  = var.vapid_private_key
   vapid_public_key   = var.vapid_public_key
 }
+
+resource "kubernetes_secret" "grafana" {
+  data = {
+    api-token       = var.grafana_api_token
+    datasource-uids = var.grafana_datasource_uids
+  }
+
+  metadata {
+    name = "grafana-credentials"
+  }
+}
