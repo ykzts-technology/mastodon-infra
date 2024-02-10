@@ -20,15 +20,15 @@ spec:
             - "--grafana-api-endpoint=https://graph.ykzts.tech"
             - "--grafana-api-token=$(GRAFANA_API_TOKEN)"
             - "--project-id=ykzts-technology"
-          env:
-          - name: GRAFANA_API_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: datasource-syncer
-                key: datasource-api-token
-          - name: GRAFANA_DATASOURCE_UIDS
-            valueFrom:
-              secretKeyRef:
-                name: datasource-syncer
-                key: datasource-uids
+            env:
+            - name: GRAFANA_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: datasource-syncer
+                  key: datasource-api-token
+            - name: GRAFANA_DATASOURCE_UIDS
+              valueFrom:
+                secretKeyRef:
+                  name: datasource-syncer
+                  key: datasource-uids
           restartPolicy: Never
