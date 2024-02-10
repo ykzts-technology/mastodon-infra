@@ -16,20 +16,16 @@ spec:
           - name: datasource-syncer
             image: gcr.io/gke-release/prometheus-engine/datasource-syncer:v0.10.0-gke.3
             args:
-            - --datasource-uids
-            - $(GRAFANA_DATASOURCE_UIDS)
-            - --grafana-api-endpoint
-            - https://graph.ykzts.tech
-            - --grafana-api-token
-            - $(GRAFANA_API_TOKEN)
-            - --project-id
-            - ykzts-technology
+            - --datasource-uids=$(GRAFANA_DATASOURCE_UIDS)
+            - --grafana-api-endpoint=https://graph.ykzts.tech
+            - --grafana-api-token=$(GRAFANA_API_TOKEN)
+            - --project-id=ykzts-technology
             env:
             - name: GRAFANA_API_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: grafana-credentials
-                  key: datasource-api-token
+                  key: api-token
             - name: GRAFANA_DATASOURCE_UIDS
               valueFrom:
                 secretKeyRef:
