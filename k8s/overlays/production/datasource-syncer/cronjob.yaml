@@ -28,11 +28,11 @@ spec:
             - name: GRAFANA_API_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: datasource-syncer
+                  name: grafana-credentials
                   key: datasource-api-token
             - name: GRAFANA_DATASOURCE_UIDS
               valueFrom:
                 secretKeyRef:
-                  name: datasource-syncer
+                  name: grafana-credentials
                   key: datasource-uids
           restartPolicy: Never
