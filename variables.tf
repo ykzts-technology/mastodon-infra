@@ -6,6 +6,14 @@ variable "domain" {
   type = string
 }
 
+variable "grafana_api_token" {
+  type = string
+}
+
+variable "grafana_datasource_uids" {
+  type = string
+}
+
 variable "project_id" {
   type = string
 }
