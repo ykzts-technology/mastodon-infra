@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: datasource-syncer
+spec:
+  schedule: "*/30 * * * *" # Run once every 30 minutes, must run at least once an hour.
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: datasource-syncer
+        spec:
+          serviceAccountName: datasource-syncer
+          containers:
+          - name: datasource-syncer
+            image: gcr.io/gke-release/prometheus-engine/datasource-syncer:v0.10.0-gke.3
+            args:
+            - "--datasource-uids=$(GRAFANA_DATASOURCE_UIDS)"
+            - "--grafana-api-endpoint=https://graph.ykzts.tech"
+            - "--grafana-api-token=$(GRAFANA_API_TOKEN)"
+            - "--project-id=ykzts-technology"
+          env:
+          - name: GRAFANA_API_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: datasource-syncer
+                key: datasource-api-token
+          - name: GRAFANA_DATASOURCE_UIDS
+            valueFrom:
+              secretKeyRef:
+                name: datasource-syncer
+                key: datasource-uids
+          restartPolicy: Never
