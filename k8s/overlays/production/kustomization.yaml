@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - ../../base
 - datasource-syncer
+- statsd_exporter
 - backendconfig.yaml
 - certificate.yaml
 - frontendconfig.yaml
