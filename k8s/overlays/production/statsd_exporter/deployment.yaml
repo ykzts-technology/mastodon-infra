@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: statsd_exporter
+  name: statsd-exporter
   labels:
-    app: statsd_exporter
+    app: statsd-exporter
 spec:
   selector:
     matchLabels:
-      app: statsd_exporter
+      app: statsd-exporter
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -16,10 +16,10 @@ spec:
   template:
     metadata:
       labels:
-        app: statsd_exporter
+        app: statsd-exporter
     spec:
       containers:
-      - name: statsd_exporter
+      - name: statsd-exporter
         resources:
           requests:
             memory: 512Mi
