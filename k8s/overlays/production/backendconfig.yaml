@@ -64,7 +64,7 @@ kind: BackendConfig
 metadata:
   name: manael-backend-config
 spec:
-  timeoutSec: 60
+  timeoutSec: 300
   cdn:
     enabled: true
     cacheMode: CACHE_ALL_STATIC
