@@ -49,12 +49,12 @@ spec:
           initialDelaySeconds: 30
           periodSeconds: 20
         volumeMounts:
-        - name: statsd_exporter-mapping-config
+        - name: statsd-exporter-mapping-config
           mountPath: /tmp
       volumes:
-      - name: statsd_exporter-mapping-config
+      - name: statsd-exporter-mapping-config
         configMap:
-          name: statsd_exporter-mapping-config
+          name: statsd-exporter-mapping-config
           items:
           - key: statsd_mapping.yml
             path: statsd_mapping.yml
