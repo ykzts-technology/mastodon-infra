@@ -43,7 +43,7 @@ module "dns-public-zone" {
     },
     {
       name    = "www"
-      records = ["10 ${var.domain} alpn=h3,h2"]
+      records = ["10 ${var.domain}. alpn=h3,h2"]
       ttl     = 7200
       type    = "HTTPS"
     },
@@ -55,7 +55,7 @@ module "dns-public-zone" {
     },
     {
       name    = "files"
-      records = ["10 ${var.domain} alpn=h3,h2"]
+      records = ["10 ${var.domain}. alpn=h3,h2"]
       ttl     = 7200
       type    = "HTTPS"
     },
