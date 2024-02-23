@@ -30,16 +30,34 @@ module "dns-public-zone" {
       type    = "A"
     },
     {
+      name    = ""
+      records = ["10 . alpn=h3,h2"]
+      ttl     = 7200
+      type    = "HTTPS"
+    },
+    {
       name    = "www"
       records = module.address-fe.addresses
       ttl     = 7200
       type    = "A"
     },
     {
+      name    = "www"
+      records = ["10 ${var.domain} alpn=h3,h2"]
+      ttl     = 7200
+      type    = "HTTPS"
+    },
+    {
       name    = "files"
       records = module.address-fe.addresses
       ttl     = 7200
       type    = "A"
+    },
+    {
+      name    = "files"
+      records = ["10 ${var.domain} alpn=h3,h2"]
+      ttl     = 7200
+      type    = "HTTPS"
     },
     {
       name    = ""
@@ -75,7 +93,7 @@ module "dns-public-zone" {
     },
     {
       name    = "_dmarc"
-      records = ["v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email"]
+      records = ["\"v=DMARC1;\" \"p=reject;\" \"rua=mailto:dmarc_agg@vali.email\""]
       ttl     = 3600
       type    = "TXT"
     },
