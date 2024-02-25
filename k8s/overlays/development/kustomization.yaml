@@ -7,6 +7,7 @@ resources:
 - minio
 - jobs/init-db.yaml
 - jobs/init-storage.yaml
+- secrets.yaml
 patches:
 - path: patches/mastodon-web.yaml
 - path: patches/mastodon-streaming.yaml
