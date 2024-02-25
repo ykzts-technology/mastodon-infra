@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: search-deploy
+spec:
+  template:
+    spec:
+      containers:
+      - name: mastodon
+        image: ghcr.io/mastodon/mastodon:nightly@sha256:9d63ae29d4675511d4727f52b83408e1e9fb17636ae97095c8a6883e806eb19b
+        envFrom:
+        - configMapRef:
+            name: mastodon-env
+        - secretRef:
+            name: mastodon
+        command: ["./bin/tootctl", "search", "deploy"]
+      restartPolicy: Never
