@@ -6,6 +6,22 @@ variable "domain" {
   type = string
 }
 
+variable "es_hostname" {
+  type = string
+}
+
+variable "es_password" {
+  type = string
+}
+
+variable "es_port" {
+  type = string
+}
+
+variable "es_username" {
+  type = string
+}
+
 variable "grafana_api_token" {
   type = string
 }

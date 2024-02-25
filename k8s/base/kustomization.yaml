@@ -6,4 +6,5 @@ resources:
 - mastodon-worker
 - manael
 - redirect
+- configmap.yaml
 - ingress.yaml

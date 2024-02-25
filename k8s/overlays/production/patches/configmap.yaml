@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mastodon-env
+data:
+  MAX_THREADS: "10"
+  S3_CLOUDFRONT_HOST: files.ykzts.technology
+  STATSD_ADDR: statsd-exporter:9125
+  STATSD_SIDEKIQ: "true"
+  TRUSTED_PROXY_IP: 34.98.116.19/32 130.211.0.0/22 35.191.0.0/16
+  WEB_CONCURRENCY: "3"

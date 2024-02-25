@@ -9,18 +9,3 @@ spec:
       - name: postgres
         image: postgres:9.6.24-alpine
         command: ["sh", "-c", "until pg_isready -h postgres -p 5432; do sleep 3; done"]
-      containers:
-      - name: mastodon
-        env:
-        - name: REDIS_HOST
-          value: redis
-        - name: REDIS_PORT
-          value: "6379"
-        - name: DB_HOST
-          value: postgres
-        - name: DB_PORT
-          value: "5432"
-        - name: DB_USER
-          value: postgres
-        - name: DB_PASS
-          value: ""
