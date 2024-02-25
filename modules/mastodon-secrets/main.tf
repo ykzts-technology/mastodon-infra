@@ -33,7 +33,7 @@ resource "kubernetes_secret" "mastodon" {
     S3_MULTIPART_THRESHOLD = "52428800"
     S3_SIGNATURE_VERSION   = "v4"
     SECRET_KEY_BASE        = random_id.secret_key_base.hex
-    SMTP_FROM_ADDRESS      = "Mastodon <notifications@ykzts.technology>"
+    SMTP_FROM_ADDRESS      = "ykzts.technology <notifications@ykzts.technology>"
     SMTP_LOGIN             = "apikey"
     SMTP_PASSWORD          = var.smtp_password
     SMTP_PORT              = "2525"
