@@ -8,51 +8,10 @@ spec:
       containers:
       - name: mastodon
         image: ghcr.io/mastodon/mastodon:nightly@sha256:9d63ae29d4675511d4727f52b83408e1e9fb17636ae97095c8a6883e806eb19b
-        env:
-        - name: REDIS_HOST
-          valueFrom:
-            secretKeyRef:
-              name: redislabs-credentials
-              key: hostname
-        - name: REDIS_PORT
-          valueFrom:
-            secretKeyRef:
-              name: redislabs-credentials
-              key: port
-        - name: REDIS_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: redislabs-credentials
-              key: password
-        - name: DB_HOST
-          valueFrom:
-            secretKeyRef:
-              name: cloudsql-db-credentials
-              key: hostname
-        - name: DB_PORT
-          valueFrom:
-            secretKeyRef:
-              name: cloudsql-db-credentials
-              key: port
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: cloudsql-db-credentials
-              key: username
-        - name: DB_PASS
-          valueFrom:
-            secretKeyRef:
-              name: cloudsql-db-credentials
-              key: password
-        - name: SECRET_KEY_BASE
-          valueFrom:
-            secretKeyRef:
-              name: mastodon-credentials
-              key: secret-key-base
-        - name: OTP_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: mastodon-credentials
-              key: otp-secret
+        envFrom:
+        - configMapRef:
+            name: mastodon-env
+        - secretRef:
+            name: mastodon
         command: ["./bin/rails", "db:migrate"]
       restartPolicy: Never
