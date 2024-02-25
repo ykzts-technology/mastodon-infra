@@ -19,6 +19,22 @@ variable "db_username" {
   type = string
 }
 
+variable "es_hostname" {
+  type = string
+}
+
+variable "es_password" {
+  type = string
+}
+
+variable "es_port" {
+  type = string
+}
+
+variable "es_username" {
+  type = string
+}
+
 variable "redis_hostname" {
   type = string
 }
@@ -36,6 +52,22 @@ variable "smtp_password" {
 }
 
 variable "storage_access_key" {
+  type = string
+}
+
+variable "storage_bucket" {
+  type = string
+}
+
+variable "storage_endpoint" {
+  type = string
+}
+
+variable "storage_hostname" {
+  type = string
+}
+
+variable "storage_region" {
   type = string
 }
 

@@ -14,49 +14,6 @@ spec:
           limits:
             memory: 512Mi
             cpu: 250m
-        env:
-        - name: REDIS_HOST
-          valueFrom:
-            secretKeyRef:
-              name: redislabs-credentials
-              key: hostname
-        - name: REDIS_PORT
-          valueFrom:
-            secretKeyRef:
-              name: redislabs-credentials
-              key: port
-        - name: REDIS_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: redislabs-credentials
-              key: password
-        - name: DB_HOST
-          valueFrom:
-            secretKeyRef:
-              name: cloudsql-db-credentials
-              key: hostname
-        - name: DB_PORT
-          valueFrom:
-            secretKeyRef:
-              name: cloudsql-db-credentials
-              key: port
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: cloudsql-db-credentials
-              key: username
-        - name: DB_PASS
-          valueFrom:
-            secretKeyRef:
-              name: cloudsql-db-credentials
-              key: password
-        - name: TRUSTED_PROXY_IP
-          value: 34.98.116.19/32 130.211.0.0/22 35.191.0.0/16
-        - name: DEEPL_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: deepl-credentials
-              key: api-key
       nodeSelector:
         cloud.google.com/gke-spot: "true"
       terminationGracePeriodSeconds: 25

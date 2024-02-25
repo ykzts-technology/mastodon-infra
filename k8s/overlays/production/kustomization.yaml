@@ -10,6 +10,7 @@ resources:
 - hpa.yaml
 - monitoring.yaml
 patches:
+- path: patches/configmap.yaml
 - path: patches/mastodon-web.yaml
 - patch: |-
     apiVersion: v1

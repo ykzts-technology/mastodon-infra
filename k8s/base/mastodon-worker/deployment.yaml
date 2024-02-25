@@ -22,14 +22,8 @@ spec:
       - name: mastodon
         image: ghcr.io/mastodon/mastodon:nightly@sha256:5913882b9d33f8a7c679bf6eaf3e47963e30d46778da48572e5a1f990d82384d
         command: ["bundle", "exec", "sidekiq", "-c", "15"]
-        env:
-        - name: DB_POOL
-          value: "15"
-        - name: LOCAL_DOMAIN
-          value: ykzts.technology
-        - name: SINGLE_USER_MODE
-          value: "true"
-        - name: DEFAULT_LOCALE
-          value: ja
-        - name: RUBY_YJIT_ENABLE
-          value: "1"
+        envFrom:
+        - configMapRef:
+            name: mastodon-env
+        - secretRef:
+            name: mastodon

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mastodon-env
+data:
+  DEFAULT_LOCALE: ja
+  DB_POOL: "15"
+  LOCAL_DOMAIN: ykzts.technology
+  PERSISTENT_TIMEOUT: "620"
+  RUBY_YJIT_ENABLE: "1"
+  SINGLE_USER_MODE: "true"
