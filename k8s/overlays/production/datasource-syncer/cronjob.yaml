@@ -31,4 +31,6 @@ spec:
                 secretKeyRef:
                   name: grafana-credentials
                   key: datasource-uids
+          nodeSelector:
+            cloud.google.com/gke-spot: "true"
           restartPolicy: Never
