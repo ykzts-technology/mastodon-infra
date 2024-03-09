@@ -27,3 +27,30 @@ spec:
             name: mastodon-env
         - secretRef:
             name: mastodon
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - 'REDIS_URL=${SIDEKIQ_REDIS_URL:-${REDIS_URL:-redis://:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}}} sidekiqmon processes | grep ${HOSTNAME}'
+          initialDelaySeconds: 30
+          timeoutSeconds: 15
+          periodSeconds: 30
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - 'REDIS_URL=${SIDEKIQ_REDIS_URL:-${REDIS_URL:-redis://:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}}} sidekiqmon processes | grep ${HOSTNAME}'
+          initialDelaySeconds: 30
+          timeoutSeconds: 15
+          periodSeconds: 30
+        startupProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - 'REDIS_URL=${SIDEKIQ_REDIS_URL:-${REDIS_URL:-redis://:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}}} sidekiqmon processes | grep ${HOSTNAME}'
+          initialDelaySeconds: 30
+          timeoutSeconds: 15
+          periodSeconds: 30
