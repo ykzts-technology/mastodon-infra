@@ -27,7 +27,7 @@ spec:
           limits:
             memory: 512Mi
             cpu: 250m
-        image: prom/statsd-exporter:v0.26.0
+        image: prom/statsd-exporter:v0.26.1
         args:
         - --statsd.mapping-config=/tmp/statsd_mapping.yml
         ports:
