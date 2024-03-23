@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: ghcr.io/mastodon/mastodon-streaming:nightly@sha256:9842ed5e3df3dd19cd50fc6e4a44ddc6d2324d92dd883d814e25a5dc1d48bf08
+        image: ghcr.io/mastodon/mastodon-streaming:nightly@sha256:0ecd640d11f02c6aab00003b5732814ee101f267f53aa710713fba666cd6a14e
         command: ["node", "./streaming/index.js"]
         envFrom:
         - configMapRef:
