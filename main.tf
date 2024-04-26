@@ -55,26 +55,29 @@ module "gke" {
 module "mastodon-secrets" {
   source = "./modules/mastodon-secrets"
 
-  deepl_api_key      = var.deepl_api_key
-  db_hostname        = module.sql-db.private_ip_address
-  db_password        = module.sql-db.additional_users[0].password
-  db_username        = module.sql-db.additional_users[0].name
-  es_hostname        = var.es_hostname
-  es_password        = var.es_password
-  es_port            = var.es_port
-  es_username        = var.es_username
-  redis_hostname     = module.memorystore.host
-  redis_password     = module.memorystore.auth_string
-  redis_port         = module.memorystore.port
-  smtp_password      = var.smtp_password
-  storage_access_key = google_storage_hmac_key.key.access_id
-  storage_bucket     = "ykzts-technology-storage"
-  storage_endpoint   = "https://storage.googleapis.com"
-  storage_hostname   = "storage.googleapis.com"
-  storage_region     = "ap-northeast-1"
-  storage_secret_key = google_storage_hmac_key.key.secret
-  vapid_private_key  = var.vapid_private_key
-  vapid_public_key   = var.vapid_public_key
+  active_record_encryption_key_derivation_salt = var.active_record_encryption_key_derivation_salt
+  active_record_encryption_deterministic_key   = var.active_record_encryption_deterministic_key
+  active_record_encryption_primary_key         = var.active_record_encryption_primary_key
+  deepl_api_key                                = var.deepl_api_key
+  db_hostname                                  = module.sql-db.private_ip_address
+  db_password                                  = module.sql-db.additional_users[0].password
+  db_username                                  = module.sql-db.additional_users[0].name
+  es_hostname                                  = var.es_hostname
+  es_password                                  = var.es_password
+  es_port                                      = var.es_port
+  es_username                                  = var.es_username
+  redis_hostname                               = module.memorystore.host
+  redis_password                               = module.memorystore.auth_string
+  redis_port                                   = module.memorystore.port
+  smtp_password                                = var.smtp_password
+  storage_access_key                           = google_storage_hmac_key.key.access_id
+  storage_bucket                               = "ykzts-technology-storage"
+  storage_endpoint                             = "https://storage.googleapis.com"
+  storage_hostname                             = "storage.googleapis.com"
+  storage_region                               = "ap-northeast-1"
+  storage_secret_key                           = google_storage_hmac_key.key.secret
+  vapid_private_key                            = var.vapid_private_key
+  vapid_public_key                             = var.vapid_public_key
 }
 
 resource "kubernetes_secret" "grafana" {
