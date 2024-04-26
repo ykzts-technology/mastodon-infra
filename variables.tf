@@ -1,3 +1,15 @@
+variable "active_record_encryption_key_derivation_salt" {
+  type = string
+}
+
+variable "active_record_encryption_deterministic_key" {
+  type = string
+}
+
+variable "active_record_encryption_primary_key" {
+  type = string
+}
+
 variable "deepl_api_key" {
   type = string
 }
