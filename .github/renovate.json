@@ -10,8 +10,8 @@
     },
     {
       "groupName": "google terraform providers",
-      "matchDatasources": ["terraform-provider"],
-      "matchPackageNames": ["google", "google-beta"]
+      "matchDepNames": ["google", "google-beta"],
+      "matchDatasources": ["terraform-provider"]
     }
   ],
   "reviewers": ["ykzts"]
