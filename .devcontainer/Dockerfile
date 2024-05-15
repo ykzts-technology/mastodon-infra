@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/devcontainers/base:1-bullseye
  # renovate: datasource=github-releases depName=skaffold packageName=GoogleContainerTools/skaffold
 ARG SKAFFOLD_VERSION=2.12.0
 # renovate: datasource=github-releases depName=kustomize packageName=kubernetes-sigs/kustomize
-ARG KUSTOMIZE_VERSION=5.3.0 
+ARG KUSTOMIZE_VERSION=5.4.1 
 
 RUN \
   if [ "${SKAFFOLD_VERSION}" != "none" ]; then \
