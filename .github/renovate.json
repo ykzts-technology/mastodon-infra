@@ -4,6 +4,7 @@
     {
       "customType": "regex",
       "description": "Update _VERSION variables in Dockerfiles",
+      "extractVersionTemplate": "^(?:(?<depName>.+)/)?v?(?<version>.+)$",
       "fileMatch": ["(^|/|\\.)Dockerfile$", "(^|/)Dockerfile\\.[^/]*$"],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[a-z-]+?)(?: depName=(?<depName>.+?))? packageName=(?<packageName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s(?:ENV|ARG) .+?_VERSION=(?<currentValue>.+?)\\s"
@@ -20,8 +21,14 @@
     },
     {
       "groupName": "google terraform providers",
-      "matchDepNames": ["google", "google-beta"],
-      "matchDatasources": ["terraform-provider"]
+      "matchDatasources": ["terraform-provider"],
+      "matchDepNames": ["google", "google-beta"]
+    },
+    {
+      "groupName": "skaffold",
+      "groupSlug": "skaffold",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["gcr.io/k8s-skaffold/skaffold"]
     }
   ],
   "reviewers": ["ykzts"]
