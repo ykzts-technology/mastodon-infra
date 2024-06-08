@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: ghcr.io/mastodon/mastodon:nightly@sha256:5967908076d0c1135770e5ba58a651e492288c84c978b8e4898f88df99e883f7
+        image: ghcr.io/mastodon/mastodon:nightly@sha256:7d6830a765eba565eee46b70f67079a364c514c46204f4afafb200145e7e6d1c
         command: ["bundle", "exec", "puma", "-C", "config/puma.rb"]
         envFrom:
         - configMapRef:
