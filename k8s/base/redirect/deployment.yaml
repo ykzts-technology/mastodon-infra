@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
       - name: redirect
-        image: ghcr.io/ykzts-technology/redirect:2.1.0
+        image: ghcr.io/ykzts-technology/redirect:3.0.0
         ports:
         - containerPort: 8080
