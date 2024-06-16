@@ -1,17 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "customManagers": [
-    {
-      "customType": "regex",
-      "description": "Update _VERSION variables in Dockerfiles",
-      "extractVersionTemplate": "^(?:(?<depName>.+)/)?v?(?<version>.+)$",
-      "fileMatch": ["(^|/|\\.)Dockerfile$", "(^|/)Dockerfile\\.[^/]*$"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+?)(?: depName=(?<depName>.+?))? packageName=(?<packageName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s(?:ENV|ARG) .+?_VERSION=(?<currentValue>.+?)\\s"
-      ]
-    }
+  "extends": [
+    "github>inabagumi/renovate-config",
+    "customManagers:dockerfileVersions"
   ],
-  "extends": ["github>inabagumi/renovate-config"],
   "packageRules": [
     {
       "groupName": "mastodon docker containers",
