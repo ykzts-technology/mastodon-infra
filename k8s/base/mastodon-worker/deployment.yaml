@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: ghcr.io/mastodon/mastodon:nightly@sha256:f2eb01866ecaa4d5af6dfc2ea57f357bbe5e7d577e48e0c5b1013946bef5a4bf
+        image: ghcr.io/mastodon/mastodon:nightly@sha256:33f4cf6c25d8cb4d2ad2047dfe2472099b8c344569e2b447f80a85b4338fef16
         command: ["bundle", "exec", "sidekiq", "-c", "15"]
         envFrom:
         - configMapRef:
