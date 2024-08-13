@@ -11,7 +11,7 @@ spec:
         command: ["sh", "-c", "until pg_isready -h postgres -p 5432; do sleep 3; done"]
       containers:
       - name: mastodon
-        image: ghcr.io/mastodon/mastodon:nightly@sha256:b3ad93053c8f019a173d07325226c51f968f7f7308f8b2ac84f7b7038919a98d
+        image: ghcr.io/mastodon/mastodon:nightly@sha256:c99eed5c71e64df58dcc8369258cc95c451d65d4b7d4a05231a4c5588bf39d0b
         command: ["./bin/rails", "db:reset"]
         env:
         - name: SAFETY_ASSURED
