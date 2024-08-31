@@ -37,15 +37,9 @@ module "dns-public-zone" {
     },
     {
       name    = "www"
-      records = module.address-fe.addresses
-      ttl     = 7200
-      type    = "A"
-    },
-    {
-      name    = "www"
-      records = ["10 ${var.domain}. alpn=\"h3,h2\""]
-      ttl     = 7200
-      type    = "HTTPS"
+      records = ["edge.redirect.pizza."]
+      ttl     = 3600
+      type    = "CNAME"
     },
     {
       name    = "files"
