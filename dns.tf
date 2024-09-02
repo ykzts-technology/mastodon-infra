@@ -55,7 +55,7 @@ module "dns-public-zone" {
     },
     {
       name    = ""
-      records = ["0 issue \"pki.goog\""]
+      records = ["0 issue \"pki.goog\"", "0 issue \"sectigo.com\"", "0 issue \"letsencrypt.org\""]
       ttl     = 7200
       type    = "CAA"
     },
