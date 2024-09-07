@@ -5,6 +5,5 @@ resources:
 - mastodon-streaming
 - mastodon-worker
 - manael
-- redirect
 - configmap.yaml
 - ingress.yaml
