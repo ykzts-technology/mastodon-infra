@@ -60,12 +60,4 @@ patches:
         beta.cloud.google.com/backend-config:
           '{"default": "manael-backend-config"}'
         cloud.google.com/neg: '{"ingress": true}'
-- path: patches/redirect.yaml
-- patch: |-
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: redirect
-      annotations:
-        cloud.google.com/neg: '{"ingress": true}'
 - path: patches/ingress.yaml
