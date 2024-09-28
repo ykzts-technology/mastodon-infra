@@ -11,7 +11,7 @@ on:
 jobs:
   build-publish-deploy:
     name: Build, Publish, and Deploy
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       id-token: write
