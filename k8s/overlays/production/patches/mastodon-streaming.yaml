@@ -10,10 +10,10 @@ spec:
         resources:
           requests:
             memory: 512Mi
-            cpu: 250m
+            cpu: 0.5
           limits:
             memory: 512Mi
-            cpu: 250m
+            cpu: 0.5
       nodeSelector:
         cloud.google.com/gke-spot: "true"
       terminationGracePeriodSeconds: 25
