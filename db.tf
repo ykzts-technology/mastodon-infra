@@ -98,7 +98,7 @@ module "memorystore" {
   connect_mode            = "PRIVATE_SERVICE_ACCESS"
   memory_size_gb          = 1
   name                    = local.default_name
-  project                 = var.project_id
+  project_id              = var.project_id
   redis_version           = "REDIS_7_0"
   region                  = var.region
   tier                    = "BASIC"
