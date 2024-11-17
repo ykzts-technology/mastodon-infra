@@ -9,11 +9,11 @@ spec:
       - name: manael
         resources:
           requests:
-            memory: 1.5Gi
-            cpu: 1
+            memory: 2Gi
+            cpu: 2
           limits:
-            memory: 1.5Gi
-            cpu: 1
+            memory: 2Gi
+            cpu: 2
         env:
         - name: MANAEL_UPSTREAM_URL
           value: https://ykzts-technology-storage.storage.googleapis.com
