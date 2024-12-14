@@ -9,7 +9,7 @@
       "groupName": "mastodon docker containers",
       "groupSlug": "mastodon",
       "matchDatasources": ["docker"],
-      "matchPackagePrefixes": ["ghcr.io/mastodon/"]
+      "matchPackageNames": ["ghcr.io/mastodon/**"]
     },
     {
       "groupName": "google terraform providers",
