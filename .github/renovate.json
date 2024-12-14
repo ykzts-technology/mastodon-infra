@@ -8,20 +8,35 @@
     {
       "groupName": "mastodon docker containers",
       "groupSlug": "mastodon",
-      "matchDatasources": ["docker"],
-      "matchPackagePrefixes": ["ghcr.io/mastodon/"]
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/mastodon/{/,}**"
+      ]
     },
     {
       "groupName": "google terraform providers",
-      "matchDatasources": ["terraform-provider"],
-      "matchDepNames": ["google", "google-beta"]
+      "matchDatasources": [
+        "terraform-provider"
+      ],
+      "matchDepNames": [
+        "google",
+        "google-beta"
+      ]
     },
     {
       "groupName": "skaffold",
       "groupSlug": "skaffold",
-      "matchDatasources": ["docker"],
-      "matchDepNames": ["gcr.io/k8s-skaffold/skaffold"]
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchDepNames": [
+        "gcr.io/k8s-skaffold/skaffold"
+      ]
     }
   ],
-  "reviewers": ["ykzts"]
+  "reviewers": [
+    "ykzts"
+  ]
 }
