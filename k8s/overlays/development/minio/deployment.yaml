@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: minio
-        image: minio/minio:RELEASE.2019-10-12T01-39-57Z
+        image: minio/minio:RELEASE.2019-10-12T01-39-57Z@sha256:6d1b59b78ae84c5c38cadf329cea5d46a0f5155608d0dca8117c5a1c6faaf0f8
         args:
         - server
         - /data
