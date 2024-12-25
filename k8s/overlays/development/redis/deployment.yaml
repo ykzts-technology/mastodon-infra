@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: redis
-        image: redis:5.0.7-alpine3.10
+        image: redis:5.0.7-alpine3.10@sha256:ee13953704783b284c080b5b0abe4620730728054f5c19e9488d7a97ecd312c5
         resources:
           limits:
             cpu: 50m

@@ -26,11 +26,11 @@ spec:
     spec:
       initContainers:
       - name: alpine
-        image: alpine:3.21.0
+        image: alpine:3.21.0@sha256:21dc6063fd678b478f57c0e13f47560d0ea4eeba26dfc947b2a4f81f686b9f45
         command: ["sh", "-c", "until nc -z minio 9000; do sleep 3; done"]
       containers:
       - name: mc
-        image: minio/mc:RELEASE.2019-10-09T22-54-57Z
+        image: minio/mc:RELEASE.2019-10-09T22-54-57Z@sha256:cfa18a5564f7649080792212d0a9281b60b1a732ef329877f56fc108cee5f012
         command:
         - sh
         - -c
