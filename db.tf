@@ -1,6 +1,6 @@
 module "sql-db" {
   source  = "terraform-google-modules/sql-db/google//modules/postgresql"
-  version = "25.0.1"
+  version = "25.0.2"
 
   additional_users = [
     {
