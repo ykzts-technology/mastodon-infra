@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/devcontainers/base:1-bullseye@sha256:f485b76ec2971017849252b494e61f4b7d97cd75d094db8161c34343edc026e9
 
  # renovate: datasource=github-releases depName=skaffold packageName=GoogleContainerTools/skaffold
-ARG SKAFFOLD_VERSION=2.13.2
+ARG SKAFFOLD_VERSION=2.14.0
 # renovate: datasource=github-releases depName=kustomize packageName=kubernetes-sigs/kustomize extractVersion=^kustomize/v(?<version>.+)$
 ARG KUSTOMIZE_VERSION=5.6.0
 
