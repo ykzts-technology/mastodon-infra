@@ -7,7 +7,7 @@ spec:
     spec:
       initContainers:
       - name: postgres
-        image: postgres:16.6-alpine3.20@sha256:1e59919c179e296eaf3cc701f4d50bab5c393d7ed9746c188c9d519489c998dc
+        image: postgres:16.7-alpine3.20@sha256:373ab338a3f46e6a1349a68d8899433c7784351c9e92697f83c32b336e82dd91
         command: ["sh", "-c", "until pg_isready -h postgres -p 5432; do sleep 3; done"]
       containers:
       - name: mastodon
