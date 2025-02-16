@@ -7,5 +7,5 @@ spec:
     spec:
       initContainers:
       - name: postgres
-        image: postgres:16.7-alpine3.20@sha256:373ab338a3f46e6a1349a68d8899433c7784351c9e92697f83c32b336e82dd91
+        image: postgres:16.7-alpine3.20@sha256:bad48fd56bdc630377e76e6944686220a50961d4b22b95396bd01da337232ce1
         command: ["sh", "-c", "until pg_isready -h postgres -p 5432; do sleep 3; done"]
