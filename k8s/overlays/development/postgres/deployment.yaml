@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: postgres:16.8-alpine3.20@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb
+        image: postgres:16.8-alpine3.20@sha256:71bf30ef97eec65edbc8abfd3d81b430705dd0086ef65ad6cf8e4ec4ba093807
         resources:
           limits:
             cpu: 50m
