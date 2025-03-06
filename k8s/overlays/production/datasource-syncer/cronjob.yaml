@@ -14,7 +14,7 @@ spec:
           serviceAccountName: datasource-syncer
           containers:
           - name: datasource-syncer
-            image: gcr.io/gke-release/prometheus-engine/datasource-syncer:v0.11.0-gke.3@sha256:fcca96d4adfe6c263fbb3689ede268ab66db27731625b944d0a7079dac30bfa3
+            image: gcr.io/gke-release/prometheus-engine/datasource-syncer:v0.14.1-gke.3@sha256:cd461158530d73f81ff7157725b0eba26d75a0ca9a33361722dc535344d906ff
             args:
             - --datasource-uids=$(GRAFANA_DATASOURCE_UIDS)
             - --grafana-api-endpoint=https://graph.ykzts.tech
