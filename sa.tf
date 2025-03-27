@@ -1,6 +1,6 @@
 module "service_accounts" {
   source  = "terraform-google-modules/service-accounts/google"
-  version = "4.5.1"
+  version = "4.5.2"
 
   generate_keys = true
   names         = ["terraform"]
