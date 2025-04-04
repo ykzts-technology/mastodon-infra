@@ -15,13 +15,13 @@ jobs:
       uses: actions/checkout@master
 
     - name: Kustomize (development)
-      uses: docker://gcr.io/k8s-skaffold/skaffold:v2.15.0@sha256:f9ba8d0f0a32af7bf158f6928694f533ac2d1802bb9cb6cb610549363b717fe6
+      uses: docker://gcr.io/k8s-skaffold/skaffold:v2.15.0@sha256:3acbffa5ac2ed691caa12fedcef16c58b78e4a3d810369026bc0ed0b0981f92b
       with:
         args: build k8s/overlays/development
         entrypoint: kustomize
 
     - name: Kustomize (production)
-      uses: docker://gcr.io/k8s-skaffold/skaffold:v2.15.0@sha256:f9ba8d0f0a32af7bf158f6928694f533ac2d1802bb9cb6cb610549363b717fe6
+      uses: docker://gcr.io/k8s-skaffold/skaffold:v2.15.0@sha256:3acbffa5ac2ed691caa12fedcef16c58b78e4a3d810369026bc0ed0b0981f92b
       with:
         args: build k8s/overlays/production
         entrypoint: kustomize
