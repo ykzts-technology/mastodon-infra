@@ -12,7 +12,7 @@ module "address-fe" {
 
 module "dns-public-zone" {
   source  = "terraform-google-modules/cloud-dns/google"
-  version = "5.3.0"
+  version = "6.0.0"
 
   dnssec_config = {
     kind          = "dns#managedZoneDnsSecConfig"
