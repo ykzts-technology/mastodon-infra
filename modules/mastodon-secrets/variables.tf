@@ -51,10 +51,6 @@ variable "redis_hostname" {
   type = string
 }
 
-variable "redis_password" {
-  type = string
-}
-
 variable "redis_port" {
   type = string
 }

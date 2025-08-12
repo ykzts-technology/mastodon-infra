@@ -66,9 +66,8 @@ module "mastodon-secrets" {
   es_password                                  = var.es_password
   es_port                                      = var.es_port
   es_username                                  = var.es_username
-  redis_hostname                               = module.memorystore.host
-  redis_password                               = module.memorystore.auth_string
-  redis_port                                   = module.memorystore.port
+  redis_hostname                               = module.valkey_cluster.psc_auto_connection[0].ip_address
+  redis_port                                   = module.valkey_cluster.psc_auto_connection[0].port
   smtp_password                                = var.smtp_password
   storage_access_key                           = google_storage_hmac_key.key.access_id
   storage_bucket                               = "ykzts-technology-storage"
