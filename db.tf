@@ -104,3 +104,21 @@ module "memorystore" {
   tier                    = "BASIC"
   transit_encryption_mode = "DISABLED"
 }
+
+module "valkey_cluster" {
+  source  = "terraform-google-modules/memorystore/google//modules/valkey"
+  version = "15.1.0"
+
+  deletion_protection_enabled   = false
+  engine_version                = "VALKEY_8_0"
+  instance_id                   = local.default_name
+  location                      = var.region
+  mode                          = "CLUSTER_DISABLED"
+  network                       = module.vpc.network_id
+  node_type                     = "SHARED_CORE_NANO"
+  project_id                    = var.project_id
+  replica_count                 = 0
+  shard_count                   = 1
+  zone_distribution_config_mode = "SINGLE_ZONE"
+  zone_distribution_config_zone	= "${var.region}-b"
+}
