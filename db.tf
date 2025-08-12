@@ -114,7 +114,7 @@ module "valkey_cluster" {
   instance_id                   = local.default_name
   location                      = var.region
   mode                          = "CLUSTER_DISABLED"
-  network                       = module.vpc.network_id
+  network                       = module.vpc.network_name
   node_type                     = "SHARED_CORE_NANO"
   project_id                    = var.project_id
   replica_count                 = 0
