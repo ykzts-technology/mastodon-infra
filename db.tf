@@ -105,28 +105,36 @@ module "memorystore" {
   transit_encryption_mode = "DISABLED"
 }
 
-module "valkey_cluster" {
-  source  = "terraform-google-modules/memorystore/google//modules/valkey"
-  version = "15.1.0"
-
+resource "google_memorystore_instance" "valkey_cluster" {
+  authorization_mode          = "AUTH_DISABLED"
   deletion_protection_enabled = false
   engine_configs = {
     maxmemory-policy = "volatile-ttl"
   }
-  engine_version = "VALKEY_8_0"
-  instance_id    = local.default_name
-  location       = var.region
-  mode           = "CLUSTER_DISABLED"
-  network        = module.vpc.network_name
-  node_type      = "SHARED_CORE_NANO"
-  project_id     = var.project_id
-  replica_count  = 0
-  service_connection_policies = {
-    "${local.default_name}-scp" = {
-      subnet_names = module.vpc.subnets_names
-    }
+  engine_version          = "VALKEY_8_0"
+  instance_id             = local.default_name
+  location                = var.region
+  mode                    = "CLUSTER_DISABLED"
+  node_type               = "SHARED_CORE_NANO"
+  project                 = var.project_id
+  replica_count           = 0
+  shard_count             = 1
+  transit_encryption_mode = "TRANSIT_ENCRYPTION_DISABLED"
+
+  desired_auto_created_endpoints {
+    network    = "projects/${var.project_id}/global/networks/${module.vpc.network_name}"
+    project_id = var.project_id
   }
-  shard_count                   = 1
-  zone_distribution_config_mode = "SINGLE_ZONE"
-  zone_distribution_config_zone = "${var.region}-b"
+}
+
+resource "google_network_connectivity_service_connection_policy" "valkey_cluster_scp" {
+  location      = var.region
+  name          = "${local.default_name}-scp"
+  network       = "projects/${var.project_id}/global/networks/${module.vpc.network_name}"
+  project       = var.project_id
+  service_class = "gcp-memorystore"
+
+  psc_config {
+    subnetworks = [for x in module.vpc.subnets_names : "projects/${var.project_id}/regions/${var.region}/subnetworks/${x}"]
+  }
 }
