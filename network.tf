@@ -2,8 +2,9 @@ module "vpc" {
   source  = "terraform-google-modules/network/google"
   version = "11.1.1"
 
-  network_name = local.network_name
-  project_id   = var.project_id
+  bgp_best_path_selection_mode = "STANDARD"
+  network_name                 = local.network_name
+  project_id                   = var.project_id
   secondary_ranges = {
     (local.subnet_name) = [
       {
