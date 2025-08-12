@@ -125,5 +125,5 @@ module "valkey_cluster" {
   }
   shard_count                   = 1
   zone_distribution_config_mode = "SINGLE_ZONE"
-  zone_distribution_config_zone	= "${var.region}-b"
+  zone_distribution_config_zone = "${var.region}-b"
 }

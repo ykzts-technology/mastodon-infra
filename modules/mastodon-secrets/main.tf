@@ -25,7 +25,6 @@ resource "kubernetes_secret" "mastodon" {
     DEEPL_API_KEY                                = var.deepl_api_key
     OTP_SECRET                                   = random_id.otp_secret.hex
     REDIS_HOST                                   = var.redis_hostname
-    REDIS_PASSWORD                               = var.redis_password
     REDIS_PORT                                   = var.redis_port
     S3_BUCKET                                    = var.storage_bucket
     S3_ENABLED                                   = "true"
