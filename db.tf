@@ -110,14 +110,17 @@ module "valkey_cluster" {
   version = "15.1.0"
 
   deletion_protection_enabled = false
-  engine_version              = "VALKEY_8_0"
-  instance_id                 = local.default_name
-  location                    = var.region
-  mode                        = "CLUSTER_DISABLED"
-  network                     = module.vpc.network_name
-  node_type                   = "SHARED_CORE_NANO"
-  project_id                  = var.project_id
-  replica_count               = 0
+  engine_configs = {
+    maxmemory-policy = "volatile-ttl"
+  }
+  engine_version = "VALKEY_8_0"
+  instance_id    = local.default_name
+  location       = var.region
+  mode           = "CLUSTER_DISABLED"
+  network        = module.vpc.network_name
+  node_type      = "SHARED_CORE_NANO"
+  project_id     = var.project_id
+  replica_count  = 0
   service_connection_policies = {
     "${local.default_name}-scp" = {
       subnet_names = module.vpc.subnets_names
