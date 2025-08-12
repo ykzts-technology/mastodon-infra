@@ -61,7 +61,7 @@ module "sql-db" {
   delete_timeout      = "30m"
   deletion_protection = true
   disk_autoresize     = true
-  disk_size           = 37
+  disk_size           = 50
   disk_type           = "PD_SSD"
   enable_default_db   = true
   enable_default_user = true
@@ -83,7 +83,7 @@ module "sql-db" {
   name                            = local.default_name
   project_id                      = var.project_id
   region                          = var.region
-  tier                            = "db-custom-1-3840"
+  tier                            = "db-f1-micro"
   update_timeout                  = "30m"
   user_name                       = "postgres"
   zone                            = "${var.region}-c"
