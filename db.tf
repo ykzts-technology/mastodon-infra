@@ -89,22 +89,6 @@ module "sql-db" {
   zone                            = "${var.region}-c"
 }
 
-module "memorystore" {
-  source  = "terraform-google-modules/memorystore/google"
-  version = "15.1.0"
-
-  auth_enabled            = true
-  authorized_network      = module.vpc.network_id
-  connect_mode            = "PRIVATE_SERVICE_ACCESS"
-  memory_size_gb          = 1
-  name                    = local.default_name
-  project_id              = var.project_id
-  redis_version           = "REDIS_7_0"
-  region                  = var.region
-  tier                    = "BASIC"
-  transit_encryption_mode = "DISABLED"
-}
-
 resource "google_memorystore_instance" "valkey_cluster" {
   authorization_mode          = "AUTH_DISABLED"
   deletion_protection_enabled = false
