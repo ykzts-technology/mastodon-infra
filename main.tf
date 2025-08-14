@@ -27,7 +27,7 @@ resource "google_compute_ssl_policy" "default" {
 
 module "datasource-syncer-workload-identity" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
-  version = "37.1.0"
+  version = "38.0.0"
 
   name       = "datasource-syncer"
   namespace  = "default"
@@ -37,7 +37,7 @@ module "datasource-syncer-workload-identity" {
 
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-public-cluster"
-  version = "37.1.0"
+  version = "38.0.0"
 
   create_service_account          = false
   enable_vertical_pod_autoscaling = true
