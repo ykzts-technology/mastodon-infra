@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: ghcr.io/mastodon/mastodon:nightly@sha256:234478c7be1a36b8c316d13695d5f4709f1768b46a9f1dc4cf2a8393b750f91b
+        image: ghcr.io/mastodon/mastodon:nightly@sha256:f959646eeb8f66ef81f7cf20fd9c8d5e0d3db71adb6c52f99aaaeec7ea2bc7b9
         envFrom:
         - configMapRef:
             name: mastodon-env
