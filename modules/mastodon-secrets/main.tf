@@ -35,10 +35,10 @@ resource "kubernetes_secret" "mastodon" {
     S3_MULTIPART_THRESHOLD                       = "52428800"
     S3_SIGNATURE_VERSION                         = "v4"
     SECRET_KEY_BASE                              = random_id.secret_key_base.hex
-    SMTP_LOGIN                                   = "apikey"
+    SMTP_LOGIN                                   = "resend"
     SMTP_PASSWORD                                = var.smtp_password
-    SMTP_PORT                                    = "2525"
-    SMTP_SERVER                                  = "smtp.sendgrid.net"
+    SMTP_PORT                                    = "587"
+    SMTP_SERVER                                  = "smtp.resend.com"
     VAPID_PRIVATE_KEY                            = var.vapid_private_key
     VAPID_PUBLIC_KEY                             = var.vapid_public_key
   }

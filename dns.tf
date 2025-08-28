@@ -85,6 +85,25 @@ module "dns-public-zone" {
       ttl     = 3600
       type    = "CNAME"
     },
+    # Resend
+    {
+      name    = "send"
+      records = ["feedback-smtp.ap-northeast-1.amazonses.com."]
+      ttl     = 3600
+      type    = "MX"
+    },
+    {
+      name    = "send"
+      records = ["v=spf1 include:amazonses.com ~all"]
+      ttl     = 3600
+      type    = "TXT"
+    },
+    {
+      name    = "resend._domainkey"
+      records = ["p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCuoKvci5vFBB22v1jKg+BwiRE8rfvcABg/jLucX/nVhI4wnmN+DJOG/P8Yfp3EQlsMEjhK6PsXOipm0wIc2KLvcHTESaCkbwBzBb3r8DiW3FQvPBkPCzYQtiFFWRWYWLq4G+YZ/imA0clFBJMuUTJi2M7uzFND8j6mCymTqB2ZUwIDAQAB"]
+      ttl     = 3600
+      type    = "TXT"
+    },
     {
       name    = "_dmarc"
       records = ["\"v=DMARC1;\" \"p=reject;\" \"rua=mailto:dmarc_agg@vali.email\""]
