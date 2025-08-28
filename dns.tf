@@ -88,7 +88,7 @@ module "dns-public-zone" {
     # Resend
     {
       name    = "send"
-      records = ["feedback-smtp.ap-northeast-1.amazonses.com."]
+      records = ["10 feedback-smtp.ap-northeast-1.amazonses.com."]
       ttl     = 3600
       type    = "MX"
     },
