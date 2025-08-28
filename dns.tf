@@ -99,10 +99,10 @@ module "dns-public-zone" {
       type    = "TXT"
     },
     {
-      name     = "resend._domainkey"
-      recoreds = ["p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCuoKvci5vFBB22v1jKg+BwiRE8rfvcABg/jLucX/nVhI4wnmN+DJOG/P8Yfp3EQlsMEjhK6PsXOipm0wIc2KLvcHTESaCkbwBzBb3r8DiW3FQvPBkPCzYQtiFFWRWYWLq4G+YZ/imA0clFBJMuUTJi2M7uzFND8j6mCymTqB2ZUwIDAQAB"]
-      ttl      = 3600
-      type     = "TXT"
+      name    = "resend._domainkey"
+      records = ["p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCuoKvci5vFBB22v1jKg+BwiRE8rfvcABg/jLucX/nVhI4wnmN+DJOG/P8Yfp3EQlsMEjhK6PsXOipm0wIc2KLvcHTESaCkbwBzBb3r8DiW3FQvPBkPCzYQtiFFWRWYWLq4G+YZ/imA0clFBJMuUTJi2M7uzFND8j6mCymTqB2ZUwIDAQAB"]
+      ttl     = 3600
+      type    = "TXT"
     },
     {
       name    = "_dmarc"
