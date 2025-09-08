@@ -1,6 +1,6 @@
 module "vpc" {
   source  = "terraform-google-modules/network/google"
-  version = "11.1.1"
+  version = "12.0.0"
 
   bgp_best_path_selection_mode = "STANDARD"
   network_name                 = local.network_name
