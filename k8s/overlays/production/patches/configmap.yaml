@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: mastodon-env
 data:
-  EXPERIMENTAL_FEATURES: "fasp,http_message_signatures,outgoing_quotes"
+  EXPERIMENTAL_FEATURES: "fasp,http_message_signatures,modern_emojis,outgoing_quotes"
   MAX_THREADS: "10"
   S3_CLOUDFRONT_HOST: files.ykzts.technology
   SMTP_FROM_ADDRESS: ykzts.technology <notifications@ykzts.technology>
