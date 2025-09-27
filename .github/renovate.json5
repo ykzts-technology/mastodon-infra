@@ -2,6 +2,6 @@
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: ['github>ykzts/ykzts//renovate-config/default.json5'],
   kubernetes: {
-    fileMatch: ['^k8s/.+\\.yaml$'],
+    managerFilePatterns: ['^k8s/.+\\.yaml$'],
   },
 }
