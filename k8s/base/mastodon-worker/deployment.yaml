@@ -27,6 +27,13 @@ spec:
             name: mastodon-env
         - secretRef:
             name: mastodon
+        env:
+        - name: MASTODON_PROMETHEUS_EXPORTER_LOCAL
+          value: "true"
+        - name: MASTODON_PROMETHEUS_EXPORTER_HOST
+          value: "0.0.0.0"
+        ports:
+        - containerPort: 9394
         livenessProbe:
           exec:
             command:
