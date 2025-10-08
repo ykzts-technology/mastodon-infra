@@ -43,3 +43,10 @@ spec:
           initialDelaySeconds: 180
           timeoutSeconds: 15
           periodSeconds: 30
+      initContainers:
+      - name: mastodon-prometheus-exporter
+        restartPolicy: Always
+        image: ghcr.io/mastodon/mastodon:nightly@sha256:81fdf2350d6a6735341817ef38ee7197676288201fc739dbfe8dc6528de90cce
+        command: ["./bin/prometheus_exporter", "--bind", "0.0.0.0"]
+        ports:
+        - containerPort: 9394

@@ -25,3 +25,31 @@ spec:
   endpoints:
   - port: 9102
     interval: 30s
+---
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  name: mastodon-web
+  labels:
+    app: mastodon-web
+spec:
+  selector:
+    matchLabels:
+      app: mastodon-web
+  endpoints:
+  - port: 9394
+    interval: 30s
+---
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  name: mastodon-worker
+  labels:
+    app: mastodon-worker
+spec:
+  selector:
+    matchLabels:
+      app: mastodon-worker
+  endpoints:
+  - port: 9394
+    interval: 30s
