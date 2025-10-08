@@ -15,20 +15,6 @@ spec:
 apiVersion: monitoring.googleapis.com/v1
 kind: PodMonitoring
 metadata:
-  name: statsd-exporter
-  labels:
-    app: statsd-exporter
-spec:
-  selector:
-    matchLabels:
-      app: statsd-exporter
-  endpoints:
-  - port: 9102
-    interval: 30s
----
-apiVersion: monitoring.googleapis.com/v1
-kind: PodMonitoring
-metadata:
   name: mastodon-web
   labels:
     app: mastodon-web
