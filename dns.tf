@@ -54,6 +54,12 @@ module "dns-public-zone" {
       type    = "HTTPS"
     },
     {
+      name    = "status"
+      records = ["uptime.stzky.com."]
+      ttl     = 3600
+      type    = "CNAME"
+    },
+    {
       name    = ""
       records = ["0 issue \"pki.goog\"", "0 issue \"sectigo.com\"", "0 issue \"letsencrypt.org\""]
       ttl     = 7200
@@ -65,25 +71,6 @@ module "dns-public-zone" {
       records = ["a0fb7df9f0"]
       ttl     = 3600
       type    = "TXT"
-    },
-    # SendGrid
-    {
-      name    = "em7827"
-      records = ["u26458027.wl028.sendgrid.net."]
-      ttl     = 3600
-      type    = "CNAME"
-    },
-    {
-      name    = "s1._domainkey"
-      records = ["s1.domainkey.u26458027.wl028.sendgrid.net."]
-      ttl     = 3600
-      type    = "CNAME"
-    },
-    {
-      name    = "s2._domainkey"
-      records = ["s2.domainkey.u26458027.wl028.sendgrid.net."]
-      ttl     = 3600
-      type    = "CNAME"
     },
     # Resend
     {
