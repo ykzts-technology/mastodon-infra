@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:2-bullseye@sha256:b387f798b9ee97144a126ba55ed92c8f2d3a8deceb8fe15e450645b307fee22a
+FROM mcr.microsoft.com/devcontainers/base:2-bullseye@sha256:1f1835d555af151b610cfa02f5c577f63e7d1f6ecf037de155451c781c949522
 
  # renovate: datasource=github-releases depName=skaffold packageName=GoogleContainerTools/skaffold
 ARG SKAFFOLD_VERSION=2.16.1
