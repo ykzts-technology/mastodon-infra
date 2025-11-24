@@ -288,6 +288,9 @@ helm uninstall mastodon-helm
 helm install mastodon mastodon/mastodon \
   --namespace default \
   --values helm/values-production.yaml
+
+# または、Skaffoldを使用
+skaffold run -p helm-production
 ```
 
 ### Phase 4: HPAとモニタリングの再設定
@@ -381,6 +384,8 @@ gcloud sql backups restore [BACKUP_ID] \
 
 ### デプロイメントの更新
 
+**Helmコマンドを直接使用:**
+
 ```bash
 # values.yamlの編集後
 helm upgrade mastodon mastodon/mastodon \
@@ -394,7 +399,22 @@ helm upgrade mastodon mastodon/mastodon \
   --set image.tag=v4.5.2
 ```
 
+**Skaffoldを使用（推奨）:**
+
+```bash
+# 本番環境へデプロイ
+skaffold run -p helm-production
+
+# 継続的な開発モード
+skaffold dev -p helm-dev
+
+# デプロイメントの削除
+skaffold delete -p helm-production
+```
+
 ### ロールバック
+
+**Helmコマンドを直接使用:**
 
 ```bash
 # 前のリビジョンへのロールバック
@@ -402,6 +422,19 @@ helm rollback mastodon
 
 # 特定のリビジョンへのロールバック
 helm rollback mastodon 2
+```
+
+**Skaffoldを使用:**
+
+Skaffoldは直接的なロールバック機能を提供しないため、以下の方法を使用：
+
+```bash
+# values.yamlを前のバージョンに戻してから再デプロイ
+git checkout <previous-commit> -- helm/values-production.yaml
+skaffold run -p helm-production
+
+# または、Helmコマンドを直接使用してロールバック
+helm rollback mastodon
 ```
 
 ### リリース履歴の確認

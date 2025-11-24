@@ -186,6 +186,8 @@ gcloud container clusters get-credentials mastodon-cluster \
 
 #### Option 1: Using Helm (Recommended - New)
 
+**Direct Helm command:**
+
 ```bash
 # Add Mastodon Helm repository
 helm repo add mastodon https://mastodon.github.io/helm-charts/
@@ -199,6 +201,19 @@ helm upgrade --install mastodon mastodon/mastodon \
 
 # Check deployment status
 kubectl get pods -l app.kubernetes.io/instance=mastodon
+```
+
+**Using Skaffold (New):**
+
+```bash
+# Development environment with Helm
+skaffold run -p helm-dev
+
+# Production environment with Helm
+skaffold run -p helm-production
+
+# Continuous development mode with Helm
+skaffold dev -p helm-dev
 ```
 
 For migration from Kustomize to Helm, see [Helm Migration Guide](docs/helm-migration-guide.md).

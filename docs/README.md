@@ -4,6 +4,24 @@
 
 ## 📚 ドキュメント一覧
 
+### 0. [Skaffold + Helm Usage Guide](./skaffold-helm-usage.md) 🆕
+**Skaffoldを使った簡単なデプロイメント** - SkaffoldとHelm Chartを組み合わせて使用する方法を説明します。
+
+**内容**:
+- Skaffoldプロファイルの説明（Kustomize/Helm対応）
+- 基本的な使い方とコマンド例
+- 開発モード（継続的デプロイ）の使用方法
+- CI/CDへの統合例
+- トラブルシューティング
+
+**対象者**: 開発者、インフラエンジニア、CI/CD担当者
+
+**推奨読了時間**: 15分
+
+**使い方**: Helm移行後の日常的なデプロイメント作業で参照してください。
+
+---
+
 ### 1. [Helm Migration Guide](./helm-migration-guide.md)
 **最も重要なドキュメント** - Kustomize管理からHelm Chart管理への移行手順を段階的に説明します。
 

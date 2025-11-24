@@ -1,5 +1,6 @@
 apiVersion: skaffold/v4beta8
 kind: Config
+# Default: Use Kustomize for development (backward compatible)
 manifests:
   kustomize:
     paths:
@@ -7,6 +8,7 @@ manifests:
 deploy:
   kubectl: {}
 profiles:
+  # Kustomize-based production deployment (existing)
   - name: production
     manifests:
       kustomize:
@@ -14,3 +16,36 @@ profiles:
           - k8s/overlays/production
     deploy:
       kubectl: {}
+  
+  # Helm-based development deployment (new)
+  - name: helm-dev
+    deploy:
+      helm:
+        releases:
+          - name: mastodon
+            chartPath: ""
+            remoteChart: mastodon/mastodon
+            repo: https://mastodon.github.io/helm-charts/
+            valuesFiles:
+              - helm/values-production.yaml
+            setValueTemplates:
+              mastodon.localDomain: "mastodon.local"
+              mastodon.web.replicas: "1"
+              mastodon.streaming.replicas: "1"
+            createNamespace: false
+  
+  # Helm-based production deployment (new)
+  - name: helm-production
+    deploy:
+      helm:
+        releases:
+          - name: mastodon
+            chartPath: ""
+            remoteChart: mastodon/mastodon
+            repo: https://mastodon.github.io/helm-charts/
+            valuesFiles:
+              - helm/values-production.yaml
+            createNamespace: false
+            upgradeOnChange: true
+            wait: true
+            timeout: 10m
