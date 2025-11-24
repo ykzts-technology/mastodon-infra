@@ -141,6 +141,8 @@ spec:
     spec:
       containers:
       - name: manael
+        # 注意: 実際の運用では、正しいイメージタグとダイジェストを使用してください
+        # 以下は現在のKustomize設定からコピーしたものです
         image: ghcr.io/manaelproxy/manael:2.0.6@sha256:73a2c1003d75c44e009bcdd974e78ee0f682ba67896d590affc4dc40ec90174e
         ports:
         - containerPort: 8080
