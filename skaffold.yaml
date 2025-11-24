@@ -23,7 +23,6 @@ profiles:
       helm:
         releases:
           - name: mastodon
-            chartPath: ""
             remoteChart: mastodon/mastodon
             repo: https://mastodon.github.io/helm-charts/
             valuesFiles:
@@ -40,7 +39,6 @@ profiles:
       helm:
         releases:
           - name: mastodon
-            chartPath: ""
             remoteChart: mastodon/mastodon
             repo: https://mastodon.github.io/helm-charts/
             valuesFiles:

@@ -24,14 +24,17 @@ Skaffoldは、Kubernetesアプリケーションの開発とデプロイメン�
 Skaffoldがインストールされていない場合：
 
 ```bash
-# macOS
+# macOS (推奨: Homebrew経由)
 brew install skaffold
 
-# Linux
-curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
+# Linux (推奨: パッケージマネージャー経由)
+# Ubuntu/Debian
+curl -fsSL https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 -o skaffold
+echo "$(curl -fsSL https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64.sha256) skaffold" | sha256sum -c -
 sudo install skaffold /usr/local/bin/
+rm skaffold
 
-# または、パッケージマネージャーを使用
+# 詳細なインストール方法はこちら:
 # https://skaffold.dev/docs/install/
 ```
 
@@ -268,8 +271,11 @@ jobs:
       
       - name: Install Skaffold
         run: |
-          curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
+          # セキュリティのためチェックサム検証を含むインストール
+          curl -fsSL https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 -o skaffold
+          echo "$(curl -fsSL https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64.sha256) skaffold" | sha256sum -c -
           sudo install skaffold /usr/local/bin/
+          rm skaffold
       
       - name: Add Helm repository
         run: |
