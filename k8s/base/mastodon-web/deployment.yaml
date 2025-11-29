@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: mastodon
-        image: ghcr.io/mastodon/mastodon:nightly@sha256:347e3a1df76008aa331fd39f8c24710ff769d5c23deeda93bc204706ced66501
+        image: ghcr.io/mastodon/mastodon:nightly@sha256:122f9a6e9a1a38fabce58a812227ddcfcdb0aceba0855ebdff328938a064396a
         command: ["bundle", "exec", "puma", "-C", "config/puma.rb"]
         envFrom:
         - configMapRef:
@@ -44,7 +44,7 @@ spec:
           timeoutSeconds: 15
           periodSeconds: 30
       - name: mastodon-prometheus-exporter
-        image: ghcr.io/mastodon/mastodon:nightly@sha256:347e3a1df76008aa331fd39f8c24710ff769d5c23deeda93bc204706ced66501
+        image: ghcr.io/mastodon/mastodon:nightly@sha256:122f9a6e9a1a38fabce58a812227ddcfcdb0aceba0855ebdff328938a064396a
         command: ["./bin/prometheus_exporter", "--bind", "0.0.0.0"]
         ports:
         - containerPort: 9394
