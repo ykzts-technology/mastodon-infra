@@ -152,13 +152,19 @@ terraform apply
 
 ### Kubernetes Resources
 
-Kubernetes manifests are organized using Kustomize:
+> **Note**: This project is transitioning from Kustomize to the official Mastodon Helm Chart. See [Helm Migration Guide](docs/helm-migration-guide.md) for details.
+
+Kubernetes manifests are currently organized using Kustomize:
 
 - **Base**: Common configurations for all environments (`k8s/base/`)
 - **Overlays**: Environment-specific configurations
   - Development: `k8s/overlays/development/`
   - Production: `k8s/overlays/production/`
 - **Jobs**: One-time jobs like database migrations (`k8s/jobs/`)
+
+For the new Helm-based deployment, see:
+- **Helm Values**: Production configuration (`helm/values-production.yaml`)
+- **Migration Docs**: Complete migration guide (`docs/helm-migration-guide.md`)
 
 ## Deployment
 
@@ -177,6 +183,42 @@ gcloud container clusters get-credentials mastodon-cluster \
 ```
 
 ### Deploy Kubernetes Applications
+
+#### Option 1: Using Helm (Recommended - New)
+
+**Direct Helm command:**
+
+```bash
+# Add Mastodon Helm repository
+helm repo add mastodon https://mastodon.github.io/helm-charts/
+helm repo update
+
+# Install or upgrade Mastodon
+helm upgrade --install mastodon mastodon/mastodon \
+  --namespace default \
+  --values helm/values-production.yaml \
+  --timeout 10m
+
+# Check deployment status
+kubectl get pods -l app.kubernetes.io/instance=mastodon
+```
+
+**Using Skaffold (New):**
+
+```bash
+# Development environment with Helm
+skaffold run -p helm-dev
+
+# Production environment with Helm
+skaffold run -p helm-production
+
+# Continuous development mode with Helm
+skaffold dev -p helm-dev
+```
+
+For migration from Kustomize to Helm, see [Helm Migration Guide](docs/helm-migration-guide.md).
+
+#### Option 2: Using Kustomize (Current)
 
 Using Skaffold:
 
@@ -200,6 +242,14 @@ kubectl apply -k k8s/overlays/production
 
 ### Run Database Migrations
 
+With Helm (automatic via hooks):
+```bash
+# Migrations run automatically during helm upgrade
+# To run manually:
+kubectl create job --from=cronjob/mastodon-db-migrate mastodon-db-migrate-manual
+```
+
+With Kustomize:
 ```bash
 kubectl apply -f k8s/jobs/migrate.yaml
 ```
@@ -239,12 +289,39 @@ kubectl apply -f k8s/jobs/search-deploy.yaml
 
 ### Updating Kubernetes Applications
 
+#### With Helm (Recommended - New)
+
+```bash
+# Update values.yaml with desired changes
+# Then upgrade the release
+helm upgrade mastodon mastodon/mastodon \
+  --namespace default \
+  --values helm/values-production.yaml
+
+# View release history
+helm history mastodon
+
+# Rollback if needed
+helm rollback mastodon
+```
+
+#### With Kustomize (Current)
+
 1. Update manifests in `k8s/` directory
 2. Apply changes using Skaffold or kubectl
 
 ### Monitoring
 
 The infrastructure includes Grafana integration for monitoring. Access metrics through your configured Grafana instance.
+
+## Documentation
+
+Comprehensive documentation is available in the `docs/` directory:
+
+- **[Helm Migration Guide](docs/helm-migration-guide.md)**: Complete guide for migrating from Kustomize to Helm Chart
+- **[Pre-Migration Checklist](docs/pre-migration-checklist.md)**: Detailed checklist to prepare for migration
+- **[Downtime Minimization Strategy](docs/downtime-minimization-strategy.md)**: Strategies to minimize downtime during migration
+- **[Rollback Procedure](docs/rollback-procedure.md)**: Emergency rollback procedures if issues occur
 
 ## Security
 

@@ -1,0 +1,273 @@
+# Mastodon Helm Chart Values for Production
+# Based on official Mastodon Helm chart: https://github.com/mastodon/helm-charts
+#
+# This configuration maps the existing Kustomize setup to Helm chart values
+
+image:
+  repository: ghcr.io/mastodon/mastodon
+  # Using nightly tag as per current Kustomize config
+  tag: "nightly"
+  pullPolicy: IfNotPresent
+
+mastodon:
+  revisionHistoryLimit: 2
+
+  # Domain configuration
+  localDomain: ykzts.technology
+  
+  # Single user mode is enabled in the current setup
+  singleUserMode: true
+
+  # Locale settings
+  locale: ja
+
+  # Trusted proxy IPs for GCP Load Balancer
+  trustedProxyIp: "34.98.116.19/32,130.211.0.0/22,35.191.0.0/16"
+
+  # Mastodon secrets - these should reference existing Kubernetes secrets
+  # Do NOT commit actual secret values to git
+  secrets:
+    existingSecret: mastodon
+    existingSecretKeys:
+      secretKeyBase: SECRET_KEY_BASE
+      vapidPrivateKey: VAPID_PRIVATE_KEY
+      vapidPublicKey: VAPID_PUBLIC_KEY
+      arePrimaryKey: ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY
+      areDeterministicKey: ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY
+      areKeyDerivationSalt: ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT
+
+  # Web service configuration
+  web:
+    replicas: 1
+    port: 3000
+    
+    # Puma configuration from current setup
+    minThreads: "5"
+    maxThreads: "10"  # From MAX_THREADS
+    workers: "3"  # From WEB_CONCURRENCY
+    persistentTimeout: "620"  # From PERSISTENT_TIMEOUT
+
+    resources:
+      requests:
+        memory: 1.5Gi
+        cpu: 1
+      limits:
+        memory: 1.5Gi
+        cpu: 1
+
+    nodeSelector:
+      cloud.google.com/gke-spot: "true"
+
+    updateStrategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+
+    pdb:
+      enable: true
+      minAvailable: 1
+
+  # Sidekiq worker configuration
+  sidekiq:
+    workers:
+      - name: all-queues
+        replicas: 1
+        concurrency: 15  # From current deployment
+        queues:
+          - default,8
+          - push,6
+          - ingress,4
+          - mailers,2
+          - pull
+          - scheduler
+          - fasp  # From EXPERIMENTAL_FEATURES
+
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 0.5
+          limits:
+            memory: 1Gi
+            cpu: 0.5
+
+        nodeSelector:
+          cloud.google.com/gke-spot: "true"
+
+    updateStrategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+
+  # Streaming service configuration
+  streaming:
+    replicas: 1
+    port: 4000
+    workers: 1
+
+    image:
+      repository: ghcr.io/mastodon/mastodon-streaming
+      tag: "nightly"
+
+    resources:
+      requests:
+        memory: 512Mi
+        cpu: 0.5
+      limits:
+        memory: 512Mi
+        cpu: 0.5
+
+    nodeSelector:
+      cloud.google.com/gke-spot: "true"
+
+    updateStrategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+
+    pdb:
+      enable: true
+      minAvailable: 1
+
+  # S3 storage configuration for GCS
+  s3:
+    # These should reference existing secrets
+    existingSecret: mastodon
+    existingSecretKeys:
+      accessKeyId: AWS_ACCESS_KEY_ID
+      secretAccessKey: AWS_SECRET_ACCESS_KEY
+    
+    hostname: files.ykzts.technology
+    endpoint: storage.googleapis.com
+    protocol: https
+    region: auto
+    bucket: ykzts-technology-storage
+    aliasHost: files.ykzts.technology
+
+  # SMTP configuration via Resend
+  smtp:
+    domain: ykzts.technology
+    fromAddress: "ykzts.technology <notifications@ykzts.technology>"
+    server: smtp.resend.com
+    port: 587
+    authMethod: plain
+    enableStartTls: auto
+    
+    # These should reference existing secrets
+    existingSecret: mastodon
+    existingSecretKeys:
+      username: SMTP_LOGIN
+      password: SMTP_PASSWORD
+
+  # DeepL translation service
+  deepl:
+    enabled: true
+    plan: pro
+    existingSecret: mastodon
+    existingSecretKeys:
+      apiKey: DEEPL_API_KEY
+
+  # Elasticsearch configuration
+  # Note: hostname, credentials should be set via existing secrets
+  # This is configured externally in the current setup
+
+  # Prometheus metrics
+  metrics:
+    prometheus:
+      enabled: true
+      port: 9394
+      web:
+        detailed: true
+      sidekiq:
+        detailed: true
+
+  # Additional environment variables from ConfigMap
+  extraEnvVars:
+    DEFAULT_LOCALE: ja
+    DB_POOL: "15"
+    PERSISTENT_TIMEOUT: "620"
+    RUBY_YJIT_ENABLE: "1"
+    MASTODON_PROMETHEUS_EXPORTER_ENABLED: "true"
+    MASTODON_PROMETHEUS_EXPORTER_SIDEKIQ_DETAILED_METRICS: "true"
+    MASTODON_PROMETHEUS_EXPORTER_WEB_DETAILED_METRICS: "true"
+    EXPERIMENTAL_FEATURES: "fasp,http_message_signatures,modern_emojis,outgoing_quotes"
+    MAX_THREADS: "10"
+    S3_CLOUDFRONT_HOST: files.ykzts.technology
+    WEB_CONCURRENCY: "3"
+
+  # Database migration hooks
+  hooks:
+    dbPrepare:
+      enabled: true
+    dbMigrate:
+      enabled: true
+    deploySearch:
+      enabled: false  # Only enable manually when needed
+
+# Service configuration
+service:
+  type: NodePort
+  port: 80
+
+# Ingress configuration for GKE
+ingress:
+  enabled: true
+  
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: ykzts-technology-ip
+    networking.gke.io/managed-certificates: mastodon-certificate
+    # Note: GCP-specific annotations for BackendConfig and FrontendConfig
+    # need to be added after ingress creation or managed separately
+
+  hosts:
+    - host: ykzts.technology
+      paths:
+        - path: "/"
+          pathType: Prefix
+  
+  tls:
+    - secretName: mastodon-tls
+      hosts:
+        - ykzts.technology
+
+# PostgreSQL configuration
+# Connection details should be pulled from existing secrets
+postgresql:
+  existingSecret: mastodon
+  existingSecretKeys:
+    username: DB_USER
+    password: DB_PASS
+  hostname: ""  # Set via secret or environment
+  port: 5432
+  database: mastodon_production
+  preparedStatements: true
+
+# Redis configuration
+# Connection details should be pulled from existing secrets
+redis:
+  existingSecret: mastodon
+  existingSecretKeys:
+    password: REDIS_PASSWORD
+  hostname: ""  # Set via secret or environment
+  port: 6379
+
+# Pod security context matching current setup
+podSecurityContext:
+  runAsUser: 991
+  runAsGroup: 991
+  fsGroup: 991
+
+# Default resources (overridden per component above)
+resources: {}
+
+# Node selector for GKE spot instances
+nodeSelector:
+  cloud.google.com/gke-spot: "true"
+
+# Timezone
+timezone: Asia/Tokyo
+
+# Revision annotation to force pod recreation on upgrade
+revisionPodAnnotation: true
