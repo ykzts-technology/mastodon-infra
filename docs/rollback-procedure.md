@@ -252,7 +252,7 @@ kubectl logs -n kube-system deployment/ingress-nginx-controller
 gcloud compute forwarding-rules list
 gcloud compute backend-services list
 
-# IngressをいったんLBに削除して再作成
+# Ingressをいったん削除して再作成
 kubectl delete ingress mastodon
 kubectl apply -f backup/ingress-mastodon.yaml
 ```

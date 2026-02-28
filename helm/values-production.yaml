@@ -184,18 +184,17 @@ mastodon:
         detailed: true
 
   # Additional environment variables from ConfigMap
+  # Note: DEFAULT_LOCALE, MAX_THREADS, WEB_CONCURRENCY, and PERSISTENT_TIMEOUT are
+  # managed via mastodon.locale, mastodon.web.maxThreads, mastodon.web.workers, and
+  # mastodon.web.persistentTimeout respectively, and are not duplicated here.
   extraEnvVars:
-    DEFAULT_LOCALE: ja
     DB_POOL: "15"
-    PERSISTENT_TIMEOUT: "620"
     RUBY_YJIT_ENABLE: "1"
     MASTODON_PROMETHEUS_EXPORTER_ENABLED: "true"
     MASTODON_PROMETHEUS_EXPORTER_SIDEKIQ_DETAILED_METRICS: "true"
     MASTODON_PROMETHEUS_EXPORTER_WEB_DETAILED_METRICS: "true"
     EXPERIMENTAL_FEATURES: "fasp,http_message_signatures,modern_emojis,outgoing_quotes"
-    MAX_THREADS: "10"
     S3_CLOUDFRONT_HOST: files.ykzts.technology
-    WEB_CONCURRENCY: "3"
 
   # Database migration hooks
   hooks:
