@@ -25,3 +25,25 @@ jobs:
       with:
         args: build k8s/overlays/production
         entrypoint: kustomize
+
+    - name: Set up mock Kubernetes server
+      uses: helm/kind-action@v1
+
+    - name: Set up Kustomize
+      # renovate: datasource=github-releases depName=kustomize packageName=kubernetes-sigs/kustomize extractVersion=^kustomize/v(?<version>.+)$
+      env:
+        KUSTOMIZE_VERSION: 5.8.1
+      run: |
+        curl -Lo kustomize.tar.gz "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz"
+        tar xf kustomize.tar.gz
+        sudo install kustomize /usr/local/bin/kustomize
+        rm kustomize kustomize.tar.gz
+
+    - name: Install GKE CRDs
+      run: kubectl apply -f k8s/mock/crds.yaml
+
+    - name: Validate against mock Kubernetes server (development)
+      run: kustomize build k8s/overlays/development | kubectl apply --dry-run=server -f -
+
+    - name: Validate against mock Kubernetes server (production)
+      run: kustomize build k8s/overlays/production | kubectl apply --dry-run=server -f -
