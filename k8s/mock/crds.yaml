@@ -1,6 +1,12 @@
 # CRD stubs for GKE-specific resources used in the production overlay.
 # These allow server-side dry-run validation against a mock Kubernetes cluster
 # (e.g. kind) without requiring a real GKE environment.
+#
+# Note: all stubs use x-kubernetes-preserve-unknown-fields: true so that the
+# mock cluster accepts any object structure for these CRs without schema errors.
+# This means only native Kubernetes resources (Deployments, Services, etc.) are
+# structurally validated; GKE-specific CRs are validated only for basic API
+# correctness (e.g. group/version/kind, metadata).
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition

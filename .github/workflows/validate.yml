@@ -14,30 +14,29 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Kustomize (development)
-      uses: docker://gcr.io/k8s-skaffold/skaffold:v2.17.0@sha256:a617cba919f5a1e21692752303b7bb4b2b1b8e0cf2266b8b73a614e28ddbed49
-      with:
-        args: build k8s/overlays/development
-        entrypoint: kustomize
-
-    - name: Kustomize (production)
-      uses: docker://gcr.io/k8s-skaffold/skaffold:v2.17.0@sha256:a617cba919f5a1e21692752303b7bb4b2b1b8e0cf2266b8b73a614e28ddbed49
-      with:
-        args: build k8s/overlays/production
-        entrypoint: kustomize
-
-    - name: Set up mock Kubernetes server
-      uses: helm/kind-action@v1
-
     - name: Set up Kustomize
       # renovate: datasource=github-releases depName=kustomize packageName=kubernetes-sigs/kustomize extractVersion=^kustomize/v(?<version>.+)$
       env:
         KUSTOMIZE_VERSION: 5.8.1
       run: |
-        curl -Lo kustomize.tar.gz "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz"
+        curl -fSLo kustomize.tar.gz "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz"
+        curl -fsSL -o checksums.txt "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/checksums.txt"
+        grep "kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" checksums.txt > kustomize_checksums.txt
+        sha256sum -c kustomize_checksums.txt
         tar xf kustomize.tar.gz
         sudo install kustomize /usr/local/bin/kustomize
-        rm kustomize kustomize.tar.gz
+        rm kustomize kustomize.tar.gz checksums.txt kustomize_checksums.txt
+
+    - name: Kustomize (development)
+      run: kustomize build k8s/overlays/development
+
+    - name: Kustomize (production)
+      run: kustomize build k8s/overlays/production
+
+    - name: Set up mock Kubernetes server
+      uses: helm/kind-action@ef37e7f390d99f746eb8b610417061a60e82a6cc # v1.14.0
+      with:
+        node_image: kindest/node:v1.31.4
 
     - name: Install GKE CRDs
       run: kubectl apply -f k8s/mock/crds.yaml
