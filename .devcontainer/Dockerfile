@@ -4,6 +4,10 @@ FROM mcr.microsoft.com/devcontainers/base:2-bullseye@sha256:fb17cc95abb5489d81d1
 ARG SKAFFOLD_VERSION=2.17.2
 # renovate: datasource=github-releases depName=kustomize packageName=kubernetes-sigs/kustomize extractVersion=^kustomize/v(?<version>.+)$
 ARG KUSTOMIZE_VERSION=5.8.1
+# renovate: datasource=github-releases depName=kind packageName=kubernetes-sigs/kind
+ARG KIND_VERSION=0.25.0
+# renovate: datasource=github-releases depName=kubectl packageName=kubernetes/kubernetes extractVersion=^v(?<version>.+)$
+ARG KUBECTL_VERSION=1.31.4
 
 RUN \
   if [ "${SKAFFOLD_VERSION}" != "none" ]; then \
@@ -16,4 +20,14 @@ RUN \
     && tar xf kustomize.tar.gz \
     && install kustomize /usr/local/bin \
     && rm kustomize; \
+  fi \
+  && if [ "${KIND_VERSION}" != "none" ]; then \
+    curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64 \
+    && install kind /usr/local/bin \
+    && rm kind; \
+  fi \
+  && if [ "${KUBECTL_VERSION}" != "none" ]; then \
+    curl -Lo kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
+    && install kubectl /usr/local/bin \
+    && rm kubectl; \
   fi
