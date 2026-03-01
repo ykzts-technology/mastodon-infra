@@ -7,7 +7,7 @@ CLUSTER_NAME="mock"
 
 # Wait for Docker daemon to be ready (required when using docker-in-docker)
 echo "Waiting for Docker daemon..."
-if ! timeout 60 sh -c 'until docker info &>/dev/null 2>&1; do sleep 2; done'; then
+if ! timeout 60 sh -c 'until docker info >/dev/null 2>&1; do sleep 2; done'; then
   echo "ERROR: Docker daemon did not become ready within 60 seconds." >&2
   exit 1
 fi
@@ -19,6 +19,9 @@ else
   echo "Creating kind cluster '${CLUSTER_NAME}' (${KIND_NODE_IMAGE})..."
   kind create cluster --name "${CLUSTER_NAME}" --image "${KIND_NODE_IMAGE}"
 fi
+
+# Ensure kubeconfig is pointing at the mock cluster
+kind export kubeconfig --name "${CLUSTER_NAME}"
 
 # Install GKE CRDs so that server-side dry-run validation accepts GKE-specific resources
 echo "Installing GKE CRDs..."

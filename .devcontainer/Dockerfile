@@ -22,12 +22,16 @@ RUN \
     && rm kustomize; \
   fi \
   && if [ "${KIND_VERSION}" != "none" ]; then \
-    curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64 \
+    curl -fsSLo kind "https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64" \
+    && curl -fsSLo kind.sha256 "https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64.sha256sum" \
+    && echo "$(awk '{print $1}' kind.sha256)  kind" | sha256sum -c - \
     && install kind /usr/local/bin \
-    && rm kind; \
+    && rm kind kind.sha256; \
   fi \
   && if [ "${KUBECTL_VERSION}" != "none" ]; then \
-    curl -Lo kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
+    curl -fsSLo kubectl "https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
+    && curl -fsSLo kubectl.sha256 "https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl.sha256" \
+    && echo "$(awk '{print $1}' kubectl.sha256)  kubectl" | sha256sum -c - \
     && install kubectl /usr/local/bin \
-    && rm kubectl; \
+    && rm kubectl kubectl.sha256; \
   fi
