@@ -17,5 +17,6 @@
       "version": "1.6.3"
     }
   },
-  "name": "Mastodon Infra"
+  "name": "Mastodon Infra",
+  "postCreateCommand": "bash .devcontainer/setup-mock-k8s.sh"
 }

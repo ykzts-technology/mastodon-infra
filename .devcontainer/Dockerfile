@@ -4,6 +4,10 @@ FROM mcr.microsoft.com/devcontainers/base:2-bullseye@sha256:fb17cc95abb5489d81d1
 ARG SKAFFOLD_VERSION=2.17.2
 # renovate: datasource=github-releases depName=kustomize packageName=kubernetes-sigs/kustomize extractVersion=^kustomize/v(?<version>.+)$
 ARG KUSTOMIZE_VERSION=5.8.1
+# renovate: datasource=github-releases depName=kind packageName=kubernetes-sigs/kind
+ARG KIND_VERSION=0.25.0
+# renovate: datasource=github-releases depName=kubectl packageName=kubernetes/kubernetes extractVersion=^v(?<version>.+)$
+ARG KUBECTL_VERSION=1.31.4
 
 RUN \
   if [ "${SKAFFOLD_VERSION}" != "none" ]; then \
@@ -16,4 +20,18 @@ RUN \
     && tar xf kustomize.tar.gz \
     && install kustomize /usr/local/bin \
     && rm kustomize; \
+  fi \
+  && if [ "${KIND_VERSION}" != "none" ]; then \
+    curl -fsSLo kind "https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64" \
+    && curl -fsSLo kind.sha256 "https://github.com/kubernetes-sigs/kind/releases/download/v${KIND_VERSION}/kind-linux-amd64.sha256sum" \
+    && echo "$(awk '{print $1}' kind.sha256)  kind" | sha256sum -c - \
+    && install kind /usr/local/bin \
+    && rm kind kind.sha256; \
+  fi \
+  && if [ "${KUBECTL_VERSION}" != "none" ]; then \
+    curl -fsSLo kubectl "https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
+    && curl -fsSLo kubectl.sha256 "https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl.sha256" \
+    && echo "$(awk '{print $1}' kubectl.sha256)  kubectl" | sha256sum -c - \
+    && install kubectl /usr/local/bin \
+    && rm kubectl kubectl.sha256; \
   fi
