@@ -5,7 +5,7 @@ ARG SKAFFOLD_VERSION=2.17.2
 # renovate: datasource=github-releases depName=kustomize packageName=kubernetes-sigs/kustomize extractVersion=^kustomize/v(?<version>.+)$
 ARG KUSTOMIZE_VERSION=5.8.1
 # renovate: datasource=github-releases depName=kind packageName=kubernetes-sigs/kind
-ARG KIND_VERSION=0.25.0
+ARG KIND_VERSION=0.31.0
 # renovate: datasource=github-releases depName=kubectl packageName=kubernetes/kubernetes extractVersion=^v(?<version>.+)$
 ARG KUBECTL_VERSION=1.31.4
 
