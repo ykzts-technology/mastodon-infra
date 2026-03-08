@@ -33,13 +33,13 @@ jobs:
         location: ${{ secrets.GOOGLE_REGION }}
 
     - name: Build, and Publish
-      uses: docker://gcr.io/k8s-skaffold/skaffold:v2.17.0@sha256:a617cba919f5a1e21692752303b7bb4b2b1b8e0cf2266b8b73a614e28ddbed49
+      uses: docker://gcr.io/k8s-skaffold/skaffold:v2.17.3@sha256:b104edf2ed7b763497b2d3597952c6cfc1fe1794d04d825541c15d17118999ea
       with:
         args: build --file-output tags.json --profile production
         entrypoint: skaffold
 
     - name: Deploy
-      uses: docker://gcr.io/k8s-skaffold/skaffold:v2.17.0@sha256:a617cba919f5a1e21692752303b7bb4b2b1b8e0cf2266b8b73a614e28ddbed49
+      uses: docker://gcr.io/k8s-skaffold/skaffold:v2.17.3@sha256:b104edf2ed7b763497b2d3597952c6cfc1fe1794d04d825541c15d17118999ea
       with:
         args: deploy --build-artifacts tags.json --profile production
         entrypoint: skaffold
