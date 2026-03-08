@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: manael
-        image: ghcr.io/manaelproxy/manael:3.0.2@sha256:7fc52196d1b3ccf113972f945e7146a5f6e429e1f3930efbb003b22dd65d44d1
+        image: ghcr.io/manaelproxy/manael:3.0.3@sha256:2bcc95cae0d37aa1285f3c0fc245b4b353a4f21df88da582c3e690752315dc6c
         env:
         - name: MANAEL_ENABLE_AVIF
           value: "true"
