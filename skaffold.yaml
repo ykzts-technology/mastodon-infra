@@ -16,7 +16,7 @@ profiles:
           - k8s/overlays/production
     deploy:
       kubectl: {}
-  
+
   # Helm-based development deployment (new)
   - name: helm-dev
     deploy:
@@ -32,7 +32,7 @@ profiles:
               mastodon.web.replicas: "1"
               mastodon.streaming.replicas: "1"
             createNamespace: false
-  
+
   # Helm-based production deployment (new)
   - name: helm-production
     deploy:
@@ -46,4 +46,3 @@ profiles:
             createNamespace: false
             upgradeOnChange: true
             wait: true
-            timeout: 10m
