@@ -7,7 +7,7 @@ ARG KUSTOMIZE_VERSION=5.8.1
 # renovate: datasource=github-releases depName=kind packageName=kubernetes-sigs/kind
 ARG KIND_VERSION=0.31.0
 # renovate: datasource=github-releases depName=kubectl packageName=kubernetes/kubernetes extractVersion=^v(?<version>.+)$
-ARG KUBECTL_VERSION=1.35.2
+ARG KUBECTL_VERSION=1.36.0
 
 RUN \
   if [ "${SKAFFOLD_VERSION}" != "none" ]; then \
